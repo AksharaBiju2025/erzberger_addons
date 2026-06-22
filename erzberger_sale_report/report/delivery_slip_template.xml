@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<!-- ============================================================
+     DELIVERY NOTE (Lieferschein) – body only
+     Plugs into: erzberger_sale_report.report_erz_external_layout
+     Model: stock.picking
+     ============================================================ -->
+
+<template id="report_delivery_note">
+<t t-call="web.html_container">
+    <t t-foreach="docs" t-as="o">
+        <t t-call="erzberger_sale_report.report_erz_external_layout">
+
+            <div style="font-family: Arial, sans-serif; font-size: 9pt; color: #222; padding: 0 0 4mm 0;">
+
+                <!-- ── Space for header / address window ── -->
+                <!-- The external layout renders the address block above the page body.
+                     These spacers push the content below it. Adjust mm values to taste. -->
+                <div style="height: 30mm;"></div>
+
+                <!-- ── Recipient address (printed in letter-window area) ── -->
+                <div style="margin-bottom: 8mm; font-size: 9pt; line-height: 1.5;">
+                    <strong t-field="o.partner_id.name"/><br/>
+
+                    <t t-if="o.partner_id.street">
+                        <span t-field="o.partner_id.street"/><br/>
+                    </t>
+
+                    <t t-if="o.partner_id.street2">
+                        <span t-field="o.partner_id.street2"/><br/>
+                    </t>
+
+                    <t t-if="o.partner_id.zip">
+                        <span t-field="o.partner_id.zip"/>
+                    </t>
+                    <t t-if="o.partner_id.city">
+                        <span t-field="o.partner_id.city"/>
+                    </t>
+                    <br/>
+
+                    <t t-if="o.partner_id.state_id">
+                        <span t-field="o.partner_id.state_id"/>
+                        <br/>
+                    </t>
+
+                    <t t-if="o.partner_id.country_id">
+                        <span t-field="o.partner_id.country_id"/>
+                    </t>
+                </div>
+
+                <!-- ── Title row: "Lieferschein" left | Date right ── -->
+                <table style="width:100%; border-collapse:collapse; margin-bottom:6mm; border:1px solid white;">
+                    <tr>
+                        <td style="vertical-align:bottom; border:1px solid white;">
+                            <span style="font-size:13pt; font-weight:bold; text-decoration:underline;">
+                                Lieferschein
+                            </span>
+                        </td>
+                        <td style="text-align:right; vertical-align:bottom; font-size:9pt; border:1px solid white;">
+                            <t t-set="slip_date" t-value="o.date_done or o.scheduled_date"/>
+                            Datum:&#160;
+                            <span t-if="slip_date"
+                                  t-field="o.date_done"
+                                  t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- ── Column-header row (thin top + bottom border) ── -->
+                <table style="width:100%; border-collapse:collapse; margin-bottom:2mm;">
+                    <thead>
+                        <tr style="border-top:1px solid #222; border-bottom:1px solid #222;">
+                            <th style="width:18%; text-align:left;  padding:1.5mm 2mm; font-weight:bold; font-size:9pt;">Menge</th>
+                            <th style="width:12%; text-align:left;  padding:1.5mm 2mm; font-weight:bold; font-size:9pt;">ME</th>
+                            <th style="width:70%; text-align:left;  padding:1.5mm 2mm; font-weight:bold; font-size:9pt;">Bezeichnung</th>
+                        </tr>
+                    </thead>
+                </table>
+
+                <!-- ── Move lines grouped by origin / order reference ── -->
+                <!--
+                    We group move lines by origin so each customer order gets its own
+                    "Bestellnummer:" header line, matching the PDF layout.
+                    If you only ever have one origin per picking you can drop the grouping.
+                -->
+                <t t-set="lines" t-value="o.move_ids.filtered(lambda m: m.state != 'cancel' and m.product_uom_qty)"/>
+
+                <!-- Order-reference header (bold, before the lines) -->
+                <t t-if="o.origin">
+                    <div style="font-weight:bold; font-size:9pt; margin-bottom:2mm;">
+                        Bestellnummer: <span t-field="o.origin"/>
+                    </div>
+                </t>
+
+                <!-- Line items -->
+                <table style="width:100%; border-collapse:collapse; margin-bottom:4mm; border:1px solid white;">
+                    <tbody>
+                        <t t-foreach="lines" t-as="move">
+
+                            <!-- Section header from sale order line (display_type section) -->
+<!--                            <t t-if="move.sale_line_id and move.sale_line_id.display_type == 'line_section'">-->
+<!--                                <tr>-->
+<!--                                    <td colspan="3" style="font-weight:bold; padding:1mm 2mm; font-size:9pt;">-->
+<!--                                        <span t-field="move.sale_line_id.name"/>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </t>-->
+
+                            <!-- Regular product line -->
+<!--                            <t t-else="">-->
+                                <tr style="vertical-align:top; border:1px solid white;">
+                                    <!-- Quantity -->
+                                    <td style="width:18%; padding:0.8mm 2mm; font-size:9pt; text-align:left; white-space:nowrap; border:1px solid white;">
+                                        <t t-set="qty" t-value="move.quantity if o.state == 'done' else move.product_uom_qty"/>
+                                        <span t-out="int(qty) if qty == int(qty) else qty"/>
+                                    </td>
+                                    <!-- Unit of measure -->
+                                    <td style="width:12%; padding:0.8mm 2mm; font-size:9pt; border:1px solid white;">
+                                        <span t-field="move.product_uom" groups="uom.group_uom"/>
+                                    </td>
+                                    <!-- Product description block -->
+                                    <td style="width:70%; padding:0.8mm 2mm; font-size:9pt; line-height:1.4; border:1px solid white;">
+                                        <!-- Main product name -->
+                                        <span t-field="move.product_id.name"/>
+                                        <!-- Optional: picking description (e.g. "Frischer Genuss") -->
+                                        <t t-if="move.description_picking
+                                                 and move.description_picking != move.product_id.name
+                                                 and move.description_picking != move.product_id.display_name">
+                                            <br/>
+                                            <span t-out="move.description_picking"
+                                                  t-options="{'widget':'text'}"/>
+                                        </t>
+                                        <!-- Internal reference / Art.-Nr. -->
+                                        <t t-if="move.product_id.default_code">
+                                            <br/>
+                                            <span style="font-size:8.5pt;">
+                                                Art.Nr.&#160;<span t-field="move.product_id.default_code"/>
+                                            </span>
+                                        </t>
+<!--                                        &lt;!&ndash; Lot / serial numbers (optional – remove block if not needed) &ndash;&gt;-->
+<!--                                        <t t-if="move.move_line_ids.mapped('lot_id')"-->
+<!--                                           groups="stock.group_lot_on_delivery_slip">-->
+<!--                                            <t t-foreach="move.move_line_ids.filtered(lambda l: l.lot_id)" t-as="ml">-->
+<!--                                                <br/>-->
+<!--                                                <span style="font-size:8.5pt; color:#555;">-->
+<!--                                                    Charge:&#160;<span t-field="ml.lot_id.name"/>-->
+<!--                                                </span>-->
+<!--                                            </t>-->
+<!--                                        </t>-->
+                                    </td>
+                                </tr>
+<!--                            </t>-->
+                        </t>
+                    </tbody>
+                </table>
+
+                <!-- ── Back-order remainder (if any) ── -->
+<!--                <t t-set="backorders" t-value="o.backorder_ids.filtered(lambda x: x.state not in ('done','cancel'))"/>-->
+<!--                <t t-if="backorders">-->
+<!--                    <div style="margin-top:4mm; font-size:9pt;">-->
+<!--                        <span>Noch ausstehende Mengen (nicht geliefert):</span>-->
+<!--                    </div>-->
+<!--                    <table style="width:100%; border-collapse:collapse; margin-top:2mm;">-->
+<!--                        <thead>-->
+<!--                            <tr style="border-top:1px solid #222; border-bottom:1px solid #222;">-->
+<!--                                <th style="width:18%; padding:1mm 2mm; text-align:left; font-size:9pt;">Menge</th>-->
+<!--                                <th style="width:12%; padding:1mm 2mm; text-align:left; font-size:9pt;">ME</th>-->
+<!--                                <th style="width:70%; padding:1mm 2mm; text-align:left; font-size:9pt;">Bezeichnung</th>-->
+<!--                            </tr>-->
+<!--                        </thead>-->
+<!--                        <tbody>-->
+<!--                            <t t-foreach="backorders.mapped('move_ids').filtered(lambda x: x.product_uom_qty)" t-as="bo">-->
+<!--                                <tr style="vertical-align:top;">-->
+<!--                                    <td style="width:18%; padding:0.8mm 2mm; font-size:9pt;">-->
+<!--                                        <t t-set="boqty" t-value="bo.product_uom_qty"/>-->
+<!--                                        <span t-out="int(boqty) if boqty == int(boqty) else boqty"/>-->
+<!--                                    </td>-->
+<!--                                    <td style="width:12%; padding:0.8mm 2mm; font-size:9pt;">-->
+<!--                                        <span t-field="bo.product_uom" groups="uom.group_uom"/>-->
+<!--                                    </td>-->
+<!--                                    <td style="width:70%; padding:0.8mm 2mm; font-size:9pt;">-->
+<!--                                        <span t-field="bo.product_id.display_name"/>-->
+<!--                                        <t t-if="bo.product_id.default_code">-->
+<!--                                            <br/>-->
+<!--                                            <span style="font-size:8.5pt;">Art.Nr.&#160;<span t-field="bo.product_id.default_code"/></span>-->
+<!--                                        </t>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+<!--                            </t>-->
+<!--                        </tbody>-->
+<!--                    </table>-->
+<!--                </t>-->
+
+                <!-- ── Signature block (optional) ── -->
+<!--                <t t-if="o.signature">-->
+<!--                    <div style="margin-top:12mm;">-->
+<!--                        <div style="width:60%; border-top:1px solid #222; padding-top:2mm; font-size:9pt;">-->
+<!--                            Unterschrift / Signature-->
+<!--                        </div>-->
+<!--                        <div style="margin-top:2mm;">-->
+<!--                            <img t-att-src="image_data_uri(o.signature)"-->
+<!--                                 style="max-height:3.5cm; max-width:7cm;"/>-->
+<!--                        </div>-->
+<!--                        <t t-if="o.partner_id.name">-->
+<!--                            <div style="font-size:9pt; margin-top:1mm;">-->
+<!--                                <span t-field="o.partner_id.name"/>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                    </div>-->
+<!--                </t>-->
+
+            </div><!-- /page div -->
+
+        </t><!-- /external_layout -->
+    </t><!-- /foreach -->
+</t><!-- /html_container -->
+</template>
+
+</odoo>

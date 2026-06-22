@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_report_delivery_note" model="ir.actions.report">
+        <field name="name">Delivery Note</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">erzberger_sale_report.report_delivery_note</field>
+        <field name="report_file">erzberger_sale_report.report_delivery_note</field>
+        <field name="print_report_name">'Delivery Note'</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+    </record>
+
+</odoo>

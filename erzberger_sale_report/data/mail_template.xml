@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="mail_template_quotation_followup"
+                model="mail.template">
+            <field name="name">Quotation Follow-up Reminder</field>
+            <field name="model_id" ref="sale.model_sale_order"/>
+            <field name="subject">Follow-up Required: {{ object.name }}</field>
+            <field name="body_html" type="html">
+                <div style="margin:0;padding:0;">
+
+                    Hello
+                    <strong t-out="object.user_id.name or ''"/>,
+                    <br/>
+                    <br/>
+
+                    The following quotation has been awaiting a response
+                    for more than 14 days.
+
+                    <p>
+                        <b>Quotation:</b>
+                        <t t-out="object.name"/>
+                    </p>
+
+                    <p>
+                        <b>Customer:</b>
+                        <t t-out="object.partner_id.name"/>
+                    </p>
+
+                    <p>
+                        <b>Total Amount:</b>
+                        <t t-out="object.amount_total"/>
+                    </p>
+
+                    <p>
+                        Please contact the customer and follow up on this quotation.
+                    </p>
+
+                    <p>
+                        Best regards,<br/>
+                        Odoo
+                    </p>
+
+                </div>
+            </field>
+            <field name="auto_delete" eval="False"/>
+
+        </record>
+
+
+        <record id="mail_template_reorder_remainder" model="mail.template">
+            <field name="name">Reorder Reminder</field>
+            <field name="model_id" ref="sale.model_sale_order_line"/>
+            <field name="subject">Reorder Reminder - {{ object.product_id.name }}</field>
+            <field name="body_html" type="html">
+                    <div style="font-family: Arial, Helvetica, sans-serif; font-size:14px; color:#333333;">
+
+                        <p>
+                            Dear Customer,
+                        </p>
+
+                        <p>
+                            We hope you are doing well.
+                        </p>
+
+                        <p>
+                            Our records indicate that it has been some time since your last order of:
+                        </p>
+
+                        <p>
+                            <strong>{{ object.product_id.name }}</strong>
+                        </p>
+
+                        <p>
+                            If you require additional quantities or would like a new quotation,
+                            please feel free to contact us.
+                        </p>
+
+                        <p>
+                            We would be happy to assist you with your next order.
+                        </p>
+
+                        <br/>
+
+                        <p>
+                            Kind regards,<br/>
+                            Erzberger Team
+                        </p>
+
+                    </div>
+                </field>
+            <field name="auto_delete" eval="False"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- ============================================================
+         The report is automatically added to the "Print" menu
+         on sale.order via binding_model_id in the report action.
+
+         This file adds an optional smart button on the form view
+         for quick access directly from the order header.
+         ============================================================ -->
+    <record id="view_order_form_auftragsbestatigung_btn" model="ir.ui.view">
+        <field name="name">sale.order.form.auftragsbestatigung.button</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <!--
+                Add a dedicated "Auftragsbestätigung" button inside the
+                top action area of the sale order form, next to Send/Print.
+            -->
+            <xpath expr="//header//button[@name='sale.action_report_saleorder']" position="after">
+                <button
+                    string="Sale Order Confirmation"
+                    name="%(erzberger_sale_report.action_report_auftragsbestatigungs)d"
+                    type="action"
+                    data-hotkey="shift+a"
+                    icon="fa-print"
+                    invisible="state != 'sale'"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
