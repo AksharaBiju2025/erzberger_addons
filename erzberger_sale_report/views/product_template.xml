@@ -1,0 +1,14 @@
+<odoo>
+    <record id="product_template_form_inherit_inventory_alert" model="ir.ui.view">
+        <field name="name">product.template.inventory.alert</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='inventory']//group[@name='inventory']" position="inside">
+                <group string="Inventory Alerts">
+                    <field name="min_qty_alert"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

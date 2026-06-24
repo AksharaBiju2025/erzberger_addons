@@ -92,5 +92,38 @@
                 </field>
             <field name="auto_delete" eval="False"/>
         </record>
+
+        <record id="mail_template_inventory_alert"
+                model="mail.template">
+            <field name="name">Inventory Low Stock Alert</field>
+            <field name="model_id" ref="product.model_product_template"/>
+            <field name="subject">Low Stock Alert - {{ object.name }}</field>
+            <field name="body_html" type="html">
+                <div>
+                    <p>Hello,</p>
+
+                    <p>The following product has reached its minimum stock level.</p>
+
+                    <p>
+                        <b>Product:</b>
+                        <t t-out="object.name"/>
+                    </p>
+
+                    <p>
+                        <b>Current Quantity:</b>
+                        <t t-out="object.qty_available"/>
+                    </p>
+
+                    <p>
+                        <b>Minimum Quantity:</b>
+                        <t t-out="object.min_qty_alert"/>
+                    </p>
+
+                    <p>Please replenish the stock.</p>
+
+                    <p>Regards,<br/>Odoo</p>
+                </div>
+            </field>
+        </record>
     </data>
 </odoo>

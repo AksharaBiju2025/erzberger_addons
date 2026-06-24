@@ -22,6 +22,7 @@
         'views/sale_order_views.xml',
         'views/stock_picking_views.xml',
         'views/res_company.xml',
+        'views/product_template.xml',
     ],
     'installable': True,
     'auto_install': False,
