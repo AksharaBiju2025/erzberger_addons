@@ -31,4 +31,34 @@
         <field name="active">False</field>
     </record>
 
+    <record id="ir_cron_set_company1_uom_to_piece" model="ir.cron">
+        <field name="name">Set Company 1 Products UoM to Stück</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_set_company1_uom_to_piece()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">False</field>
+    </record>
+
+    <record id="ir_cron_product_uom_weight_mapping" model="ir.cron">
+        <field name="name">Product UoM and Weight Mapping</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_product_uom_weight_mapping()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">False</field>
+    </record>
+
+    <record id="ir_cron_product_pos_category_mapping" model="ir.cron">
+        <field name="name">Product POS Category Mapping</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_product_pos_category_mapping()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">False</field>
+    </record>
+
 </odoo>

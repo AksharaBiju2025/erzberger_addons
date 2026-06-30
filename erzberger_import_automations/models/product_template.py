@@ -176,3 +176,191 @@ class ProductTemplate(models.Model):
                 "Product not found: %s",
                 item
             )
+
+
+    def _cron_set_company1_uom_to_piece(self):
+
+        company = self.env['res.company'].browse(1)
+        if not company.exists():
+            _logger.info("Company 1 not found.")
+            return
+
+        uom_piece = self.env['uom.uom'].search([
+            ('name', '=', 'Stück')
+        ], limit=1)
+
+        if not uom_piece:
+            _logger.info("UoM 'Stück' not found.")
+            return
+
+        products = self.search([
+            ('company_id', '=', company.id)
+        ])
+
+        _logger.info("Updating %s products...", len(products))
+
+        products.write({
+            'uom_id': uom_piece.id,
+        })
+
+        _logger.info("Finished updating Company 1 products.")
+
+    def _cron_product_uom_weight_mapping(self):
+
+        attachment = self.env['ir.attachment'].search([
+            ('name', '=', 'uom_change_ver_cleaned.xlsx')
+        ], limit=1)
+
+        if not attachment:
+            _logger.info("UoM mapping file not found")
+            return
+
+        workbook = load_workbook(
+            filename=BytesIO(base64.b64decode(attachment.datas)),
+            read_only=True
+        )
+
+        sheet = workbook.active
+
+        updated = 0
+        not_found = []
+        uom_not_found = []
+
+        for row in sheet.iter_rows(min_row=2, values_only=True):
+
+            product_name = str(row[0]).strip() if row[0] else False
+            uom_name = str(row[1]).strip() if row[1] else False
+            weight = row[2]
+
+            if not product_name:
+                continue
+
+            product = self.search([
+                ('name', '=', product_name)
+            ], limit=1)
+
+            if not product:
+                not_found.append(product_name)
+                continue
+
+            vals = {}
+
+            # Update UoM
+            if uom_name:
+                uom = self.env['uom.uom'].search([
+                    ('name', '=', uom_name)
+                ], limit=1)
+
+                if uom:
+                    vals.update({
+                        'uom_id': uom.id,
+                    })
+                else:
+                    uom_not_found.append(
+                        f"{product_name} -> {uom_name}"
+                    )
+
+            # Update Weight
+            if weight not in (None, "", False):
+                try:
+                    vals['weight'] = float(weight)
+                except Exception:
+                    _logger.warning(
+                        "Invalid weight '%s' for product '%s'",
+                        weight,
+                        product_name
+                    )
+
+            if vals:
+                product.write(vals)
+                updated += 1
+
+        _logger.info(
+            "UoM & Weight mapping completed. Updated %s products.",
+            updated
+        )
+
+        for product_name in not_found:
+            _logger.warning(
+                "Product not found: %s",
+                product_name
+            )
+
+        for item in uom_not_found:
+            _logger.warning(
+                "UoM not found: %s",
+                item
+            )
+
+    def _cron_product_pos_category_mapping(self):
+
+        attachment = self.env['ir.attachment'].search([
+            ('name', '=', 'product_pos_category.xlsx')
+        ], limit=1)
+
+        if not attachment:
+            _logger.info("POS Category mapping file not found.")
+            return
+
+        workbook = load_workbook(
+            filename=BytesIO(base64.b64decode(attachment.datas)),
+            read_only=True
+        )
+
+        sheet = workbook.active
+
+        updated = 0
+        product_not_found = []
+        category_not_found = []
+
+        for row in sheet.iter_rows(min_row=2, values_only=True):
+
+            product_name = str(row[0]).strip() if row[0] else False
+            category_name = str(row[1]).strip() if row[1] else False
+
+            if not product_name:
+                continue
+
+            product = self.search([
+                ('name', '=', product_name)
+            ], limit=1)
+
+            if not product:
+                product_not_found.append(product_name)
+                continue
+
+            if not category_name:
+                continue
+
+            pos_category = self.env['pos.category'].search([
+                ('name', '=', category_name)
+            ], limit=1)
+
+            if not pos_category:
+                category_not_found.append(
+                    f"{product_name} -> {category_name}"
+                )
+                continue
+
+            product.write({
+                'pos_categ_ids': [(6, 0, [pos_category.id])]
+            })
+
+            updated += 1
+
+        _logger.info(
+            "POS Category Mapping completed. Updated %s products.",
+            updated
+        )
+
+        for product_name in product_not_found:
+            _logger.warning(
+                "Product not found: %s",
+                product_name
+            )
+
+        for item in category_not_found:
+            _logger.warning(
+                "POS Category not found: %s",
+                item
+            )
