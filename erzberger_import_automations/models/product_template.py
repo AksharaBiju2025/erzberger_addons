@@ -13,6 +13,7 @@ from openpyxl import load_workbook
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
+
     def _cron_product_category_mapping_verpackungssysteme(self):
 
         attachment = self.env['ir.attachment'].search([
@@ -126,3 +127,52 @@ class ProductTemplate(models.Model):
 
         for item in not_found:
             _logger.warning(item)
+
+    def _cron_quotation_description_mapping(self):
+
+        attachment = self.env['ir.attachment'].search([
+            ('name', '=', 'quotation_description_mapping.xlsx')
+        ], limit=1)
+
+        if not attachment:
+            _logger.info("Quotation description mapping file not found")
+            return
+
+        workbook = load_workbook(
+            filename=BytesIO(base64.b64decode(attachment.datas)),
+            read_only=True
+        )
+
+        sheet = workbook.active
+
+        updated = 0
+        not_found = []
+
+        for row in sheet.iter_rows(min_row=2, values_only=True):
+
+            product_name = row[0] and str(row[0]).strip()
+            quotation_description = row[1] and str(row[1]).strip()
+
+            if not product_name:
+                continue
+
+            product = self.search([
+                ('name', '=', product_name)
+            ], limit=1)
+
+            if product:
+                product.description_sale = quotation_description or ""
+                updated += 1
+            else:
+                not_found.append(product_name)
+
+        _logger.info(
+            "Quotation description mapping completed. Updated %s products",
+            updated
+        )
+
+        for item in not_found:
+            _logger.warning(
+                "Product not found: %s",
+                item
+            )
