@@ -10,13 +10,13 @@
    position="replace">
     <t t-set="company" t-value="o.company_id.sudo()"/>
     <div t-attf-class="header o_company_#{company.id}_layout"
-         style="font-family: Arial, sans-serif; font-size: 9pt; color: #222; padding: 1mm 0 2mm 0; border:1px solid white;">
+         style="font-family: Arial, sans-serif; font-size: 11pt; color: #222; padding: 1mm 0 2mm 0; border:1px solid white;">
 
         <table style="width:100%; border-collapse:collapse; border:1px solid white;">
             <tr>
                 <!-- LEFT: Address -->
                 <td style="width:25%; vertical-align:bottom; padding-right:4mm; border:1px solid white;">
-                    <div style="color:#003399; font-size:7pt; text-decoration:underline; white-space:nowrap; border:1px solid white;">
+                    <div style="color:#003399; font-size:11pt; text-decoration:underline; white-space:nowrap; border:1px solid white;">
                         <t t-esc="company.name"/> &#x2022;
                         <t t-esc="company.street"/> &#x2022;
                         D-<t t-esc="company.zip"/> <t t-esc="company.city"/>
@@ -27,7 +27,7 @@
                 <td style="width:33%; vertical-align:bottom; text-align:left; padding-right:4mm; border:1px solid white;">
                     <div style="
                         color:#4a52a6;
-                        font-size:8pt;
+                        font-size:11pt;
                         font-weight:bold;
                         line-height:1.6;
                         white-space:pre-line;
@@ -41,14 +41,14 @@
                     <t t-if="company.logo">
                         <div style="margin-bottom:3mm; text-align:right;">
                             <img t-att-src="image_data_uri(company.logo)"
-                                 style="max-height:65px; max-width:280px;"/>
+                                style="height:100px; width:auto;"/>
                         </div>
                     </t>
 
                     <!-- Description 2 — left-aligned under logo -->
                     <div style="
                         color:#4a52a6;
-                        font-size:8pt;
+                        font-size:11pt;
                         font-weight:bold;
                         line-height:1.6;
                         text-align:left;
@@ -64,7 +64,7 @@
     <!-- ▶ REPLACE the footer div -->
     <xpath expr="//div[div[@class='o_footer_content d-flex border-top pt-2']]" position="replace">
         <div t-attf-class="footer o_company_#{company.id}_layout"
-             style="font-family: Arial, sans-serif; font-size: 6.5pt; color:#444; padding-top:2mm; border:1px solid white;">
+             style="font-family: Arial, sans-serif; font-size: 9pt; color:#444; padding-top:2mm; border:1px solid white;">
 
             <hr style="border-top:1px solid #000; margin:0 0 2mm 0;"/>
 
@@ -134,7 +134,7 @@
 <!--        <t t-set="layout_document_title" t-value="'Auftragsbestätigung'"/>-->
         <t t-call="erzberger_sale_report.report_erz_external_layout">
 
-            <div style="font-family: Arial, sans-serif; font-size: 9pt; color: #222;">
+            <div style="font-family: Arial, sans-serif; font-size: 11pt; color: #222;">
 
                 <style>
                     /* your existing CSS here — same as before */
@@ -159,12 +159,27 @@
                 </style>
 
                 <!-- META block -->
-
-                <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white;">
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                 <!-- Recipient address -->
+                <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
+                    <t t-if="doc.partner_id.parent_id">
+                        <div><t t-esc="doc.partner_id.parent_id.name"/></div>
+                    </t>
+                    <div t-field="doc.partner_id"
+                         t-options='{"widget":"contact","fields":["name","address"],"no_marker":True}'/>
+                </div>
+                <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white; font-size: 11pt;">
                     <tr>
                         <td style="width:58%; vertical-align:top; padding-right:6mm; border:1px solid white;">
                             <div class="erz-title">Auftragsbestätigung</div>
-                            <div class="erz-ref">
+                            <div class="erz-ref" style="font-size: 11pt;">
                                 <t t-if="doc.partner_id.name">
                                     (Ihr Auftrag v.
                                     <span t-field="doc.date_order" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
@@ -174,7 +189,7 @@
                                 </t>
                             </div>
                         </td>
-                        <td style="width:42%; vertical-align:top; border:1px solid white;">
+                        <td style="width:42%; vertical-align:top; border:1px solid white; font-size: 11pt;">
                             <table style="border:1px solid white;">
                                 <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white;">AB-Nr.:</td><td class="meta-val b"><span t-field="doc.name"/></td></tr>
                                 <tr style="border:1px solid white;">
@@ -197,17 +212,10 @@
                     </tr>
                 </table>
 
-                <!-- Recipient address -->
-                <div style="font-size:9pt; line-height:1.65; margin:3mm 0;">
-                    <t t-if="doc.partner_id.parent_id">
-                        <div><t t-esc="doc.partner_id.parent_id.name"/></div>
-                    </t>
-                    <div t-field="doc.partner_id"
-                         t-options='{"widget":"contact","fields":["name","address"],"no_marker":True}'/>
-                </div>
+
 
                 <!-- Greeting -->
-                <div style="font-size:9pt; margin:2.5mm 0;">
+                <div style="font-size:11pt; margin:2.5mm 0;">
                     Sehr
                     <t t-if="doc.partner_id.parent_id"><t t-esc="doc.partner_id.parent_id.name"/>,</t>
                     <t t-else=""><span t-field="doc.partner_id.name"/>,</t>
@@ -215,36 +223,36 @@
                 </div>
 
                 <!-- Order lines -->
-                <table class="otbl">
+                <table class="otbl" style="font-size: 11pt;">
                     <thead>
                         <tr>
-                            <th class="tl" style="width:13%;">Menge<br/><span class="sub">kg/Stück</span></th>
-                            <th class="tl" style="width:47%;">Bezeichnung</th>
-                            <th class="tr" style="width:22%;">Preis/Einheit<br/><span class="sub">per kg/1.000 Stück</span></th>
-                            <th class="tr" style="width:18%;">Betrag</th>
+                            <th class="tl" style="width:13%; font-size: 11pt;">Menge<br/><span class="sub">kg/Stück</span></th>
+                            <th class="tl" style="width:47%; font-size: 11pt;">Bezeichnung</th>
+                            <th class="tr" style="width:22%; font-size: 11pt; text-align:center;">Preis/Einheit<br/><span class="sub">per kg/1.000 Stück</span></th>
+                            <th class="tr" style="width:18%; font-size: 11pt; text-align:center;">Betrag</th>
                         </tr>
                     </thead>
                     <tbody>
                         <t t-foreach="doc.order_line" t-as="line">
                             <t t-if="line.display_type == 'line_section'">
-                                <tr><td colspan="4" class="b" style="font-size:9pt; padding-top:3mm;"><span t-field="line.name"/></td></tr>
+                                <tr><td colspan="4" class="b" style="font-size:11pt; padding-top:3mm;"><span t-field="line.name"/></td></tr>
                             </t>
                             <t t-elif="line.display_type == 'line_note'">
-                                <tr><td colspan="4" style="font-style:italic; font-size:8pt;"><span t-field="line.name"/></td></tr>
+                                <tr><td colspan="4" style="font-style:italic; font-size:11pt;"><span t-field="line.name"/></td></tr>
                             </t>
                             <t t-else="">
                                 <tr>
-                                    <td class="tl">
+                                    <td class="tl" style="font-size: 11pt;">
                                         <span t-field="line.product_uom_qty"
                                               t-options='{"widget":"float","decimal_precision":"Product Unit of Measure"}'/>
                                     </td>
-                                    <td><span t-field="line.name"/></td>
-                                    <td class="tr">
+                                    <td style="font-size: 11pt;"><span t-field="line.name"/></td>
+                                    <td style="font-size: 11pt;" class="tr">
                                         <t t-if="line.price_unit != 0">
                                             <span t-field="line.price_unit" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
                                         </t><t t-else="">–</t>
                                     </td>
-                                    <td class="tr">
+                                    <td style="font-size: 11pt;" class="tr">
                                         <t t-if="line.price_subtotal != 0">
                                             <span t-field="line.price_subtotal" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
                                         </t><t t-else="">–</t>
@@ -255,12 +263,12 @@
                     </tbody>
                 </table>
 
-                <div class="delivery">
+                <div style="font-size: 11pt;" class="delivery">
                     Eine termingerechte Lieferung setzt eine ungestörte und ausreichende Rohstoffversorgung voraus.
                 </div>
 
                 <!-- Totals -->
-                <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+                <table style="width:100%; border-collapse:collapse; border:1px solid white; font-size: 11pt;">
                     <tr>
                         <td style="width:55%; border:1px solid white;"></td>
                         <td style="width:45%; border:1px solid white;">
@@ -268,16 +276,16 @@
                                 <t t-set="tax_totals" t-value="doc.tax_totals"/>
                                 <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
                                     <tr style="border:1px solid white;">
-                                        <td style="text-align:right; border:1px solid white;" class="tot-lbl">Warenwert</td>
-                                        <td style="text-align:left; border:1px solid white;" class="tot-val">
+                                        <td style="text-align:right; border:1px solid white; font-size: 11pt;" class="tot-lbl">Warenwert</td>
+                                        <td style="text-align:left; border:1px solid white; font-size: 11pt;" class="tot-val">
                                             <span t-out="subtotal['base_amount_currency']"
                                                   t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
                                         </td>
                                     </tr>
                                     <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
                                         <tr style="border:1px solid white;">
-                                            <td style="text-align:right; border:1px solid white;" class="tot-lbl">zzgl. <span t-out="tax_group['group_name']"/></td>
-                                            <td style="text-align:left; border:1px solid white;" class="tot-val">
+                                            <td style="text-align:right; border:1px solid white; font-size: 11pt;" class="tot-lbl">zzgl. <span t-out="tax_group['group_name']"/></td>
+                                            <td style="text-align:left; border:1px solid white; font-size: 11pt;" class="tot-val">
                                                 <span t-out="tax_group['tax_amount_currency']"
                                                       t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
                                             </td>
@@ -285,8 +293,8 @@
                                     </t>
                                 </t>
                                 <tr style="border:1px solid white;" class="tot-grand">
-                                    <td style="text-align:right; border:1px solid white;" class="tot-lbl b">Gesamtbetrag</td>
-                                    <td style="text-align:left; border:1px solid white;" class="tot-val b">
+                                    <td style="text-align:right; border:1px solid white; font-size: 11pt;" class="tot-lbl b">Gesamtbetrag</td>
+                                    <td style="text-align:left; border:1px solid white; font-size: 11pt;" class="tot-val b">
                                         <span t-field="doc.amount_total"
                                               t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
                                     </td>
@@ -297,7 +305,7 @@
                 </table>
 
                 <!-- Terms -->
-                <div class="erz-terms">
+                <div class="erz-terms" style="font-size: 11pt;">
                     <t t-if="doc.note">
                         <span t-field="doc.note"/>
                     </t>
@@ -314,7 +322,6 @@
                         <t t-if="doc.partner_shipping_id">
                             <p>Versand: <span t-field="doc.partner_shipping_id.name"/>.</p>
                         </t>
-                        <br/>
                         <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
                         <p>Beanstandungen werden nur innerhalb acht Tagen nach Warenerhalt berücksichtigt.
                            Kleine Abweichungen in Farbe, Gewicht und Stoff berechtigen nicht zu Mängelrügen.</p>
@@ -326,7 +333,7 @@
                 </div>
 
                 <!-- Bank details (mid-page, above the fixed footer) -->
-                <div class="erz-bank">
+                <div class="erz-bank" style="font-size: 11pt;">
                     <t t-set="bank" t-value="doc.company_id.bank_ids[:1]"/>
                     <t t-if="bank">
                         <p class="b">Bankverbindung:&#160;&#160;<t t-esc="bank.bank_id.name"/></p>

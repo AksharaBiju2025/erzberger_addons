@@ -10,6 +10,8 @@
         <field name="print_report_name">'Delivery Note'</field>
         <field name="binding_model_id" ref="stock.model_stock_picking"/>
         <field name="binding_type">report</field>
+        <field name="paperformat_id"
+           ref="erzberger_sale_report.paperformat_sale_order_confirmation"/>
     </record>
 
 </odoo>

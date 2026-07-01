@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+<template id="report_invoice_document_custom">
+<t t-call="web.html_container">
+    <t t-foreach="docs" t-as="doc">
+
+        <t t-set="o" t-value="doc"/>
+        <t t-call="erzberger_sale_report.report_erz_external_layout">
+
+            <div style="font-family: Arial, sans-serif; font-size: 9pt; color: #222;">
+
+                    <style>
+                    .erz-title {
+                        font-size:20pt;
+                        font-weight:bold;
+                        text-decoration:underline;
+                        margin-bottom:2mm;
+                    }
+
+                    .erz-ref {
+                        font-size:11pt;
+                        line-height:1.6;
+                    }
+
+                    .meta-lbl,
+                    .meta-val {
+                        font-size:11pt;
+                    }
+
+                    .otbl thead th {
+                        font-size:11pt;
+                        font-weight:bold;
+                        padding:2mm;
+                    }
+
+                    .otbl tbody td {
+                        font-size:11pt;
+                        padding:2mm;
+                        vertical-align:top;
+                    }
+
+                    .sub {
+                        font-size:10pt;
+                    }
+
+                    .delivery {
+                        font-size:11pt;
+                    }
+
+                    .tot-inner td {
+                        font-size:11pt;
+                    }
+
+                    .tot-grand td {
+                        font-size:12pt;
+                        font-weight:bold;
+                    }
+
+                    .erz-terms {
+                        font-size:11pt;
+                        line-height:1.6;
+                    }
+
+                    .erz-bank {
+                        font-size:11pt;
+                    }
+
+                    .info-tbl th,
+                    .info-tbl td {
+                        font-size:11pt;
+                    }
+
+                    .info-head th,
+                    .info-data td,
+                    .line-head th {
+                        font-size:11pt;
+                    }
+
+                    p {
+                        font-size:11pt;
+                        margin:0 0 2mm 0;
+                    }
+                </style>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white;">
+                    <tr>
+                        <td style="width:58%; vertical-align:top; padding-right:6mm; border:1px solid white;">
+                            <div class="erz-title">RECHNUNG</div>
+                        </td>
+                        <td style="width:42%; vertical-align:top; border:1px solid white;">
+                            <table style="border:1px solid white;">
+                                <tr style="border:1px solid white;">
+                                    <td class="meta-lbl" style="border:1px solid white;">RE-Nr.:</td>
+                                    <td class="meta-val b" style="border:1px solid white;"><span t-field="doc.name"/></td>
+                                </tr>
+                                <tr style="border:1px solid white;">
+                                    <td class="meta-lbl" style="border:1px solid white;">Datum:</td>
+                                    <td class="meta-val" style="border:1px solid white;">
+                                        <span t-field="doc.invoice_date" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
+                                    </td>
+                                </tr>
+                                <t t-if="doc.company_id.company_registry">
+                                    <tr style="border:1px solid white;">
+                                        <td class="meta-lbl" style="border:1px solid white;">St.-Nr.:</td>
+                                        <td class="meta-val" style="border:1px solid white;"><t t-esc="doc.company_id.company_registry"/></td>
+                                    </tr>
+                                </t>
+                                <t t-if="doc.company_id.vat">
+                                    <tr style="border:1px solid white;">
+                                        <td class="meta-lbl" style="border:1px solid white;">Ust.-IdNr.:</td>
+                                        <td class="meta-val" style="border:1px solid white;"><span t-field="doc.company_id.vat"/></td>
+                                    </tr>
+                                </t>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+
+                <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
+                    <t t-if="doc.partner_id.parent_id">
+                        <div><t t-esc="doc.partner_id.parent_id.name"/></div>
+                    </t>
+                    <div t-field="doc.partner_id"
+                         t-options='{"widget":"contact","fields":["name","address"],"no_marker":True}'/>
+                </div>
+
+                <table class="otbl">
+
+                    <tr class="info-head">
+                        <th style="width:22%; text-align:left;">Auftragsnr.</th>
+                        <th style="width:33%; text-align:left;">Lieferdatum</th>
+                        <th style="width:22%; text-align:left;">Versandart</th>
+                        <th style="width:23%; text-align:left;">Lieferbed.</th>
+                    </tr>
+
+                    <tr class="info-data">
+                        <td style="text-align:left;"><span t-field="doc.invoice_origin"/></td>
+                        <td style="text-align:left;">Rechnungsdatum = Lieferdatum</td>
+                        <td style="text-align:left;">per Spedition</td>
+                        <td style="text-align:left;">frei Haus</td>
+                    </tr>
+
+                    <tr class="line-head">
+                        <th style="text-align:left;">Menge<br/><span class="sub">kg/Stück</span></th>
+                        <th style="text-align:left;">Bezeichnung</th>
+                        <th style="text-align:center;" class="tr">
+                            Preis/Einheit<br/>
+                            <span class="sub">per kg/1.000 Stück</span>
+                        </th>
+                        <th style="text-align:center;" class="tr">Betrag</th>
+                    </tr>
+
+                    <t t-foreach="doc.invoice_line_ids" t-as="line">
+                        <t t-if="line.display_type == 'line_section'">
+                            <tr><td colspan="4" class="b" style="font-size:11pt; padding-top:3mm;"><span t-field="line.name"/></td></tr>
+                        </t>
+                        <t t-elif="line.display_type == 'line_note'">
+                            <tr><td colspan="4" style="font-style:italic; font-size:8pt;"><span t-field="line.name"/></td></tr>
+                        </t>
+                        <t t-else="">
+                            <tr>
+                                <td class="tl">
+                                    <span t-field="line.quantity"
+                                          t-options='{"widget":"float","decimal_precision":"Product Unit of Measure"}'/>
+                                </td>
+                                <td><span t-field="line.name"/></td>
+                                <td class="tr">
+                                    <t t-if="line.price_unit != 0">
+                                        <span t-field="line.price_unit" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                    </t><t t-else="">–</t>
+                                </td>
+                                <td class="tr">
+                                    <t t-if="line.price_subtotal != 0">
+                                        <span t-field="line.price_subtotal" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                    </t><t t-else="">–</t>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                <t t-set="tax_totals" t-value="doc.tax_totals"/>
+
+                    <tr class="totals-row">
+
+                        <!-- blank area -->
+                        <td></td>
+
+                        <!-- ONE CELL -->
+                        <td style="vertical-align:top;">
+
+                            <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+
+                                <div>Warenwert</div>
+
+                                <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
+                                    <div>
+                                        zzgl.
+                                        <span t-out="tax_group['group_name']"/>
+                                    </div>
+                                </t>
+
+                            </t>
+
+                            <div style="font-weight:bold;">
+                                Rechnungsbetrag
+                            </div>
+
+                        </td>
+
+                        <!-- blank column -->
+                        <td></td>
+
+                        <!-- ONE CELL -->
+                        <td class="tr" style="vertical-align:top;">
+
+                            <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+
+                                <div>
+                                    <span t-out="subtotal['base_amount_currency']"
+                                          t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                </div>
+
+                                <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
+
+                                    <div>
+                                        <span t-out="tax_group['tax_amount_currency']"
+                                              t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                    </div>
+
+                                </t>
+
+                            </t>
+
+                            <div style="font-weight:bold;">
+                                <span t-field="doc.amount_total"
+                                      t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                            </div>
+
+                        </td>
+
+                    </tr>
+
+                </table>
+
+                <div class="erz-terms">
+                    <t t-if="doc.narration">
+                        <span t-field="doc.narration"/>
+                    </t>
+                    <t t-else="">
+                        <t t-if="doc.invoice_payment_term_id and doc.invoice_payment_term_id.early_discount">
+                            <p>
+                                Zahlung innerhalb von <t t-esc="doc.invoice_payment_term_id.discount_days"/> Tagen
+                                mit <t t-esc="doc.invoice_payment_term_id.discount_percentage"/>% Skonto bis
+                                <span t-esc="(doc.invoice_date + relativedelta(days=doc.invoice_payment_term_id.discount_days)).strftime('%d.%m.%Y')"/>
+                                - (Skonto
+                                <span t-esc="'%.2f' % (doc.amount_total * doc.invoice_payment_term_id.discount_percentage / 100)"/>
+                                <t t-esc="doc.currency_id.symbol"/>)
+                                <br/>
+                                oder <t t-esc="doc.invoice_payment_term_id.line_ids[-1].nb_days if doc.invoice_payment_term_id.line_ids else ''"/>
+                                Tage netto bis
+                                <span t-field="doc.invoice_date_due" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
+                            </p>
+                        </t>
+                        <t t-elif="doc.invoice_payment_term_id">
+                            <p>Zahlungsbedingungen: <span t-field="doc.invoice_payment_term_id.name"/>.</p>
+                        </t>
+                        <div class="erz-bank">
+                            <t t-set="bank" t-value="doc.company_id.bank_ids[:1]"/>
+                            <t t-if="bank">
+                                <p class="b">Bankverbindung:&#160;&#160;<t t-esc="bank.bank_id.name"/></p>
+                                <div class="erz-bank-center">IBAN: <t t-esc="bank.acc_number"/></div>
+                                <div class="erz-bank-center">BIC: <t t-esc="bank.bank_id.bic or ''"/></div>
+                            </t>
+                            <t t-else="">
+                                <p class="b">Bankverbindung:&#160;&#160;Erzgebirgssparkasse</p>
+                                <div class="erz-bank-center">IBAN: DE37 8705 4000 3612 0096 47</div>
+                                <div class="erz-bank-center">BIC: WELADED1STB</div>
+                            </t>
+                        </div>
+                        <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
+                        <p>Sind keine Entsorgungsgebühren aufgeführt, gehen wir davon aus, dass die Service-Verpackungen
+                           Ihrerseits nach dem neuen Verpackungsgesetz bei einem dualen System lizensiert und die
+                           Mengen beim Verpackungsregister (LUCID) gemeldet werden.</p>
+                    </t>
+                </div>
+
+
+
+            </div>
+        </t>
+
+    </t>
+</t>
+</template>
+
+</odoo>
