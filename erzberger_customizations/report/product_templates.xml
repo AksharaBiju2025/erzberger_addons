@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="erzberger_51x19_zpl_label">
+
+        <t t-if="product._name == 'product.product'">
+            <t t-set="name_display"
+               t-value="f'[{product.default_code}] {product.name}' if product.default_code else product.name"/>
+        </t>
+        <t t-else="">
+            <t t-set="name_display"
+               t-value="product_info['display_name_markup']"/>
+        </t>
+
+        <t t-if="len(name_display) > 60">
+            <t t-set="name_display"
+               t-value="name_display[:57] + '...'"/>
+        </t>
+
+^XA
+^CI28
+
+^PW408
+^LL152
+^LH0,0
+^LS0
+
+^FO10,6
+^A0N,14,12
+^FB300,2,2,L,0
+^FD<t t-out="name_display"/>^FS
+
+<t t-if="price_included">
+^FO315,6
+^A0N,16,16
+^FD<t t-esc="price"/>^FS
+</t>
+
+<t t-if="barcode">
+^FO10,42
+^BY2,3,60
+^BCN,60,Y,N,N
+^FD<t t-out="barcode"/>^FS
+</t>
+
+^XZ
+
+    </template>
+
+    <template id="label_product_product_view_inherit"
+              inherit_id="stock.label_product_product_view">
+
+        <xpath expr="//t[@t-call='stock.alternative_zpl_label']"
+               position="after">
+
+            <t t-elif="'erzberger_51x19' in zpl_template"
+               t-call="erzberger_customizations.erzberger_51x19_zpl_label"/>
+
+        </xpath>
+
+    </template>
+
+</odoo>
