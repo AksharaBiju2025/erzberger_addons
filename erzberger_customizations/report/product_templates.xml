@@ -12,13 +12,11 @@
                t-value="product_info['display_name_markup']"/>
         </t>
 
-        <t t-if="len(name_display) > 60">
+        <t t-if="len(name_display) > 55">
             <t t-set="name_display"
-               t-value="name_display[:57] + '...'"/>
+               t-value="name_display[:52] + '...'"/>
         </t>
 
-^XA
-^CI28
 
 ^PW408
 ^LL152
@@ -26,24 +24,25 @@
 ^LS0
 
 ^FO10,6
-^A0N,14,12
-^FB300,2,2,L,0
+^A0N,18,16
+^FB260,2,2,L,0
 ^FD<t t-out="name_display"/>^FS
 
+<!-- Price -->
 <t t-if="price_included">
-^FO315,6
-^A0N,16,16
+^FO260,72
+^A0N,24,24
 ^FD<t t-esc="price"/>^FS
 </t>
 
+<!-- Barcode -->
 <t t-if="barcode">
-^FO10,42
-^BY2,3,60
-^BCN,60,Y,N,N
+^FO10,58
+^BY1,2,35
+^BCN,35,Y,N,N
 ^FD<t t-out="barcode"/>^FS
 </t>
 
-^XZ
 
     </template>
 
