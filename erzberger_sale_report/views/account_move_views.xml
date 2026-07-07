@@ -7,7 +7,7 @@
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//header/button[@name='action_print_pdf']" position="replace">
+            <xpath expr="//header/button[@name='action_print_pdf'][1]" position="replace">
                 <button
                     string="Print"
                     type="action"
@@ -16,6 +16,7 @@
                     invisible="move_type not in ('out_invoice','out_refund') or state != 'posted'"
                 />
             </xpath>
+            <xpath expr="//header/button[@name='action_print_pdf']" position="replace"/>
 
         </field>
     </record>
