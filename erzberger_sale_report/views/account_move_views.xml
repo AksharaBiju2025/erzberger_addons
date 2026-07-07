@@ -7,9 +7,9 @@
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//header/button[@name='action_post']" position="after">
+            <xpath expr="//header/button[@name='action_print_pdf']" position="replace">
                 <button
-                    string="Invoice"
+                    string="Print"
                     type="action"
                     name="%(erzberger_sale_report.action_report_invoice_custom)d"
                     icon="fa-print"

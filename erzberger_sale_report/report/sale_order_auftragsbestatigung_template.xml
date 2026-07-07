@@ -135,7 +135,14 @@
         <t t-call="erzberger_sale_report.report_erz_external_layout">
 
             <div style="font-family: Arial, sans-serif; font-size: 11pt; color: #222;">
-
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
                 <style>
                     /* your existing CSS here — same as before */
                     .erz-title { font-size:15pt; font-weight:bold; text-decoration:underline; margin-bottom:1mm; }
@@ -159,14 +166,7 @@
                 </style>
 
                 <!-- META block -->
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
+
                  <!-- Recipient address -->
                 <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
                     <t t-if="doc.partner_id.parent_id">
@@ -178,7 +178,13 @@
                 <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white; font-size: 11pt;">
                     <tr>
                         <td style="width:58%; vertical-align:top; padding-right:6mm; border:1px solid white;">
-                            <div class="erz-title">Auftragsbestätigung</div>
+                            <t t-if="doc.state == 'sale'">
+                                <div class="erz-title">Auftragsbestätigung</div>
+                            </t>
+                            <t t-elif="doc.state in ('draft', 'sent')">
+                                <div class="erz-title">BESTELLUNG/ORDER</div>
+                            </t>
+
                             <div class="erz-ref" style="font-size: 11pt;">
                                 <t t-if="doc.partner_id.name">
                                     (Ihr Auftrag v.
@@ -260,11 +266,34 @@
                                 </tr>
                             </t>
                         </t>
+                        <t t-if="doc.state == 'sale'">
+                            <tr>
+                                <td colspan="4"
+                                    style="padding:3mm 2mm; font-size:11pt; line-height:1.5; border-bottom:0.5px solid #ccc;">
+                                    Aufgrund der nicht planbaren, sehr dynamischen Preisentwicklung im
+                                    Rohstoff-, Energie- und Frachtbereich bestätigen wir unsere
+                                    Preisangaben freibleibend. Wir behalten uns vor, unsere Preise in
+                                    Rücksprache mit Ihnen anzupassen, sollten die Kosten bis zur
+                                    Produktion um mehr als 5% steigen. Die Einhaltung unseres
+                                    bestätigten Liefertermins setzt eine reibungslose
+                                    Rohstoffversorgung voraus.
+                                </td>
+                            </tr>
+                        </t>
+                        <t t-elif="doc.state in ('draft', 'sent')">
+                            <tr>
+                                <td colspan="4"
+                                    style="padding:3mm 2mm; font-size:11pt; line-height:1.5; border-bottom:0.5px solid #ccc;">
+                                     Wir vereinbaren 100% Kundenschutz für diesen und alle Folgeaufträge.
+                                     Kenntnisse aus und über diesen Auftrag dürfen ohne unsere Zustimmung nicht an Dritte weiter gegeben werden.
+                                     Eine Weitervergabe des Auftrages an Dritte ist nur mit unserer Zustimmung zulässig.
+                                </td>
+                            </tr>
+                        </t>
                     </tbody>
                 </table>
 
                 <div style="font-size: 11pt;" class="delivery">
-                    Eine termingerechte Lieferung setzt eine ungestörte und ausreichende Rohstoffversorgung voraus.
                 </div>
 
                 <!-- Totals -->
@@ -305,47 +334,103 @@
                 </table>
 
                 <!-- Terms -->
-                <div class="erz-terms" style="font-size: 11pt;">
-                    <t t-if="doc.note">
-                        <span t-field="doc.note"/>
+                <div class="erz-terms" style="font-size:11pt;">
+
+                    <!-- Quotation -->
+                    <t t-if="doc.state in ('draft', 'sent')">
+
+                        <p>Packeinheit: 8,23 kg netto für netto in ERZBERGER-Karton</p>
+
+                        <p>Druckplatten: sind in Ihrem Hause. Qualität und Ausführung wie zuletzt in 2025 geliefert.</p>
+
+                        <p>Auftrag soll ohne "Grüner Punkt" gefertigt werden.</p>
+
+                        <p>
+                            Liefertermin:
+                            <t t-if="doc.commitment_date">
+                                <span t-field="doc.commitment_date"
+                                      t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
+                            </t>
+                        </p>
+
+                        <p>Verpackung u. Versand: streng neutral mit unserem ERZBERGER-Lieferschein</p>
+
+                        <p>
+                            Zahlung:
+                            <t t-if="doc.payment_term_id">
+                                <span t-field="doc.payment_term_id.name"/>
+                            </t>
+                        </p>
+
+                        <p>Versandart: ab Werk streng neutral direkt zum Kunden</p>
+
+                        <p>Anlieferzeiten: Mo–Fr. 09:00–12:30 Uhr und 13:30–16:00 Uhr</p>
+
+                        <p>Nur Motorwagen mit Hebebühne!</p>
+
                     </t>
-                    <t t-else="">
-                        <p>Wie gewünscht, übernehmen Sie selbst Lizensierung und Vollständigkeitserklärung.</p>
+
+                    <!-- Order Confirmation -->
+                    <t t-elif="doc.state == 'sale'">
+
+                        <p>Wie gewünscht, übernehmen wir Lizenzierung und Vollständigkeitserklärung.</p>
+
                         <t t-if="doc.commitment_date">
-                            <p>Liefertermin: bei uns abgehend bis
-                                <span t-field="doc.commitment_date" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
+                            <p>
+                                Liefertermin:
+                                <span t-field="doc.commitment_date"
+                                      t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
                             </p>
                         </t>
+
                         <t t-if="doc.payment_term_id">
                             <p>Zahlungsbedingungen: <span t-field="doc.payment_term_id.name"/>.</p>
                         </t>
+
                         <t t-if="doc.partner_shipping_id">
                             <p>Versand: <span t-field="doc.partner_shipping_id.name"/>.</p>
                         </t>
-                        <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
-                        <p>Beanstandungen werden nur innerhalb acht Tagen nach Warenerhalt berücksichtigt.
-                           Kleine Abweichungen in Farbe, Gewicht und Stoff berechtigen nicht zu Mängelrügen.</p>
-                        <p>Toleranzen bei Gewichtsschwankungen (Papier 8%, Kunststoff 25%), Maßabweichungen von 5%
-                           und Mengenabweichungen von 20% allg. können nicht beanstandet werden.</p>
-                        <p>Es gelten die &#x201E;Geschäfts-, Liefer- und Zahlungsbedingungen für die Papier- und
-                           Kunststoffindustrie&#x201C; in Ihrer jeweils neuesten Fassung.</p>
-                    </t>
-                </div>
 
-                <!-- Bank details (mid-page, above the fixed footer) -->
-                <div class="erz-bank" style="font-size: 11pt;">
-                    <t t-set="bank" t-value="doc.company_id.bank_ids[:1]"/>
-                    <t t-if="bank">
-                        <p class="b">Bankverbindung:&#160;&#160;<t t-esc="bank.bank_id.name"/></p>
-                        <div class="erz-bank-center">IBAN: <t t-esc="bank.acc_number"/></div>
-                        <div class="erz-bank-center">BIC: <t t-esc="bank.bank_id.bic or ''"/></div>
+                        <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
+
+                        <p>Beanstandungen werden nur innerhalb acht Tagen berücksichtigt. Kleine Abweichungen in Farbe, Gewicht und Stoff berechtigen nicht zu Mängelrügen.</p>
+
+                        <p>Toleranzen bei Gewichtsschwankungen (Papier 8%, Kunststoff 25%), Maßabweichungen von 5% und Mengenabweichungen von 20% allg. können nicht beanstandet werden.</p>
+
+                        <p>Es gelten die „Geschäfts-, Liefer- und Zahlungsbedingungen für die Papier- und Kunststoffindustrie“ in Ihrer jeweils neuesten Fassung.</p>
+
                     </t>
-                    <t t-else="">
-                        <p class="b">Bankverbindung:&#160;&#160;Erzgebirgssparkasse</p>
-                        <div class="erz-bank-center">IBAN: DE37 8705 4000 3612 0096 47</div>
-                        <div class="erz-bank-center">BIC: WELADED1STB</div>
-                    </t>
+
+                    <!-- Common Bank Details -->
+                    <div class="erz-bank" style="font-size:11pt;">
+                        <t t-set="bank" t-value="doc.company_id.bank_ids[:1]"/>
+                        <t t-if="bank">
+                            <p class="b">Bankverbindung: <t t-esc="bank.bank_id.name"/></p>
+                            <div class="erz-bank-center">IBAN: <t t-esc="bank.acc_number"/></div>
+                            <div class="erz-bank-center">BIC: <t t-esc="bank.bank_id.bic or ''"/></div>
+                        </t>
+                        <t t-else="">
+                            <p class="b">Bankverbindung: Erzgebirgssparkasse</p>
+                            <div class="erz-bank-center">IBAN: DE37 8705 4000 3612 0096 47</div>
+                            <div class="erz-bank-center">BIC: WELADED1STB</div>
+                        </t>
+                    </div>
+
                 </div>
+<!--                &lt;!&ndash; Bank details (mid-page, above the fixed footer) &ndash;&gt;-->
+<!--                <div class="erz-bank" style="font-size: 11pt;">-->
+<!--                    <t t-set="bank" t-value="doc.company_id.bank_ids[:1]"/>-->
+<!--                    <t t-if="bank">-->
+<!--                        <p class="b">Bankverbindung:&#160;&#160;<t t-esc="bank.bank_id.name"/></p>-->
+<!--                        <div class="erz-bank-center">IBAN: <t t-esc="bank.acc_number"/></div>-->
+<!--                        <div class="erz-bank-center">BIC: <t t-esc="bank.bank_id.bic or ''"/></div>-->
+<!--                    </t>-->
+<!--                    <t t-else="">-->
+<!--                        <p class="b">Bankverbindung:&#160;&#160;Erzgebirgssparkasse</p>-->
+<!--                        <div class="erz-bank-center">IBAN: DE37 8705 4000 3612 0096 47</div>-->
+<!--                        <div class="erz-bank-center">BIC: WELADED1STB</div>-->
+<!--                    </t>-->
+<!--                </div>-->
 
             </div>
         </t><!-- end t-call layout -->
