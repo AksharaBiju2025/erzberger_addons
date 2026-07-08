@@ -14,7 +14,7 @@
     'data': [
         'data/cron.xml',
         'data/mail_template.xml',
-        # 'data/mail_template_data.xml',
+        'data/mail_template_data.xml',
         'security/ir.model.access.csv',
         'report/sale_order_auftragsbestatigung_template.xml',
         'report/sale_order_auftragsbestatigung_report.xml',
