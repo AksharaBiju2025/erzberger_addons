@@ -14,14 +14,25 @@ class SaleOrder(models.Model):
         copy=False
     )
 
+    def action_print_custom(self):
+        self.ensure_one()
+
+        if self.company_id.use_custom_sale_report:
+            return self.env.ref(
+                "erzberger_sale_report.action_report_auftragsbestatigungs"
+            ).report_action(self)
+
+        return self.env.ref(
+            "sale.action_report_saleorder"
+        ).report_action(self)
+
     def _cron_quotation_followup(self):
         limit_date = fields.Datetime.now() - timedelta(minutes=1)
 
         quotations = self.search([
-            # ('state', '=', 'sent'),
-            ('id', '=', 20),
-            # ('date_order', '<=', limit_date),
-            # ('quotation_followup_sent', '=', False),
+            ('state', '=', 'sent'),
+            ('date_order', '<=', limit_date),
+            ('quotation_followup_sent', '=', False),
         ])
 
         template = self.env.ref(

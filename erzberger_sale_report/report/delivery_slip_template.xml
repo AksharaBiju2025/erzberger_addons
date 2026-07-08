@@ -10,7 +10,8 @@
 <template id="report_delivery_note">
 <t t-call="web.html_container">
     <t t-foreach="docs" t-as="o">
-        <t t-call="erzberger_sale_report.report_erz_external_layout">
+        <t t-set="company" t-value="o.company_id.sudo()"/>
+        <t t-call="erzberger_sale_report.report_erz_external_layouts">
 
             <div style="font-family: Arial, sans-serif; font-size: 9pt; color: #222; padding: 0 0 4mm 0;">
 
@@ -18,12 +19,6 @@
                 <!-- The external layout renders the address block above the page body.
                      These spacers push the content below it. Adjust mm values to taste. -->
                 <div style="height: 30mm;"></div>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
 
                 <!-- ── Recipient address (printed in letter-window area) ── -->
                 <div style="margin-bottom: 8mm; font-size: 9pt; line-height: 1.5;">

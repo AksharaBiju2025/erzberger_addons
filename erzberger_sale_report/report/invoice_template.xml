@@ -6,7 +6,8 @@
     <t t-foreach="docs" t-as="doc">
 
         <t t-set="o" t-value="doc"/>
-        <t t-call="erzberger_sale_report.report_erz_external_layout">
+        <t t-set="company" t-value="doc.company_id.sudo()"/>
+        <t t-call="erzberger_sale_report.report_erz_external_layouts">
 
             <div style="font-family: Arial, sans-serif; font-size: 9pt; color: #222;">
 
@@ -82,16 +83,7 @@
                         margin:0 0 2mm 0;
                     }
                 </style>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
-                <br/>
+
                 <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white;">
                     <tr>
                         <td style="width:58%; vertical-align:top; padding-right:6mm; border:1px solid white;">

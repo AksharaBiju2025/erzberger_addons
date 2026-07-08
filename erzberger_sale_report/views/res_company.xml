@@ -7,6 +7,9 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='branches']" position="after">
                 <page string="Report Settings" name="report_settings">
+                     <group>
+                        <field name="use_custom_sale_report"/>
+                    </group>
                     <group>
                         <field name="report_company_description1"/>
                     </group>

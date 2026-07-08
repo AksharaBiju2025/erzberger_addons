@@ -37,9 +37,13 @@
 
 <!-- Barcode -->
 <t t-if="barcode">
-^FO10,58
-^BY1,2,35
-^BCN,35,Y,N,N
+<t t-set="bc_module" t-value="2"/>
+<t t-set="bc_height" t-value="55"/>
+<t t-set="bc_est_width" t-value="int(bc_module * (11 * (len(barcode) + 2) + 13) + (bc_module * 20))"/>
+<t t-set="bc_x" t-value="max(4, int((408 - bc_est_width) / 2) - 40)"/>
+^FO<t t-out="bc_x"/>,50
+^BY<t t-out="bc_module"/>,2,<t t-out="bc_height"/>
+^BCN,<t t-out="bc_height"/>,Y,N,N
 ^FD<t t-out="barcode"/>^FS
 </t>
 

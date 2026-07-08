@@ -9,15 +9,16 @@
 
             <xpath expr="//header/button[@name='action_print_pdf'][1]" position="replace">
                 <button
+                    name="action_print_invoice_custom"
+                    type="object"
                     string="Print"
-                    type="action"
-                    name="%(erzberger_sale_report.action_report_invoice_custom)d"
                     icon="fa-print"
                     invisible="move_type not in ('out_invoice','out_refund') or state != 'posted'"
                 />
             </xpath>
-            <xpath expr="//header/button[@name='action_print_pdf']" position="replace"/>
 
+            <xpath expr="//header/button[@name='action_print_pdf']"
+                   position="replace"/>
         </field>
     </record>
 

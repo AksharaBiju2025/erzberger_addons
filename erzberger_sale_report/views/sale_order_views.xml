@@ -10,12 +10,9 @@
             <xpath expr="//header//button[@name='sale.action_report_saleorder']" position="replace">
                 <button
                     string="Print"
-                    name="%(erzberger_sale_report.action_report_auftragsbestatigungs)d"
-                    type="action"
-                    data-hotkey="shift+a"
-                    icon="fa-print"
-
-                />
+                    name="action_print_custom"
+                    type="object"
+                    data-hotkey="i"/>
             </xpath>
         </field>
     </record>
