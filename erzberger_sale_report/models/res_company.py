@@ -13,6 +13,6 @@ class ResCompany(models.Model):
         string="Report Company Description2",
         sanitize=False,
     )
-    # use_custom_sale_report = fields.Boolean(
-    #     string="Use Custom Sale Order Report"
-    # )
+    use_custom_sale_report = fields.Boolean(
+        string="Use Custom Sale Order Report"
+    )
