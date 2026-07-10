@@ -8,10 +8,43 @@ _logger = logging.getLogger(__name__)
 import base64
 from io import BytesIO
 from openpyxl import load_workbook
-
+BATCH_SIZE = 1000
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
+
+    @api.model
+    def cron_enable_track_inventory(self):
+        domain = [
+            ("type", "=", "consu"),
+            ("is_storable", "=", False),
+        ]
+
+        total_updated = 0
+
+        while True:
+            products = self.search(domain, limit=BATCH_SIZE)
+
+            if not products:
+                break
+
+            products.write({
+                "is_storable": True,
+            })
+
+            total_updated += len(products)
+            self.env.cr.commit()  # Optional for cron jobs with large datasets
+
+            _logger.info(
+                "Updated %s products in current batch. Total updated: %s",
+                len(products),
+                total_updated,
+            )
+
+        _logger.info(
+            "Track Inventory enabled successfully for %s products.",
+            total_updated,
+        )
 
     @api.model
     def cron_enable_dropship_route(self):

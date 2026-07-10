@@ -17,6 +17,30 @@
         </field>
     </record>
 
-    
+    <template id="sale_order_portal_remove_connect_button"
+          inherit_id="sale.sale_order_portal_template">
+
+        <xpath expr="//button[@id='portal_connect_software_modal_btn']"
+               position="replace"/>
+
+    </template>
+
+    <template id="remove_purchase_portal_connect_button"
+          inherit_id="purchase.portal_my_purchase_order">
+
+        <xpath expr="//button[@id='portal_connect_software_modal_btn']"
+               position="replace"/>
+
+    </template>
+
+    <template id="remove_portal_powered_by_odoo"
+          inherit_id="portal.portal_record_sidebar">
+
+        <xpath expr="//div[contains(@class, 'd-none') and contains(@class, 'd-lg-block') and contains(@class, 'text-muted')]"
+               position="replace"/>
+
+    </template>
+
+
 
 </odoo>

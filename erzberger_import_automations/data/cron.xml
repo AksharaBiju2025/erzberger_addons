@@ -71,4 +71,14 @@
         <field name="active">False</field>
     </record>
 
+    <record id="ir_cron_enable_track_inventory" model="ir.cron">
+        <field name="name">Enable Track Inventory for Goods Products</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_enable_track_inventory()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">False</field>
+    </record>
+
 </odoo>
