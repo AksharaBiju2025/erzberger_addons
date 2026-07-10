@@ -61,4 +61,14 @@
         <field name="active">False</field>
     </record>
 
+    <record id="ir_cron_enable_dropship_packaging" model="ir.cron">
+        <field name="name">Enable Dropship for Packaging Products</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">model.cron_enable_dropship_route()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">False</field>
+    </record>
+
 </odoo>

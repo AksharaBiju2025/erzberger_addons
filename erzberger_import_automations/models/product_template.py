@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 import logging
 from odoo.osv import expression
@@ -13,6 +13,31 @@ from openpyxl import load_workbook
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
+    @api.model
+    def cron_enable_dropship_route(self):
+        company_id = 2  # Erzberger Verpackung
+
+        dropship_route = self.env.ref(
+            "stock_dropshipping.route_drop_shipping",
+            raise_if_not_found=False,
+        )
+
+        if not dropship_route:
+            _logger.warning("Dropship route not found.")
+            return
+
+        products = self.search([
+            ('company_id', '=', company_id),
+            ('route_ids', 'not in', dropship_route.ids),
+        ])
+
+        _logger.info("Found %s products.", len(products))
+
+        products.write({
+            'route_ids': [(4, dropship_route.id)]
+        })
+
+        _logger.info("Dropship route enabled successfully.")
 
     def _cron_product_category_mapping_verpackungssysteme(self):
 
