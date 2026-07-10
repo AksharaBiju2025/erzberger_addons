@@ -9,7 +9,7 @@
 
             <xpath expr="//header//button[@name='sale.action_report_saleorder']" position="replace">
                 <button
-                    string="Print"
+                    string="Drucken"
                     name="action_print_custom"
                     type="object"
                     data-hotkey="i"/>
