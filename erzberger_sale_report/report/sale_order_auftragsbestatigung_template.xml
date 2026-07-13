@@ -3,35 +3,41 @@
 
 <template id="report_erz_external_layouts">
     <div class="header" style="font-family: Arial, sans-serif; font-size: 11pt; color: #222;">
-        <table style="width:100%; border-collapse:collapse; border:1px solid white;">
-            <tr>
-                <td style="width:25%; vertical-align:bottom; padding-right:4mm; border:1px solid white;">
-                    <div style="color:#003399; font-size:11pt; text-decoration:underline; white-space:nowrap; border:1px solid white;">
-                        <t t-esc="company.name"/> &#x2022;
-                        <t t-esc="company.street"/> &#x2022;
-                        D-<t t-esc="company.zip"/> <t t-esc="company.city"/>
-                    </div>
-                </td>
+    <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+        <tr>
+            <td style="width:45%; vertical-align:bottom; padding-bottom:2mm; border:1px solid white;">
+                <div style="color:#003399; font-size:9.5pt; text-decoration:underline; white-space:nowrap; border:1px solid white;">
+                    <t t-esc="company.name"/> &#x2022;
+                    <t t-esc="company.street"/> &#x2022;
+                    D-<t t-esc="company.zip"/> <t t-esc="company.city"/>
+                </div>
+            </td>
 
-                <td style="width:33%; vertical-align:bottom; text-align:left; padding-right:4mm; border:1px solid white;">
-                    <div style="color:#4a52a6; font-size:11pt; font-weight:bold; line-height:1.6; white-space:pre-line;">
-                        <t t-esc="company.report_company_description1"/>
+            <td style="width:55%; vertical-align:top; border:1px solid white;">
+                <t t-if="company.logo">
+                    <div style="margin-bottom:4mm; text-align:right;">
+                        <img t-att-src="image_data_uri(company.logo)" style="max-height:80px; width:auto; display:inline-block;"/>
                     </div>
-                </td>
+                </t>
 
-                <td style="width:42%; vertical-align:top; text-align:right; border:1px solid white;">
-                    <t t-if="company.logo">
-                        <div style="margin-bottom:3mm; text-align:right;">
-                            <img t-att-src="image_data_uri(company.logo)" style="height:100px; width:auto;"/>
-                        </div>
-                    </t>
-                    <div style="color:#4a52a6; font-size:11pt; font-weight:bold; line-height:1.6; text-align:left; white-space:pre-line;">
-                        <t t-esc="company.report_company_description2"/>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    </div>
+                <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+                    <tr>
+                        <td style="width:50%; vertical-align:top; text-align:left; padding-right:3mm; border:1px solid white;">
+                            <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
+                                <t t-esc="company.report_company_description1"/>
+                            </div>
+                        </td>
+                        <td style="width:50%; vertical-align:top; text-align:left; border:1px solid white;">
+                            <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
+                                <t t-esc="company.report_company_description2"/>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
 
     <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
          t-att-data-oe-model="o and o._name"
