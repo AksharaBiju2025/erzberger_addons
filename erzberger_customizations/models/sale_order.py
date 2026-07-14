@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import fields, models, _
 
 
 class SaleOrder(models.Model):
@@ -6,6 +6,6 @@ class SaleOrder(models.Model):
 
     job_reference = fields.Char(
         string="Job / Project Reference",
-        help="Reference of the print job or project."
+        help="Reference of the print job or project.",
     )
 

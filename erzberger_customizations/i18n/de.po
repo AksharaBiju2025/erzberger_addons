@@ -1,0 +1,21 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * erzberger_customizations
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. module: erzberger_customizations
+#: model:ir.model.fields,field_description:erzberger_customizations.field_purchase_order__job_reference
+msgid "Job / Project Reference"
+msgstr "Auftrags- / Projektreferenz"
+
+#. module: erzberger_customizations
+#: model:ir.model.fields,help:erzberger_customizations.field_purchase_order__job_reference
+msgid "Reference of the print job or project."
+msgstr "Referenz des Druckauftrags oder Projekts."
