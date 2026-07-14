@@ -5,7 +5,7 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     job_reference = fields.Char(
-        string="Job / Project Reference",
-        help="Reference of the print job or project.",
+        string=_("Auftrags- / Projektreferenz"),
+        help=_("Referenz des Druckauftrags oder Projekts."),
     )
 

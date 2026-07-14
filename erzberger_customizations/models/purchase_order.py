@@ -5,8 +5,8 @@ class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
     job_reference = fields.Char(
-        string="Job / Project Reference",
-        help="Reference of the print job or project.",
+        string="Auftrags- / Projektreferenz",
+        help="Referenz des Druckauftrags oder Projekts.",
     )
 
     @api.model_create_multi
