@@ -81,4 +81,14 @@
         <field name="active">False</field>
     </record>
 
+    <record id="ir_cron_product_vendor_mapping" model="ir.cron">
+        <field name="name">Product Vendor Mapping</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_product_vendor_mapping()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">False</field>
+    </record>
+
 </odoo>

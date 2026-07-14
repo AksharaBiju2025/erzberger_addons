@@ -422,3 +422,85 @@ class ProductTemplate(models.Model):
                 "POS Category not found: %s",
                 item
             )
+
+    def _cron_product_vendor_mapping(self):
+
+        attachment = self.env["ir.attachment"].search([
+            ("name", "=", "product_vendor_mapping.xlsx")
+        ], limit=1)
+
+        if not attachment:
+            _logger.info("Product vendor mapping file not found.")
+            return
+
+        workbook = load_workbook(
+            filename=BytesIO(base64.b64decode(attachment.datas)),
+            read_only=True,
+            data_only=True,
+        )
+
+        sheet = workbook.active
+
+        updated = 0
+        product_not_found = []
+        vendor_not_found = []
+
+        SupplierInfo = self.env["product.supplierinfo"]
+        Partner = self.env["res.partner"]
+
+        for row in sheet.iter_rows(
+                min_row=2,
+                min_col=1,
+                max_col=2,
+                values_only=True,
+        ):
+            product_name = str(row[0]).strip() if row[0] else False
+            vendor_name = str(row[1]).strip() if len(row) > 1 and row[1] else False
+
+            if not product_name or not vendor_name:
+                continue
+
+            product = self.search([
+                ("name", "=", product_name)
+            ], limit=1)
+
+            if not product:
+                product_not_found.append(product_name)
+                continue
+
+            vendor = Partner.search([
+                ("name", "=", vendor_name)
+            ], limit=1)
+
+            if not vendor:
+                vendor_not_found.append(
+                    f"{product_name} -> {vendor_name}"
+                )
+                continue
+
+            existing_supplier = SupplierInfo.search([
+                ("product_tmpl_id", "=", product.id),
+                ("partner_id", "=", vendor.id),
+            ], limit=1)
+
+            if existing_supplier:
+                continue
+
+            SupplierInfo.create({
+                "product_tmpl_id": product.id,
+                "partner_id": vendor.id,
+                "min_qty": 0,
+            })
+
+            updated += 1
+
+        _logger.info(
+            "Product Vendor Mapping completed. Updated %s products.",
+            updated,
+        )
+
+        for product_name in product_not_found:
+            _logger.warning("Product not found: %s", product_name)
+
+        for item in vendor_not_found:
+            _logger.warning("Vendor not found: %s", item)
