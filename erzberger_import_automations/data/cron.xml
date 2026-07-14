@@ -91,4 +91,14 @@
         <field name="active">False</field>
     </record>
 
+    <record id="ir_cron_update_supplierinfo_company" model="ir.cron">
+        <field name="name">Update supplierinfo</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_update_supplierinfo_company()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">False</field>
+    </record>
+
 </odoo>

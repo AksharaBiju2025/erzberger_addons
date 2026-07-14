@@ -504,3 +504,22 @@ class ProductTemplate(models.Model):
 
         for item in vendor_not_found:
             _logger.warning("Vendor not found: %s", item)
+
+    def _cron_update_supplierinfo_company(self):
+        SupplierInfo = self.env["product.supplierinfo"].sudo()
+
+        supplier_infos = SupplierInfo.search([
+            ("company_id", "=", 1),
+        ])
+
+        count = len(supplier_infos)
+
+        supplier_infos.write({
+            "company_id": 2,
+        })
+
+        _logger.info(
+            "SupplierInfo Company Update completed. "
+            "Updated %s supplier records from company 1 to company 2.",
+            count,
+        )
