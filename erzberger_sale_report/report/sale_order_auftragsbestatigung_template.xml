@@ -3,7 +3,7 @@
 
 <template id="report_erz_external_layouts">
     <div class="header" style="font-family: Arial, sans-serif; font-size: 11pt; color: #222;">
-    <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+    <!-- <table style="width:100%; border-collapse:collapse; border:1px solid white;">
         <tr>
             <td style="width:45%; vertical-align:bottom; padding-bottom:2mm; border:1px solid white;">
                 <div style="color:#003399; font-size:9.5pt; text-decoration:underline; white-space:nowrap; border:1px solid white;">
@@ -36,7 +36,45 @@
                 </table>
             </td>
         </tr>
-    </table>
+    </table> -->
+
+    <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+            <tr>
+                <td width="40%">
+                    
+                </td>
+                <td width="45%" colspan="2" style="text-align:left">
+                    <t t-if="company.logo">
+                        <img t-att-src="image_data_uri(company.logo)" style="max-height:230px; width:400px;text-align:left;"/>
+                       
+                    </t>
+
+                </td>
+            </tr>
+            <tr>
+                <td width="40%" style="vertical-align:bottom; border:1px solid white;text-align:left">
+                    <div style="color:#003399; font-size:9.5pt; text-decoration:underline; white-space:nowrap;">
+                        <t t-esc="company.name"/> •
+                        <t t-esc="company.street"/> •
+                        D-<t t-esc="company.zip"/> <t t-esc="company.city"/>
+                    </div>
+                </td>
+                <td width="22.5%" style="text-align:left;padding-left:6px; vertical-align:top; border:1px solid white; white-space:nowrap;">
+                    <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
+                        <t t-esc="company.report_company_description1"/>
+                    </div>
+                </td>
+                <td width="22.5%" style="text-align:left;padding-left:6px; vertical-align:top; border:1px solid white; white-space:nowrap;">
+                    <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
+                        <t t-esc="company.report_company_description2"/>
+                    </div>
+                </td>
+            </tr>
+            
+        
+        </table>
+
+
 </div>
 
     <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
@@ -47,7 +85,7 @@
 
     <div class="footer" style="font-family: Arial, sans-serif; font-size: 9pt; color:#444; border:1px solid white;">
         <hr style="border-top:1px solid #000; margin:0 0 2mm 0;"/>
-        <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+        <!-- <table style="width:100%; border-collapse:collapse; border:1px solid white;">
             <tr>
                 <td style="width:26%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
                     <strong><t t-esc="company.name"/></strong><br/>
@@ -83,7 +121,56 @@
                     </t>
                 </td>
             </tr>
+        </table> -->
+
+        <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+            <tr>
+                <td style="width:26%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
+                    <strong style="color:#003399;"><t t-esc="company.name"/></strong><br/>
+                    <span style="color:#12b6e3;"><t t-esc="company.street"/><br/>
+                    D-<t t-esc="company.zip"/> <t t-esc="company.city"/><br/>
+                    <t t-esc="company.country_id.name"/></span>
+                </td>
+                <!--<td style="width:28%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">-->
+                <!--    <strong>Firmensitz / Headquarters</strong><br/>-->
+                <!--    Buntspeicher | Speicherstraße 1<br/>-->
+                <!--    D-08297 Zwönitz / Erzgebirge<br/>-->
+                <!--    Deutschland / Germany<br/>-->
+                <!--    <t t-if="company.phone">Fon: <t t-esc="company.phone"/></t>-->
+                <!--</td>-->
+                <td style="width:24%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
+                    <strong style="color:#003399;">Telefone/Fax:</strong><br/>
+                    <strong style="color:#003399;">Phone/Fax:</strong><br/>
+                    <span style="color:#12b6e3;">Fon: +49(0)3 72 96 - 93 28 93</span><br/>
+                    <span style="color:#12b6e3;">Fax: +49(0)3 72 96 - 93 28 90</span><br/>
+                    <span style="color:#12b6e3;">Mobil: +49(0)1 72 - 37 14 686</span>
+                </td>
+                
+                <td style="width:24%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
+                    <span style="color:#003399;"><strong style="color:#003399;">Website:</strong><br/></span>
+                    <span style="color:#12b6e3;"><t t-esc="company.website"/><br/></span>
+                    <strong style="color:#003399;">E-Mail:</strong><br/>
+                    <span style="color:#12b6e3;"><t t-esc="company.email"/></span>
+                </td>
+                <td style="width:22%; vertical-align:top; line-height:1.6; border:1px solid white;">
+                    <strong style="color:#003399;">Bankverbindung</strong><br/>
+                    <span style="color:#12b6e3;"><t t-set="bf" t-value="company.partner_id.bank_ids[:1]"/>
+                    <t t-if="bf">
+                        <t t-esc="bf.bank_id.name"/><br/>
+                        IBAN: <t t-esc="bf.acc_number"/><br/>
+                        BIC: <t t-esc="bf.bank_id.bic or ''"/>
+                    </t>
+                    <t t-else="">
+                        Erzgebirgssparkasse<br/>
+                        IBAN: DE37 8705 4000 3612 0096 47<br/>
+                        BIC: WELADED1STB
+                    </t></span>
+                </td>
+            </tr>
         </table>
+
+
+        
         <div t-if="report_type == 'pdf'" style="text-align:right; margin-top:1mm; font-size:6pt; color:#888;">
             Seite <span class="page"/> / <span class="topage"/>
         </div>

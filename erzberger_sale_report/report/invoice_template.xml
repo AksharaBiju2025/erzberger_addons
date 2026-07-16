@@ -83,6 +83,13 @@
                         margin:0 0 2mm 0;
                     }
                 </style>
+                 <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
+                    <t t-if="doc.partner_id.parent_id">
+                        <div><t t-esc="doc.partner_id.parent_id.name"/></div>
+                    </t>
+                    <div t-field="doc.partner_id"
+                         t-options='{"widget":"contact","fields":["name","address"],"no_marker":True}'/>
+                </div>
 
                 <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white;">
                     <tr>
@@ -118,15 +125,15 @@
                     </tr>
                 </table>
 
-                <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
+                <!-- <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
                     <t t-if="doc.partner_id.parent_id">
                         <div><t t-esc="doc.partner_id.parent_id.name"/></div>
                     </t>
                     <div t-field="doc.partner_id"
                          t-options='{"widget":"contact","fields":["name","address"],"no_marker":True}'/>
-                </div>
+                </div> -->
 
-                <table class="otbl">
+                <!-- <table class="otbl">
 
                     <tr class="info-head">
                         <th style="width:22%; text-align:left;">Auftragsnr.</th>
@@ -183,10 +190,8 @@
 
                     <tr class="totals-row">
 
-                        <!-- blank area -->
                         <td></td>
 
-                        <!-- ONE CELL -->
                         <td style="vertical-align:top;">
 
                             <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
@@ -208,10 +213,8 @@
 
                         </td>
 
-                        <!-- blank column -->
                         <td></td>
 
-                        <!-- ONE CELL -->
                         <td class="tr" style="vertical-align:top;">
 
                             <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
@@ -241,7 +244,122 @@
 
                     </tr>
 
+                </table> -->
+
+                <table class="otbl">
+
+                    <tr class="info-head">
+                        <th style="width:22%; text-align:left;padding:4px;"><b>Auftragsnr.</b></th>
+                        <th style="width:33%; text-align:left;padding:4px;"><b>Lieferdatum</b></th>
+                        <th style="width:22%; text-align:left;padding:4px;"><b>Versandart</b></th>
+                        <th style="width:23%; text-align:left;padding:4px;"><b>Lieferbed.</b></th>
+                    </tr>
+
+                    <tr class="info-data">
+                        <td style="text-align:left;padding:4px;"><span t-field="doc.invoice_origin"/></td>
+                        <td style="text-align:left;padding:4px;">Rechnungsdatum = Lieferdatum</td>
+                        <td style="text-align:left;padding:4px;">per Spedition</td>
+                        <td style="text-align:left;padding:4px;">frei Haus</td>
+                    </tr>
+
+                    <tr class="line-head">
+                        <th style="text-align:left;padding:4px;"><b>Menge</b><br/><span class="sub">kg/Stück</span></th>
+                        <th style="text-align:left;padding:4px;"><b>Bezeichnung</b></th>
+                        <th style="text-align:center;" class="tr">
+                            <b>Preis/Einheit</b><br/>
+                            <span class="sub">per kg/1.000 Stück</span>
+                        </th>
+                        <th style="text-align:center;" class="tr"><b>Betrag</b></th>
+                    </tr>
+
+                    <t t-foreach="doc.invoice_line_ids" t-as="line">
+                        <t t-if="line.display_type == 'line_section'">
+                            <tr><td colspan="4" class="b" style="font-size:11pt; padding-top:3mm;"><span t-field="line.name"/></td></tr>
+                        </t>
+                        <t t-elif="line.display_type == 'line_note'">
+                            <tr><td colspan="4" style="font-style:italic; font-size:8pt;"><span t-field="line.name"/></td></tr>
+                        </t>
+                        <t t-else="">
+                            <tr>
+                                <td class="tl">
+                                    <span t-field="line.quantity" t-options="{&quot;widget&quot;:&quot;float&quot;,&quot;decimal_precision&quot;:&quot;Product Unit of Measure&quot;}"/>
+                                </td>
+                                <td><span t-field="line.name"/></td>
+                                <td class="tr">
+                                    <t t-if="line.price_unit != 0">
+                                        <span t-field="line.price_unit" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
+                                    </t><t t-else="">–</t>
+                                </td>
+                                <td class="tr">
+                                    <t t-if="line.price_subtotal != 0">
+                                        <span t-field="line.price_subtotal" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
+                                    </t><t t-else="">–</t>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                <t t-set="tax_totals" t-value="doc.tax_totals"/>
+
+                    <tr class="totals-row">
+
+                        <!-- blank area -->
+                        <td/>
+
+                        <!-- ONE CELL -->
+                        <td style="vertical-align:top;">
+
+                            <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+
+                                <div>Warenwert</div>
+
+                                <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
+                                    <div>
+                                        zzgl.
+                                        <span t-out="tax_group['group_name']"/>
+                                    </div>
+                                </t>
+
+                            </t>
+
+                            <div style="font-weight:bold;">
+                                Rechnungsbetrag
+                            </div>
+
+                        </td>
+
+                        <!-- blank column -->
+                        <td/>
+
+                        <!-- ONE CELL -->
+                        <td class="tr" style="vertical-align:top;">
+
+                            <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+
+                                <div>
+                                    <span t-out="subtotal['base_amount_currency']" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
+                                </div>
+
+                                <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
+
+                                    <div>
+                                        <span t-out="tax_group['tax_amount_currency']" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
+                                    </div>
+
+                                </t>
+
+                            </t>
+
+                            <div style="font-weight:bold;">
+                                <span t-field="doc.amount_total" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
+                            </div>
+
+                        </td>
+
+                    </tr>
+
                 </table>
+
+                
 
                 <div class="erz-terms">
                     <t t-if="doc.narration">

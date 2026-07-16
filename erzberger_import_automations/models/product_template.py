@@ -12,6 +12,105 @@ BATCH_SIZE = 1000
 
 class ProductTemplate(models.Model):
     _inherit = "product.template"
+    
+    
+    _ATTACHMENT_NAME = "Mastertabelle Holzkunst.xlsx"  # match exactly
+ 
+    # ------------------------------------------------------------------
+    # This function about missing product categories will update while trigger this function
+    # ------------------------------------------------------------------
+    @api.model
+    def map_product_categories_from_excel(self):
+        """
+        1. Fetch all product.template records where categ_id is False.
+        2. For each, take its Name and look it up in the Excel's "Name"
+           column (col B).
+        3. If found, read that row's "Kategorie des Kassensystems" value
+           (col G).
+        4. Search for an EXISTING product.category with that exact name
+           (no creation).
+        5. If found, write categ_id on the product.
+        """
+        attachment = self.env["ir.attachment"].search(
+            [("name", "=", self._ATTACHMENT_NAME)], limit=1
+        )
+        if not attachment:
+            print(f"Attachment '{self._ATTACHMENT_NAME}' not found — aborting.")
+            return False
+ 
+        import openpyxl  # local import keeps module load light if unused
+ 
+        file_bytes = base64.b64decode(attachment.datas)
+        wb = openpyxl.load_workbook(io.BytesIO(file_bytes), data_only=True)
+        ws = wb.active
+ 
+        # Map header name -> column index (1-based), read from row 1
+        headers = {cell.value: idx + 1 for idx, cell in enumerate(ws[1])}
+        name_col = headers.get("Name")
+        cat_col = headers.get("Kategorie des Kassensystems")
+ 
+        if not name_col or not cat_col:
+            print(
+                f"Required columns not found. Name col: {name_col}, "
+                f"Kategorie des Kassensystems col: {cat_col}"
+            )
+            return False
+ 
+        # Build: { product name (stripped) : category text from col G }
+        by_name = {}
+        for row in ws.iter_rows(min_row=2, values_only=False):
+            name_val = row[name_col - 1].value
+            cat_val = row[cat_col - 1].value
+            if not name_val or not cat_val:
+                continue
+            by_name[str(name_val).strip()] = str(cat_val).strip()
+ 
+        # Step 1: fetch products with no category set
+        products = self.search([("categ_id", "=", False)])
+        print(f"Found {len(products)} products with categ_id = False")
+ 
+        Category = self.env["product.category"]
+        category_cache = {}   # category text -> product.category record / None
+        matched = 0
+        no_excel_row = []      # product name not found in Excel at all
+        no_category_match = [] # Excel had a value, but no matching product.category
+ 
+        for product in products:
+            product_name = (product.name or "").strip()
+            cat_text = by_name.get(product_name)
+ 
+            if not cat_text:
+                no_excel_row.append(product.id)
+                continue
+ 
+            if cat_text not in category_cache:
+                category_cache[cat_text] = Category.search(
+                    [("name", "=", cat_text)], limit=1
+                ) or None
+            category = category_cache[cat_text]
+ 
+            if not category:
+                no_category_match.append((product.id, cat_text))
+                continue
+ 
+            product.write({"categ_id": category.id})
+            matched += 1
+ 
+        print(
+            f"Category mapping done. Matched: {matched} | "
+            f"No Excel row: {len(no_excel_row)} | "
+            f"Category not found in system: {len(no_category_match)}"
+        )
+        if no_excel_row:
+            print(f"Products with no matching Excel row: {no_excel_row}")
+        if no_category_match:
+            print(
+                "Products where category text had no existing "
+                f"product.category: {no_category_match}"
+            )
+ 
+        return True
+    
 
     @api.model
     def cron_enable_track_inventory(self):
