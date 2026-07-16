@@ -8,6 +8,7 @@
     'category': 'Sales',
     'author': 'Erzberger',
     'depends': ['sale', 'account'],
+    
     'data': [
         'data/cron.xml',
     ],
