@@ -13,8 +13,6 @@ BATCH_SIZE = 1000
 class ProductTemplate(models.Model):
     _inherit = "product.template"
 
-    def normalize(text):
-        return " ".join(str(text).split())
     # ------------------------------------------------------------------
     # This function about missing product categories will update while trigger this function
     # ------------------------------------------------------------------
@@ -113,6 +111,100 @@ class ProductTemplate(models.Model):
 
         return True
 
+    @api.model
+    def map_manufacturer_from_excel(self):
+
+        attachment = self.env["ir.attachment"].search(
+            [("name", "=", "verpack_man.xlsx")], limit=1
+        )
+        if not attachment:
+            print("Attachment 'verpack_man.xlsx' not found — aborting.")
+            return False
+
+        import openpyxl
+
+        file_bytes = base64.b64decode(attachment.datas)
+        wb = openpyxl.load_workbook(io.BytesIO(file_bytes), data_only=True)
+        ws = wb.active
+
+        # Read headers
+        headers = {}
+        for idx, cell in enumerate(ws[1]):
+            if cell.value:
+                headers[str(cell.value).strip()] = idx + 1
+
+        name_col = headers.get("Name")
+        manufacturer_col = headers.get("Hersteller")
+        manufacturer_ref_col = headers.get("Referenz Hersteller")
+
+        if not (name_col and manufacturer_col and manufacturer_ref_col):
+            print(
+                "Required columns not found.\n"
+                f"Beschreibung: {name_col}\n"
+                f"Hersteller: {manufacturer_col}\n"
+                f"Referenz Hersteller: {manufacturer_ref_col}"
+            )
+            return False
+
+        # Build lookup
+        by_name = {}
+
+        for row in ws.iter_rows(min_row=2, values_only=False):
+            product_name = row[name_col - 1].value
+            manufacturer = row[manufacturer_col - 1].value
+            manufacturer_ref = row[manufacturer_ref_col - 1].value
+
+            if not product_name:
+                continue
+
+            by_name[str(product_name).strip()] = {
+                "hersteller": (
+                    str(manufacturer).strip() if manufacturer else False
+                ),
+                "referenz_hersteller": (
+                    str(manufacturer_ref).strip() if manufacturer_ref else False
+                ),
+            }
+
+        products = self.search([])
+        print(f"Found {len(products)} products")
+
+        matched = 0
+        no_excel_row = []
+        updated = 0
+
+        for product in products:
+            vals = by_name.get((product.name or "").strip())
+
+            if not vals:
+                no_excel_row.append(product.id)
+                continue
+
+            write_vals = {}
+
+            if vals["hersteller"]:
+                write_vals["hersteller"] = vals["hersteller"]
+
+            if vals["referenz_hersteller"]:
+                write_vals["referenz_hersteller"] = vals["referenz_hersteller"]
+
+            if write_vals:
+                product.write(write_vals)
+                updated += 1
+
+            matched += 1
+
+        print(
+            f"Manufacturer mapping completed.\n"
+            f"Matched: {matched}\n"
+            f"Updated: {updated}\n"
+            f"No Excel row: {len(no_excel_row)}"
+        )
+
+        if no_excel_row:
+            print(f"Products with no matching Excel row: {no_excel_row}")
+
+        return True
 
     @api.model
     def cron_enable_track_inventory(self):

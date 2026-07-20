@@ -11,6 +11,7 @@
     'data': [
         'views/sale_order_views.xml',
         'views/purchase_order_views.xml',
+        'views/product_template.xml',
         'report/product_templates.xml',
         ],
     'installable': True,
