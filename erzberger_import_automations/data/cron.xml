@@ -101,4 +101,14 @@
         <field name="active">False</field>
     </record>
 
+     <record id="ir_cron_map_product_categories" model="ir.cron">
+        <field name="name">Map Product categories</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="state">code</field>
+        <field name="code">model.map_product_categories_from_excel()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">False</field>
+    </record>
+
 </odoo>
