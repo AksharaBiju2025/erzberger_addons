@@ -220,7 +220,7 @@
                                     <div class="erz-title">Auftragsbestätigung</div>
                                 </t>
                                 <t t-elif="doc.state in ('draft', 'sent')">
-                                    <div class="erz-title">BESTELLUNG/ORDER</div>
+                                    <div class="erz-title">Angebot</div>
                                 </t>
                                 <div class="erz-ref">
                                     <t t-if="doc.partner_id.name">
