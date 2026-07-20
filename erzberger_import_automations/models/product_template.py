@@ -49,7 +49,7 @@ class ProductTemplate(models.Model):
             if cell.value is not None:
                 headers[str(cell.value).strip()] = idx + 1
         name_col = headers.get("Name")
-        cat_col = headers.get("Kategorie des Kassensystems")
+        cat_col = headers.get("Produktkategorie")
 
         if not name_col or not cat_col:
             print(
