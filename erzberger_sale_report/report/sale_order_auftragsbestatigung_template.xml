@@ -40,15 +40,16 @@
 
     <table style="width:100%; border-collapse:collapse; border:1px solid white;">
             <tr>
-                <td width="40%">
-                    
+                <td width="40%" style="text-align:center;">
+                    <img src="/erzberger_sale_report/static/src/img/img_3.png" style="width:160px;"/>
+                    <img src="/erzberger_sale_report/static/src/img/img_4.png" style="width:120px;"/>
                 </td>
                 <td width="20%" style="padding-left:80px;">
                     
                 </td>
                 <td width="40%" colspan="2" style="text-align:left">
                     <t t-if="company.logo">
-                        <img t-att-src="image_data_uri(company.logo)" style="max-height:260px; width:500px;text-align:left;"/>
+                        <img t-att-src="image_data_uri(company.logo)" style="max-height:260px; width:570px;text-align:left;"/>
                        
                     </t>
 
@@ -67,12 +68,12 @@
                 <td width="20%" style="padding-left:80px;">
                     
                 </td>
-                <td width="20%" style="text-align:left;padding-left:10px; vertical-align:top; border:1px solid white; white-space:nowrap;">
+                <td width="20%" style="text-align:left;padding-left:30px; vertical-align:top; border:1px solid white; white-space:nowrap;">
                     <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
                         <t t-esc="company.report_company_description1"/>
                     </div>
                 </td>
-                <td width="20%" style="text-align:left;padding-left:10px; vertical-align:top; border:1px solid white; white-space:nowrap;">
+                <td width="20%" style="text-align:left;padding-left:30px; vertical-align:top; border:1px solid white; white-space:nowrap;">
                     <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
                         <t t-esc="company.report_company_description2"/>
                     </div>
@@ -215,36 +216,15 @@
                         p  { margin:0 0 1mm 0; }
                     </style>
 
-                    <!-- <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
+                    <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
                         <t t-if="doc.partner_id.parent_id">
                             <div><t t-esc="doc.partner_id.parent_id.name"/></div>
                         </t>
                         <div t-field="doc.partner_id" t-options='{"widget":"contact","fields":["name","address"],"no_marker":True}'/>
-                    </div> -->
+                    </div>
 
 
-                    <table width="100%" style="border:hidden;">
-                        <tr>
-                            <td width="50%" style="border:hidden;">
-                            <t t-if="doc.partner_id.parent_id">
-                            <div><t t-esc="doc.partner_id.parent_id.name"/></div>
-                        </t>
-                        <div t-field="doc.partner_id" t-options="{&quot;widget&quot;:&quot;contact&quot;,&quot;fields&quot;:[&quot;name&quot;,&quot;address&quot;],&quot;no_marker&quot;:True}"/>
-                        </td>
-                        <td width="50%" style="padding-left:240px;border:hidden;">
-                            <img src="/erzberger_sale_report/static/src/img/img_1.png"
-                                 style="width:100px;"/>
-                
-                            <br/><br/>
-                
-                            <!-- Bottom Logo -->
-                            <img src="/erzberger_sale_report/static/src/img/img_2.png"
-                                 style="width:130px;"/>
-                        </td>
-                        </tr>
-                    </table>
-
-
+                    
                     <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white; font-size: 11pt;">
                         <tr>
                             <td style="width:58%; vertical-align:top; padding-right:6mm; border:1px solid white;">
@@ -333,13 +313,13 @@
                                     </td>
                                 </tr>
                             </t>
-                            <t t-elif="doc.state in ('draft', 'sent')">
+                            <!-- <t t-elif="doc.state in ('draft', 'sent')">
                                 <tr>
                                     <td colspan="4" style="padding:3mm 2mm; font-size:11pt; line-height:1.5; border-bottom:0.5px solid #ccc;">
                                          Wir vereinbaren 100% Kundenschutz für diesen und alle Folgeaufträge. Kenntnisse aus und über diesen Auftrag dürfen ohne unsere Zustimmung nicht an Dritte weiter gegeben werden. Eine Weitervergabe des Auftrages an Dritte ist nur mit unserer Zustimmung zulässig.
                                     </td>
                                 </tr>
-                            </t>
+                            </t> -->
                         </tbody>
                     </table>
 
@@ -378,7 +358,7 @@
 
                     <div class="erz-terms">
                         <t t-if="doc.state in ('draft', 'sent')">
-                            <p>Packeinheit: 8,23 kg netto für netto in ERZBERGER-Karton</p>
+                            <!-- <p>Packeinheit: 8,23 kg netto für netto in ERZBERGER-Karton</p>
                             <p>Druckplatten: sind in Ihrem Hause. Qualität und Ausführung wie zuletzt in 2025 geliefert.</p>
                             <p>Auftrag soll ohne "Grüner Punkt" gefertigt werden.</p>
                             <p>Liefertermin: <t t-if="doc.commitment_date"><span t-field="doc.commitment_date" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/></t></p>
@@ -386,7 +366,7 @@
                             <p>Zahlung: <t t-if="doc.payment_term_id"><span t-field="doc.payment_term_id.name"/></t></p>
                             <p>Versandart: ab Werk streng neutral direkt zum Kunden</p>
                             <p>Anlieferzeiten: Mo–Fr. 09:00–12:30 Uhr und 13:30–16:00 Uhr</p>
-                            <p>Nur Motorwagen mit Hebebühne!</p>
+                            <p>Nur Motorwagen mit Hebebühne!</p> -->
                         </t>
                         <t t-elif="doc.state == 'sale'">
                             <p>Wie gewünscht, übernehmen wir Lizenzierung und Vollständigkeitserklärung.</p>
