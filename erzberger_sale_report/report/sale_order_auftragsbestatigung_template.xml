@@ -149,11 +149,11 @@
                 <!--    <t t-if="company.phone">Fon: <t t-esc="company.phone"/></t>-->
                 <!--</td>-->
                 <td style="width:24%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
-                    <strong style="color:#003399;">Telefone/Fax:</strong><br/>
-                    <strong style="color:#003399;">Phone/Fax:</strong><br/>
-                    <span style="color:#12b6e3;">Fon: +49(0)3 72 96 - 93 28 93</span><br/>
-                    <span style="color:#12b6e3;">Fax: +49(0)3 72 96 - 93 28 90</span><br/>
-                    <span style="color:#12b6e3;">Mobil: +49(0)1 72 - 37 14 686</span>
+                    <strong style="color:#003399;">Firmensitz / Headquarter</strong><br/>
+                    <strong style="color:#003399;">Buntspeicher | Speicherstraße 1</strong><br/>
+                    <span style="color:#12b6e3;">D-08297 Zwönitz / Erzgebirge</span><br/>
+                    <span style="color:#12b6e3;">Deutschland / Germany</span><br/>
+                    <span style="color:#12b6e3;">Fon: +49 (0) 3 77 54 - 33 70 42</span>
                 </td>
                 
                 <td style="width:24%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
@@ -234,17 +234,22 @@
                                 <t t-elif="doc.state in ('draft', 'sent')">
                                     <div class="erz-title">Angebot</div>
                                 </t>
-                                <div class="erz-ref">
-                                    <t t-if="doc.partner_id.name">
-                                        (Ihr Auftrag v. <span t-field="doc.date_order" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/> p. Email v. <span t-field="doc.partner_id.name"/>)<br/>
-                                        Ihre Bestellnr.: <span t-field="doc.name"/><br/>
-                                        Ihre Artikelnr.: <br/>
-                                    </t>
-                                </div>
+                                <t t-if="doc.state == 'sale'">
+                                    <div class="erz-ref">
+                                        <t t-if="doc.partner_id.name">
+                                            (Ihr Auftrag v. <span t-field="doc.date_order" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/> p. Email v. <span t-field="doc.partner_id.name"/>)<br/>
+                                            Ihre Bestellnr.: <span> </span><br/>
+                                            Ihre Artikelnr.: <br/>
+                                        </t>
+                                    </div>
+                                </t>
+                                <t t-elif="doc.state in ('draft', 'sent')">
+                                    <div class="erz-ref"> </div>
+                                </t>
                             </td>
                             <td style="width:42%; vertical-align:top; border:1px solid white; font-size: 11pt;">
                                 <table style="border:1px solid white; width:100%;">
-                                    <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white;">AB-Nr.:</td><td class="meta-val b"><span t-field="doc.name"/></td></tr>
+                                    <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white;">Nr.:</td><td class="meta-val b"><span t-field="doc.name"/></td></tr>
                                     <tr style="border:1px solid white;">
                                         <td class="meta-lbl" style="border:1px solid white;">Datum:</td>
                                         <td class="meta-val" style="border:1px solid white;">
@@ -264,11 +269,18 @@
                             </td>
                         </tr>
                     </table>
-
-                    <div style="font-size:11pt; margin:2.5mm 0;">
-                        Sehr <t t-if="doc.partner_id.parent_id"><t t-esc="doc.partner_id.parent_id.name"/>,</t><t t-else=""><span t-field="doc.partner_id.name"/>,</t>
-                        vielen Dank für Ihren Auftrag, den wir wie folgt bestätigen:
-                    </div>
+                    <t t-if="doc.state == 'sale'">
+                        <div style="font-size:11pt; margin:2.5mm 0;">
+                            Sehr <t t-if="doc.partner_id.parent_id"><t t-esc="doc.partner_id.parent_id.name"/>,</t><t t-else=""><span t-field="doc.partner_id.name"/>,</t>
+                            vielen Dank für Ihren Auftrag, den wir wie folgt bestätigen:
+                        </div>
+                    </t>
+                    <t t-elif="doc.state in ('draft', 'sent')">
+                        <div style="font-size:11pt; margin:2.5mm 0;">
+                            Sehr <t t-if="doc.partner_id.parent_id"><t t-esc="doc.partner_id.parent_id.name"/>,</t><t t-else=""></t>
+                            <span>Gerne bieten wir Ihnen wie folgt an!</span>
+                        </div>
+                    </t>
 
                     <table class="otbl">
                         <thead>
@@ -379,19 +391,22 @@
                             <p>Es gelten die „Geschäfts-, Liefer- und Zahlungsbedingungen für die Papier- und Kunststoffindustrie“ in Ihrer jeweils neuesten Fassung.</p>
                         </t>
 
-                        <div class="erz-bank">
-                            <t t-set="bank" t-value="doc.company_id.bank_ids[:1]"/>
-                            <t t-if="bank">
-                                <p class="b">Bankverbindung: <t t-esc="bank.bank_id.name"/></p>
-                                <div class="erz-bank-center">IBAN: <t t-esc="bank.acc_number"/></div>
-                                <div class="erz-bank-center">BIC: <t t-esc="bank.bank_id.bic or ''"/></div>
-                            </t>
-                            <t t-else="">
-                                <p class="b">Bankverbindung: Erzgebirgssparkasse</p>
-                                <div class="erz-bank-center">IBAN: DE37 8705 4000 3612 0096 47</div>
-                                <div class="erz-bank-center">BIC: WELADED1STB</div>
-                            </t>
-                        </div>
+
+                        <t t-if="doc.state == 'sale'">
+                            <div class="erz-bank">
+                                <t t-set="bank" t-value="doc.company_id.bank_ids[:1]"/>
+                                <t t-if="bank">
+                                    <p class="b">Bankverbindung: <t t-esc="bank.bank_id.name"/></p>
+                                    <div class="erz-bank-center">IBAN: <t t-esc="bank.acc_number"/></div>
+                                    <div class="erz-bank-center">BIC: <t t-esc="bank.bank_id.bic or ''"/></div>
+                                </t>
+                                <t t-else="">
+                                    <p class="b">Bankverbindung: Erzgebirgssparkasse</p>
+                                    <div class="erz-bank-center">IBAN: DE37 8705 4000 3612 0096 47</div>
+                                    <div class="erz-bank-center">BIC: WELADED1STB</div>
+                                </t>
+                            </div>
+                        </t>
                     </div>
 
                 </div>

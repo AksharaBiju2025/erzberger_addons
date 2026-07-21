@@ -297,16 +297,16 @@
                         </t>
                         <t t-else="">
                             <tr>
-                                <td class="tl">
+                                <td class="tl" style="text-align:center;">
                                     <span t-field="line.quantity" t-options="{&quot;widget&quot;:&quot;float&quot;,&quot;decimal_precision&quot;:&quot;Product Unit of Measure&quot;}"/>
                                 </td>
                                 <td><span t-field="line.name"/></td>
-                                <td class="tr">
+                                <td class="tr" style="text-align:center;">
                                     <t t-if="line.price_unit != 0">
                                         <span t-field="line.price_unit" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                     </t><t t-else="">–</t>
                                 </td>
-                                <td class="tr">
+                                <td class="tr" style="text-align:center;">
                                     <t t-if="line.price_subtotal != 0">
                                         <span t-field="line.price_subtotal" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                     </t><t t-else="">–</t>
