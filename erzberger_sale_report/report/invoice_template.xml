@@ -83,13 +83,29 @@
                         margin:0 0 2mm 0;
                     }
                 </style>
-                 <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
+                 <!-- <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
                     <t t-if="doc.partner_id.parent_id">
                         <div><t t-esc="doc.partner_id.parent_id.name"/></div>
                     </t>
                     <div t-field="doc.partner_id"
                          t-options='{"widget":"contact","fields":["name","address"],"no_marker":True}'/>
-                </div>
+                </div> -->
+                <table width="100%" style="border:hidden;">
+                        <tr>
+                            <td width="50%" style="border:hidden;">
+                            <t t-if="doc.partner_id.parent_id">
+                            <div><t t-esc="doc.partner_id.parent_id.name"/></div>
+                        </t>
+                        <div t-field="doc.partner_id" t-options="{&quot;widget&quot;:&quot;contact&quot;,&quot;fields&quot;:[&quot;name&quot;,&quot;address&quot;],&quot;no_marker&quot;:True}"/>
+                        </td>
+                        <td width="50%" style="padding-left:220px;border:hidden;">
+                            <img src="/erzberger_sale_report/static/src/img/img_1.png"
+                                 style="width:150px;"/>
+                
+                            
+                        </td>
+                        </tr>
+                    </table>
 
                 <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white;">
                     <tr>

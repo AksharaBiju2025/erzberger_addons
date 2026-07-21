@@ -43,13 +43,18 @@
                 <td width="40%">
                     
                 </td>
-                <td width="45%" colspan="2" style="text-align:left">
+                <td width="20%" style="padding-left:80px;">
+                    
+                </td>
+                <td width="40%" colspan="2" style="text-align:left">
                     <t t-if="company.logo">
-                        <img t-att-src="image_data_uri(company.logo)" style="max-height:230px; width:400px;text-align:left;"/>
+                        <img t-att-src="image_data_uri(company.logo)" style="max-height:260px; width:500px;text-align:left;"/>
                        
                     </t>
 
                 </td>
+                <br/>
+                
             </tr>
             <tr>
                 <td width="40%" style="vertical-align:bottom; border:1px solid white;text-align:left">
@@ -59,15 +64,19 @@
                         D-<t t-esc="company.zip"/> <t t-esc="company.city"/>
                     </div>
                 </td>
-                <td width="22.5%" style="text-align:left;padding-left:6px; vertical-align:top; border:1px solid white; white-space:nowrap;">
+                <td width="20%" style="padding-left:80px;">
+                    
+                </td>
+                <td width="20%" style="text-align:left;padding-left:10px; vertical-align:top; border:1px solid white; white-space:nowrap;">
                     <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
                         <t t-esc="company.report_company_description1"/>
                     </div>
                 </td>
-                <td width="22.5%" style="text-align:left;padding-left:6px; vertical-align:top; border:1px solid white; white-space:nowrap;">
+                <td width="20%" style="text-align:left;padding-left:10px; vertical-align:top; border:1px solid white; white-space:nowrap;">
                     <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
                         <t t-esc="company.report_company_description2"/>
                     </div>
+                    
                 </td>
             </tr>
             
@@ -206,12 +215,35 @@
                         p  { margin:0 0 1mm 0; }
                     </style>
 
-                    <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
+                    <!-- <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
                         <t t-if="doc.partner_id.parent_id">
                             <div><t t-esc="doc.partner_id.parent_id.name"/></div>
                         </t>
                         <div t-field="doc.partner_id" t-options='{"widget":"contact","fields":["name","address"],"no_marker":True}'/>
-                    </div>
+                    </div> -->
+
+
+                    <table width="100%" style="border:hidden;">
+                        <tr>
+                            <td width="50%" style="border:hidden;">
+                            <t t-if="doc.partner_id.parent_id">
+                            <div><t t-esc="doc.partner_id.parent_id.name"/></div>
+                        </t>
+                        <div t-field="doc.partner_id" t-options="{&quot;widget&quot;:&quot;contact&quot;,&quot;fields&quot;:[&quot;name&quot;,&quot;address&quot;],&quot;no_marker&quot;:True}"/>
+                        </td>
+                        <td width="50%" style="padding-left:240px;border:hidden;">
+                            <img src="/erzberger_sale_report/static/src/img/img_1.png"
+                                 style="width:100px;"/>
+                
+                            <br/><br/>
+                
+                            <!-- Bottom Logo -->
+                            <img src="/erzberger_sale_report/static/src/img/img_2.png"
+                                 style="width:130px;"/>
+                        </td>
+                        </tr>
+                    </table>
+
 
                     <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white; font-size: 11pt;">
                         <tr>
