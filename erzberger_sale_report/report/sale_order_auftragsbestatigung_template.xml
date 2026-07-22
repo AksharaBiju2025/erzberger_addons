@@ -45,17 +45,17 @@
                     <img src="/erzberger_sale_report/static/src/img/img_4.png" style="width:120px;"/>
                 </td>
                 <td width="20%" style="padding-left:80px;">
-                    
+
                 </td>
                 <td width="40%" colspan="2" style="text-align:left">
                     <t t-if="company.logo">
                         <img t-att-src="image_data_uri(company.logo)" style="max-height:260px; width:570px;text-align:left;"/>
-                       
+
                     </t>
 
                 </td>
                 <br/>
-                
+
             </tr>
             <tr>
                 <td width="40%" style="vertical-align:bottom; border:1px solid white;text-align:left">
@@ -66,7 +66,7 @@
                     </div>
                 </td>
                 <td width="20%" style="padding-left:80px;">
-                    
+
                 </td>
                 <td width="20%" style="text-align:left;padding-left:30px; vertical-align:top; border:1px solid white; white-space:nowrap;">
                     <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
@@ -77,11 +77,11 @@
                     <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
                         <t t-esc="company.report_company_description2"/>
                     </div>
-                    
+
                 </td>
             </tr>
-            
-        
+
+
         </table>
 
 
@@ -155,7 +155,7 @@
                     <span style="color:#12b6e3;">Deutschland / Germany</span><br/>
                     <span style="color:#12b6e3;">Fon: +49 (0) 3 77 54 - 33 70 42</span>
                 </td>
-                
+
                 <td style="width:24%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
                     <span style="color:#003399;"><strong style="color:#003399;">Website:</strong><br/></span>
                     <span style="color:#12b6e3;"><t t-esc="company.website"/><br/></span>
@@ -180,7 +180,7 @@
         </table>
 
 
-        
+
         <div t-if="report_type == 'pdf'" style="text-align:right; margin-top:1mm; font-size:6pt; color:#888;">
             Seite <span class="page"/> / <span class="topage"/>
         </div>
@@ -224,18 +224,18 @@
                     </div>
 
 
-                    
+
                     <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white; font-size: 11pt;">
                         <tr>
                             <td style="width:58%; vertical-align:top; padding-right:6mm; border:1px solid white;">
                                 <t t-if="doc.state == 'sale'">
-                                    <div class="erz-title">Auftragsbestätigung</div>
+                                    <div class="erz-title" style="font-size: 18pt;">Auftragsbestätigung</div>
                                 </t>
                                 <t t-elif="doc.state in ('draft', 'sent')">
-                                    <div class="erz-title">Angebot</div>
+                                    <div class="erz-title" style="font-size: 18pt;">Angebot</div>
                                 </t>
                                 <t t-if="doc.state == 'sale'">
-                                    <div class="erz-ref">
+                                    <div class="erz-ref" style="padding-top:6mm;">
                                         <t t-if="doc.partner_id.name">
                                             (Ihr Auftrag v. <span t-field="doc.date_order" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/> p. Email v. <span t-field="doc.partner_id.name"/>)<br/>
                                             Ihre Bestellnr.: <span> </span><br/>
@@ -249,21 +249,21 @@
                             </td>
                             <td style="width:42%; vertical-align:top; border:1px solid white; font-size: 11pt;">
                                 <table style="border:1px solid white; width:100%;">
-                                    <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white;">Nr.:</td><td class="meta-val b"><span t-field="doc.name"/></td></tr>
+                                    <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt;">Nr.:</td><td style="font-size: 11pt;" class="meta-val b"><span t-field="doc.name"/></td></tr>
                                     <tr style="border:1px solid white;">
-                                        <td class="meta-lbl" style="border:1px solid white;">Datum:</td>
-                                        <td class="meta-val" style="border:1px solid white;">
+                                        <td class="meta-lbl" style="border:1px solid white; font-size: 11pt;">Datum:</td>
+                                        <td class="meta-val" style="border:1px solid white; font-size: 11pt;">
                                             <span t-field="doc.date_order" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
                                         </td>
                                     </tr>
-                                    <t t-if="doc.company_id.company_registry">
-                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white;">St.-Nr.:</td><td class="meta-val"><t t-esc="doc.company_id.company_registry"/></td></tr>
+                                    <t t-if="doc.company_id.l10n_de_stnr">
+                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt;">St.-Nr.:</td><td class="meta-val" style="font-size: 11pt;"><t t-esc="doc.company_id.l10n_de_stnr"/></td></tr>
                                     </t>
                                     <t t-if="doc.company_id.vat">
-                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white;">Ust.-IdNr.:</td><td class="meta-val"><span t-field="doc.company_id.vat"/></td></tr>
+                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt;">Ust.-IdNr.:</td><td class="meta-val" style="font-size: 11pt;"><span t-field="doc.company_id.vat"/></td></tr>
                                     </t>
                                     <t t-if="doc.user_id">
-                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white;">Bearbeiter:</td><td class="meta-val"><span t-field="doc.user_id.name"/></td></tr>
+                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt;">Bearbeiter:</td><td style="font-size: 11pt;" class="meta-val"><span t-field="doc.user_id.name"/></td></tr>
                                     </t>
                                 </table>
                             </td>
@@ -370,15 +370,11 @@
 
                     <div class="erz-terms">
                         <t t-if="doc.state in ('draft', 'sent')">
-                            <!-- <p>Packeinheit: 8,23 kg netto für netto in ERZBERGER-Karton</p>
-                            <p>Druckplatten: sind in Ihrem Hause. Qualität und Ausführung wie zuletzt in 2025 geliefert.</p>
-                            <p>Auftrag soll ohne "Grüner Punkt" gefertigt werden.</p>
-                            <p>Liefertermin: <t t-if="doc.commitment_date"><span t-field="doc.commitment_date" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/></t></p>
-                            <p>Verpackung u. Versand: streng neutral mit unserem ERZBERGER-Lieferschein</p>
-                            <p>Zahlung: <t t-if="doc.payment_term_id"><span t-field="doc.payment_term_id.name"/></t></p>
-                            <p>Versandart: ab Werk streng neutral direkt zum Kunden</p>
-                            <p>Anlieferzeiten: Mo–Fr. 09:00–12:30 Uhr und 13:30–16:00 Uhr</p>
-                            <p>Nur Motorwagen mit Hebebühne!</p> -->
+                            <p>Preise verstehen sich zzgl. MWSt.</p>
+                            <p>Lieferung frei Haus Fulda</p>
+                            <p>Es gelten die „Geschäfts-, Zahlungs- und Lieferbedingungen für die Papier- und Kunststoffindustrie“ in Ihrer jeweils neuesten Fassung.</p>
+                            <p>Lieferzeit: ca. 10 - 12 Wochen oder auch nach Vereinbarung</p>
+                            <p>Zahlung: DAGEMA-Zentralregulierung - Hiermit weisen wir auf unsere Bonusvereinbarungen hin.</p>
                         </t>
                         <t t-elif="doc.state == 'sale'">
                             <p>Wie gewünscht, übernehmen wir Lizenzierung und Vollständigkeitserklärung.</p>

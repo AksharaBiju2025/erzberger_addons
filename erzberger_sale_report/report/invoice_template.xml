@@ -107,9 +107,9 @@
                         </tr>
                     </table> -->
 
-                <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white;">
+                <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white; ">
                     <tr>
-                        <td style="width:58%; vertical-align:top; padding-right:6mm; border:1px solid white;">
+                        <td style="width:58%; vertical-align:top; padding-right:6mm; padding-top:7mm; border:1px solid white;">
                             <div class="erz-title">RECHNUNG</div>
                         </td>
                         <td style="width:42%; vertical-align:top; border:1px solid white;">
@@ -124,10 +124,10 @@
                                         <span t-field="doc.invoice_date" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
                                     </td>
                                 </tr>
-                                <t t-if="doc.company_id.company_registry">
+                                <t t-if="doc.company_id.l10n_de_stnr">
                                     <tr style="border:1px solid white;">
                                         <td class="meta-lbl" style="border:1px solid white;">St.-Nr.:</td>
-                                        <td class="meta-val" style="border:1px solid white;"><t t-esc="doc.company_id.company_registry"/></td>
+                                        <td class="meta-val" style="border:1px solid white;"><t t-esc="doc.company_id.l10n_de_stnr"/></td>
                                     </tr>
                                 </t>
                                 <t t-if="doc.company_id.vat">
