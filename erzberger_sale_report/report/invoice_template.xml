@@ -377,7 +377,7 @@
 
                 
 
-                <div class="erz-terms">
+                <div class="erz-terms" style="padding-top:20px;">
                     <t t-if="doc.narration">
                         <span t-field="doc.narration"/>
                     </t>
