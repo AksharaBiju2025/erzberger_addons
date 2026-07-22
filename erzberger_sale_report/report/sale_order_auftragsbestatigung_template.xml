@@ -38,16 +38,16 @@
         </tr>
     </table> -->
 
-    <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+   <table style="width:100%; border-collapse:collapse; border:1px solid white;">
             <tr>
                 <td width="40%" style="text-align:center;">
                     <img src="/erzberger_sale_report/static/src/img/img_3.png" style="width:160px;"/>
                     <img src="/erzberger_sale_report/static/src/img/img_4.png" style="width:120px;"/>
                 </td>
-                <td width="20%" style="padding-left:80px;">
+                <td width="5%" style="padding-left:10px;">
 
                 </td>
-                <td width="40%" colspan="2" style="text-align:left">
+                <td width="55%" colspan="2" style="text-align:left">
                     <t t-if="company.logo">
                         <img t-att-src="image_data_uri(company.logo)" style="max-height:260px; width:570px;text-align:left;"/>
 
@@ -58,22 +58,22 @@
 
             </tr>
             <tr>
-                <td width="40%" style="vertical-align:bottom; border:1px solid white;text-align:left">
+                <td width="40%" style="vertical-align:bottom; border:1px solid white;text-align:left ">
                     <div style="color:#003399; font-size:9.5pt; text-decoration:underline; white-space:nowrap;">
                         <t t-esc="company.name"/> •
                         <t t-esc="company.street"/> •
                         D-<t t-esc="company.zip"/> <t t-esc="company.city"/>
                     </div>
                 </td>
-                <td width="20%" style="padding-left:80px;">
+                <td width="5%" style="padding-left:10px;">
 
                 </td>
-                <td width="20%" style="text-align:left;padding-left:30px; vertical-align:top; border:1px solid white; white-space:nowrap;">
+                <td width="27%" style="text-align:left;padding-left:5px; vertical-align:top; border:1px solid white; white-space:nowrap;">
                     <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
                         <t t-esc="company.report_company_description1"/>
                     </div>
                 </td>
-                <td width="20%" style="text-align:left;padding-left:30px; vertical-align:top; border:1px solid white; white-space:nowrap;">
+                <td width="28%" style="text-align:left;padding-left:5px; vertical-align:top; border:1px solid white; white-space:nowrap;">
                     <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
                         <t t-esc="company.report_company_description2"/>
                     </div>
@@ -86,7 +86,6 @@
 
 
 </div>
-
     <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
          t-att-data-oe-model="o and o._name"
          t-att-data-oe-id="o and o.id">
@@ -227,7 +226,7 @@
 
                     <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white; font-size: 11pt;">
                         <tr>
-                            <td style="width:58%; vertical-align:top; padding-right:6mm; border:1px solid white;">
+                            <td style="width:58%; vertical-align:top; padding-right:6mm; padding-top:8mm; border:1px solid white;">
                                 <t t-if="doc.state == 'sale'">
                                     <div class="erz-title" style="font-size: 18pt;">Auftragsbestätigung</div>
                                 </t>
@@ -270,13 +269,13 @@
                         </tr>
                     </table>
                     <t t-if="doc.state == 'sale'">
-                        <div style="font-size:11pt; margin:2.5mm 0;">
+                        <div style="font-size:11pt; margin:2.5mm 0; padding-top:6mm;">
                             Sehr <t t-if="doc.partner_id.parent_id"><t t-esc="doc.partner_id.parent_id.name"/>,</t><t t-else=""><span t-field="doc.partner_id.name"/>,</t>
                             vielen Dank für Ihren Auftrag, den wir wie folgt bestätigen:
                         </div>
                     </t>
                     <t t-elif="doc.state in ('draft', 'sent')">
-                        <div style="font-size:11pt; margin:2.5mm 0;">
+                        <div style="font-size:11pt; margin:2.5mm 0; padding-top:6mm;">
                             Sehr <t t-if="doc.partner_id.parent_id"><t t-esc="doc.partner_id.parent_id.name"/>,</t><t t-else=""></t>
                             <span>Gerne bieten wir Ihnen wie folgt an!</span>
                         </div>

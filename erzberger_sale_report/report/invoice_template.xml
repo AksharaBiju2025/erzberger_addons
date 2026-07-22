@@ -262,7 +262,7 @@
 
                 </table> -->
 
-                <table class="otbl">
+                <table class="otbl" style="margin-top: 6mm;">
 
                     <tr class="info-head">
                         <th style="width:22%; text-align:left;padding:4px;"><b>Auftragsnr.</b></th>
@@ -297,7 +297,7 @@
                         </t>
                         <t t-else="">
                             <tr>
-                                <td class="tl" style="text-align:center;">
+                                <td class="tl" style="text-align:left;">
                                     <span t-field="line.quantity" t-options="{&quot;widget&quot;:&quot;float&quot;,&quot;decimal_precision&quot;:&quot;Product Unit of Measure&quot;}"/>
                                 </td>
                                 <td><span t-field="line.name"/></td>
