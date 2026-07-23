@@ -40,7 +40,7 @@
 
    <table style="width:100%; border-collapse:collapse; border:1px solid white;">
             <tr>
-                <td width="40%" style="text-align:center;">
+                <td width="40%" style="text-align:left;">
                     <img src="/erzberger_sale_report/static/src/img/img_3.png" style="width:160px; vertical-align:bottom;"/>
                     <img src="/erzberger_sale_report/static/src/img/img_4.png" style="width:120px; vertical-align:bottom;"/>
                 </td>
@@ -49,7 +49,8 @@
                 </td>
                 <td width="55%" colspan="2" style="text-align:left; vertical-align:bottom;">
                     <t t-if="company.logo">
-                        <img t-att-src="image_data_uri(company.logo)" style="max-height:260px; width:570px;text-align:left;"/>
+                       <img t-att-src="image_data_uri(company.logo)"
+                        style="width:440px; height:auto; display:block;"/>
 <!--                        <img t-att-src="image_data_uri(company.logo)"-->
 <!--     style="width:500px; max-height:220px;"/>-->
                     </t>
