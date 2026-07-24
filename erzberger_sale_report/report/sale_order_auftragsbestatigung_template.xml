@@ -7,17 +7,18 @@
         <table style="width:100%; border-collapse:collapse; border:1px solid white;">
                 <tr>
                     <td width="40%" style="text-align:left;">
-                        <img src="/erzberger_sale_report/static/src/img/img_3.png" style="width:160px; vertical-align:bottom;"/>
-                        <img src="/erzberger_sale_report/static/src/img/img_4.png" style="width:120px; vertical-align:bottom;"/>
+                        <img src="/erzberger_sale_report/static/src/img/img_3.png" style="width:150px; vertical-align:bottom;"/>
+                        <img src="/erzberger_sale_report/static/src/img/img_4.png" style="width:100px; vertical-align:bottom;"/>
                     </td>
                     <td width="5%" style="padding-left:10px;">
 
                     </td>
-                    <td width="55%" colspan="2" style="text-align:left; vertical-align:bottom;">
+                    <td width="55%" colspan="2"
+                        style="text-align:left; vertical-align:top;">
                         <t t-if="company.logo">
-                           <img t-att-src="image_data_uri(company.logo)" style="width:440px; height:auto; display:block;"/>
+                            <img t-att-src="image_data_uri(company.logo)"
+                                 style="width:440px; height:auto; display:block;"/>
                         </t>
-
                     </td>
                     <br/>
 
@@ -35,13 +36,28 @@
 
                     </td>
                     <td width="27%" style="text-align:left;padding-left:5px; vertical-align:top; border:1px solid white; white-space:nowrap;">
-                        <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
-                            <t t-esc="company.report_company_description1"/>
+<!--                        <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">-->
+<!--                            <t t-esc="company.report_company_description1"/>-->
+<!--                        </div>-->
+                        <div style="color: #4a52a6; font-size: 8pt; font-weight: bold; line-height:1.4;">
+                                Umweltfreundliche<br/>
+                                Einwickelpapiere für Lebensmittel<br/>
+                                Frischpack (Papier+Folie)<br/>
+                                Wachspapiere<br/>
+                                Papiertragetaschen
                         </div>
                     </td>
                     <td width="28%" style="text-align:left;padding-left:5px; vertical-align:top; border:1px solid white; white-space:nowrap;">
-                        <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
-                            <t t-esc="company.report_company_description2"/>
+<!--                        <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">-->
+<!--                            <t t-esc="company.report_company_description2"/>-->
+<!--                        </div>-->
+                        <div style="color: #4a52a6; font-size: 8pt; font-weight: bold; line-height:1.4;">
+                            Papierfaltenbeutel<br/>
+                            Sichtstreifenbeutel<br/>
+                            Hemdchentragetaschen<br/>
+                            Abreißbeutel<br/>
+                            Snacktüten<br/>
+                            Secare-Rollen
                         </div>
 
                     </td>
