@@ -3,137 +3,62 @@
 
 <template id="report_erz_external_layouts">
     <div class="header" style="font-family: Arial, sans-serif; font-size: 11pt; color: #222;">
-    <!-- <table style="width:100%; border-collapse:collapse; border:1px solid white;">
-        <tr>
-            <td style="width:45%; vertical-align:bottom; padding-bottom:2mm; border:1px solid white;">
-                <div style="color:#003399; font-size:9.5pt; text-decoration:underline; white-space:nowrap; border:1px solid white;">
-                    <t t-esc="company.name"/> &#x2022;
-                    <t t-esc="company.street"/> &#x2022;
-                    D-<t t-esc="company.zip"/> <t t-esc="company.city"/>
-                </div>
-            </td>
 
-            <td style="width:55%; vertical-align:top; border:1px solid white;">
-                <t t-if="company.logo">
-                    <div style="margin-bottom:4mm; text-align:right;">
-                        <img t-att-src="image_data_uri(company.logo)" style="max-height:80px; width:auto; display:inline-block;"/>
-                    </div>
-                </t>
+        <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+                <tr>
+                    <td width="40%" style="text-align:left;">
+                        <img src="/erzberger_sale_report/static/src/img/img_3.png" style="width:160px; vertical-align:bottom;"/>
+                        <img src="/erzberger_sale_report/static/src/img/img_4.png" style="width:120px; vertical-align:bottom;"/>
+                    </td>
+                    <td width="5%" style="padding-left:10px;">
 
-                <table style="width:100%; border-collapse:collapse; border:1px solid white;">
-                    <tr>
-                        <td style="width:50%; vertical-align:top; text-align:left; padding-right:3mm; border:1px solid white;">
-                            <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
-                                <t t-esc="company.report_company_description1"/>
-                            </div>
-                        </td>
-                        <td style="width:50%; vertical-align:top; text-align:left; border:1px solid white;">
-                            <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
-                                <t t-esc="company.report_company_description2"/>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-    </table> -->
+                    </td>
+                    <td width="55%" colspan="2" style="text-align:left; vertical-align:bottom;">
+                        <t t-if="company.logo">
+                           <img t-att-src="image_data_uri(company.logo)" style="width:440px; height:auto; display:block;"/>
+                        </t>
 
+                    </td>
+                    <br/>
 
-<table style="width:100%; border-collapse:collapse; border:1px solid white;">
-            <tr>
-                <td width="40%" style="text-align:left;">
-                    <img src="/erzberger_sale_report/static/src/img/img_3.png" style="width:160px; vertical-align:bottom;"/>
-                    <img src="/erzberger_sale_report/static/src/img/img_4.png" style="width:120px; vertical-align:bottom;"/>
-                </td>
-                <td width="5%" style="padding-left:10px;">
+                </tr>
+                <tr>
+                    <td width="40%" style="vertical-align:bottom; border:1px solid white;text-align:left ">
+                        <div style="color:#003399; font-size:9.5pt; text-decoration:underline; white-space:nowrap;">
+                            <t t-esc="company.name"/> •
+                            <t t-esc="company.street"/>
+                            <t t-esc="company.street2"/> •
+                            D-<t t-esc="company.zip"/> <t t-esc="company.city"/>
+                        </div>
+                    </td>
+                    <td width="5%" style="padding-left:10px;">
 
-                </td>
-                <td width="55%" colspan="2" style="text-align:left; vertical-align:bottom;">
-                    <t t-if="company.logo">
-                       <img t-att-src="image_data_uri(company.logo)" style="width:440px; height:auto; display:block;"/>
-<!--                        <img t-att-src="image_data_uri(company.logo)"-->
-<!--     style="width:500px; max-height:220px;"/>-->
-                    </t>
+                    </td>
+                    <td width="27%" style="text-align:left;padding-left:5px; vertical-align:top; border:1px solid white; white-space:nowrap;">
+                        <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
+                            <t t-esc="company.report_company_description1"/>
+                        </div>
+                    </td>
+                    <td width="28%" style="text-align:left;padding-left:5px; vertical-align:top; border:1px solid white; white-space:nowrap;">
+                        <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
+                            <t t-esc="company.report_company_description2"/>
+                        </div>
 
-                </td>
-                <br/>
-
-            </tr>
-            <tr>
-                <td width="40%" style="vertical-align:bottom; border:1px solid white;text-align:left ">
-                    <div style="color:#003399; font-size:9.5pt; text-decoration:underline; white-space:nowrap;">
-                        <t t-esc="company.name"/> •
-                        <t t-esc="company.street"/>
-                        <t t-esc="company.street2"/> •
-                        D-<t t-esc="company.zip"/> <t t-esc="company.city"/>
-                    </div>
-                </td>
-                <td width="5%" style="padding-left:10px;">
-
-                </td>
-                <td width="27%" style="text-align:left;padding-left:5px; vertical-align:top; border:1px solid white; white-space:nowrap;">
-                    <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
-                        <t t-esc="company.report_company_description1"/>
-                    </div>
-                </td>
-                <td width="28%" style="text-align:left;padding-left:5px; vertical-align:top; border:1px solid white; white-space:nowrap;">
-                    <div style="color:#4a52a6; font-size:9.5pt; font-weight:bold; line-height:1.4; white-space:pre-line;">
-                        <t t-esc="company.report_company_description2"/>
-                    </div>
-
-                </td>
-            </tr>
-
+                    </td>
+                </tr>
 
         </table>
 
+    </div>
 
-</div>
     <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
         <t t-out="0"/>
     </div>
 
     <div class="footer" style="font-family: Arial, sans-serif; font-size: 9pt; color:#444; border:1px solid white;">
         <hr style="border-top:1px solid #000; margin:0 0 2mm 0;"/>
-        <!-- <table style="width:100%; border-collapse:collapse; border:1px solid white;">
-            <tr>
-                <td style="width:26%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
-                    <strong><t t-esc="company.name"/></strong><br/>
-                    <t t-esc="company.street"/><br/>
-                    D-<t t-esc="company.zip"/> <t t-esc="company.city"/><br/>
-                    <t t-esc="company.country_id.name"/>
-                </td>
-                <td style="width:28%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
-                    <strong>Firmensitz / Headquarters</strong><br/>
-                    Buntspeicher | Speicherstraße 1<br/>
-                    D-08297 Zwönitz / Erzgebirge<br/>
-                    Deutschland / Germany<br/>
-                    <t t-if="company.phone">Fon: <t t-esc="company.phone"/></t>
-                </td>
-                <td style="width:24%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
-                    <strong>Website:</strong><br/>
-                    <t t-esc="company.website"/><br/>
-                    <strong>E-Mail:</strong><br/>
-                    <t t-esc="company.email"/>
-                </td>
-                <td style="width:22%; vertical-align:top; line-height:1.6; border:1px solid white;">
-                    <strong>Bankverbindung</strong><br/>
-                    <t t-set="bf" t-value="company.partner_id.bank_ids[:1]"/>
-                    <t t-if="bf">
-                        <t t-esc="bf.bank_id.name"/><br/>
-                        IBAN: <t t-esc="bf.acc_number"/><br/>
-                        BIC: <t t-esc="bf.bank_id.bic or ''"/>
-                    </t>
-                    <t t-else="">
-                        Erzgebirgssparkasse<br/>
-                        IBAN: DE37 8705 4000 3612 0096 47<br/>
-                        BIC: WELADED1STB
-                    </t>
-                </td>
-            </tr>
-        </table> -->
 
-    <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+        <table style="width:100%; border-collapse:collapse; border:1px solid white;">
             <tr>
                 <td style="width:26%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
                     <strong style="color:#003399;"><t t-esc="company.name"/></strong><br/>
@@ -142,13 +67,6 @@
                     D-<t t-esc="company.zip"/> <t t-esc="company.city"/>/Erzgebirge<br/>
                     Deutschland/<t t-esc="company.country_id.name"/></span>
                 </td>
-                <!--<td style="width:28%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">-->
-                <!--    <strong>Firmensitz / Headquarters</strong><br/>-->
-                <!--    Buntspeicher | Speicherstraße 1<br/>-->
-                <!--    D-08297 Zwönitz / Erzgebirge<br/>-->
-                <!--    Deutschland / Germany<br/>-->
-                <!--    <t t-if="company.phone">Fon: <t t-esc="company.phone"/></t>-->
-                <!--</td>-->
                 <td style="width:24%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
                     <strong style="color:#003399;">Firmensitz / Headquarter</strong><br/>
                     <strong style="color:#003399;">Buntspeicher | Speicherstraße 1</strong><br/>
@@ -180,12 +98,11 @@
             </tr>
         </table>
 
-
-
         <div t-if="report_type == 'pdf'" style="text-align:right; margin-top:1mm; font-size:6pt; color:#888;">
             Seite <span class="page"/> / <span class="topage"/>
         </div>
     </div>
+
 </template>
 
 <template id="report_auftragsbestatigung_documents">
@@ -217,14 +134,16 @@
                         p  { margin:0 0 1mm 0; }
                     </style>
 
+                    <div style="position:fixed; top: 0mm; right: 0mm; z-index: -1;">
+                        <img t-att-src="'/erzberger_sale_report/static/src/img/img_5.png'" style="height:250mm; width:30.6mm; opacity:0.45;"/>
+                    </div>
+
                     <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
                         <t t-if="doc.partner_id.parent_id">
                             <div><t t-esc="doc.partner_id.parent_id.name"/></div>
                         </t>
-                        <div t-field="doc.partner_id" t-options='{"widget":"contact","fields":["name","address"],"no_marker":True}'/>
+                        <div t-field="doc.partner_id" t-options="{&quot;widget&quot;:&quot;contact&quot;,&quot;fields&quot;:[&quot;name&quot;,&quot;address&quot;],&quot;no_marker&quot;:True}"/>
                     </div>
-
-
 
                     <table style="width:100%; border-collapse:collapse; margin-top:2mm; border:1px solid white; font-size: 11pt;">
                         <tr>
@@ -238,7 +157,7 @@
                                 <t t-if="doc.state == 'sale'">
                                     <div class="erz-ref" style="padding-top:6mm;">
                                         <t t-if="doc.partner_id.name">
-                                            (Ihr Auftrag v. <span t-field="doc.date_order" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/> p. Email v. <span t-field="doc.partner_id.name"/>)<br/>
+                                            (Ihr Auftrag v. <span t-field="doc.date_order" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/> p. Email v. <span t-field="doc.partner_id.name"/>)<br/>
                                             Ihre Bestellnr.: <span> </span><br/>
                                             Ihre Artikelnr.: <br/>
                                         </t>
@@ -250,21 +169,21 @@
                             </td>
                             <td style="width:42%; vertical-align:top; border:1px solid white; font-size: 11pt;">
                                 <table style="border:1px solid white; width:100%;">
-                                    <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt;">Nr.:</td><td style="font-size: 11pt;" class="meta-val b"><span t-field="doc.name"/></td></tr>
+                                    <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Nr.:</td><td style="font-size: 11pt; text-align:left;" class="meta-val b"><span style="padding-right:65px;" t-field="doc.name"/></td></tr>
                                     <tr style="border:1px solid white;">
-                                        <td class="meta-lbl" style="border:1px solid white; font-size: 11pt;">Datum:</td>
-                                        <td class="meta-val" style="border:1px solid white; font-size: 11pt;">
-                                            <span t-field="doc.date_order" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
+                                        <td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Datum:</td>
+                                        <td class="meta-val" style="border:1px solid white; font-size: 11pt; text-align:left;">
+                                            <span style="padding-right:65px;" t-field="doc.date_order" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/>
                                         </td>
                                     </tr>
                                     <t t-if="doc.company_id.l10n_de_stnr">
-                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt;">St.-Nr.:</td><td class="meta-val" style="font-size: 11pt;"><t t-esc="doc.company_id.l10n_de_stnr"/></td></tr>
+                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">St.-Nr.:</td><td class="meta-val" style="font-size: 11pt;padding-right:65px; text-align:left;"><t t-esc="doc.company_id.l10n_de_stnr"/></td></tr>
                                     </t>
                                     <t t-if="doc.company_id.vat">
-                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt;">Ust.-IdNr.:</td><td class="meta-val" style="font-size: 11pt;"><span t-field="doc.company_id.vat"/></td></tr>
+                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Ust.-IdNr.:</td><td class="meta-val" style="font-size: 11pt;padding-right:65px; text-align:left;"><span t-field="doc.company_id.vat"/></td></tr>
                                     </t>
                                     <t t-if="doc.user_id">
-                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt;">Bearbeiter:</td><td style="font-size: 11pt;" class="meta-val"><span t-field="doc.user_id.name"/></td></tr>
+                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Bearbeiter:</td><td style="font-size: 11pt;padding-right:65px; text-align:left;" class="meta-val"><span t-field="doc.user_id.name"/></td></tr>
                                     </t>
                                 </table>
                             </td>
@@ -282,7 +201,7 @@
                         </div>
                     </t>
 
-                    <table class="otbl">
+                    <table class="otbl" style="width:92%;">
                         <thead>
                             <tr>
                                 <th class="tl" style="width:13%;">Menge<br/><span class="sub">kg/Stück</span></th>
@@ -302,17 +221,17 @@
                                 <t t-else="">
                                     <tr>
                                         <td class="tl">
-                                            <span t-field="line.product_uom_qty" t-options='{"widget":"float","decimal_precision":"Product Unit of Measure"}'/>
+                                            <span t-field="line.product_uom_qty" t-options="{&quot;widget&quot;:&quot;float&quot;,&quot;decimal_precision&quot;:&quot;Product Unit of Measure&quot;}"/>
                                         </td>
                                         <td><span t-field="line.name"/></td>
                                         <td class="tr">
                                             <t t-if="line.price_unit != 0">
-                                                <span t-field="line.price_unit" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                                <span t-field="line.price_unit" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                             </t><t t-else="">–</t>
                                         </td>
                                         <td class="tr">
                                             <t t-if="line.price_subtotal != 0">
-                                                <span t-field="line.price_subtotal" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                                <span t-field="line.price_subtotal" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                             </t><t t-else="">–</t>
                                         </td>
                                     </tr>
@@ -320,22 +239,16 @@
                             </t>
                             <t t-if="doc.state == 'sale'">
                                 <tr>
-                                    <td colspan="4" style="padding:3mm 2mm; font-size:11pt; line-height:1.5; border-bottom:0.5px solid #ccc;">
+                                    <td colspan="4" style="width:93%;padding:3mm 2mm; font-size:11pt; line-height:1.5; border-bottom:0.5px solid #ccc;">
                                         Aufgrund der nicht planbaren, sehr dynamischen Preisentwicklung im Rohstoff-, Energie- und Frachtbereich bestätigen wir unsere Preisangaben freibleibend. Wir behalten uns vor, unsere Preise in Rücksprache mit Ihnen anzupassen, sollten die Kosten bis zur Produktion um mehr als 5% steigen. Die Einhaltung unseres bestätigten Liefertermins setzt eine reibungslose Rohstoffversorgung voraus.
                                     </td>
                                 </tr>
                             </t>
-                            <!-- <t t-elif="doc.state in ('draft', 'sent')">
-                                <tr>
-                                    <td colspan="4" style="padding:3mm 2mm; font-size:11pt; line-height:1.5; border-bottom:0.5px solid #ccc;">
-                                         Wir vereinbaren 100% Kundenschutz für diesen und alle Folgeaufträge. Kenntnisse aus und über diesen Auftrag dürfen ohne unsere Zustimmung nicht an Dritte weiter gegeben werden. Eine Weitervergabe des Auftrages an Dritte ist nur mit unserer Zustimmung zulässig.
-                                    </td>
-                                </tr>
-                            </t> -->
+
                         </tbody>
                     </table>
 
-                    <table style="width:100%; border-collapse:collapse; border:1px solid white; margin-top: 4mm;">
+                    <table style="width:92%; border-collapse:collapse; border:1px solid white; margin-top: 4mm;">
                         <tr>
                             <td style="width:55%; border:1px solid white;"/>
                             <td style="width:45%; border:1px solid white;">
@@ -345,14 +258,14 @@
                                         <tr style="border:1px solid white;">
                                             <td style="text-align:right; border:1px solid white;" class="tot-lbl">Warenwert</td>
                                             <td style="text-align:right; border:1px solid white;" class="tot-val">
-                                                <span t-out="subtotal['base_amount_currency']" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                                <span t-out="subtotal['base_amount_currency']" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                             </td>
                                         </tr>
                                         <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
                                             <tr style="border:1px solid white;">
                                                 <td style="text-align:right; border:1px solid white;" class="tot-lbl">zzgl. <span t-out="tax_group['group_name']"/></td>
                                                 <td style="text-align:right; border:1px solid white;" class="tot-val">
-                                                    <span t-out="tax_group['tax_amount_currency']" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                                    <span t-out="tax_group['tax_amount_currency']" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                                 </td>
                                             </tr>
                                         </t>
@@ -360,7 +273,7 @@
                                     <tr style="border:1px solid white;" class="tot-grand">
                                         <td style="text-align:right; border:1px solid white;" class="tot-lbl b">Gesamtbetrag</td>
                                         <td style="text-align:right; border:1px solid white;" class="tot-val b">
-                                            <span t-field="doc.amount_total" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                            <span t-field="doc.amount_total" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                         </td>
                                     </tr>
                                 </table>
@@ -368,7 +281,7 @@
                         </tr>
                     </table>
 
-                    <div class="erz-terms">
+                    <div class="erz-terms" style="padding-right:65px;">
                         <t t-if="doc.state in ('draft', 'sent')">
                             <p>Preise verstehen sich zzgl. MWSt.</p>
                             <p>Lieferung frei Haus Fulda</p>
@@ -378,7 +291,7 @@
                         </t>
                         <t t-elif="doc.state == 'sale'">
                             <p>Wie gewünscht, übernehmen wir Lizenzierung und Vollständigkeitserklärung.</p>
-                            <t t-if="doc.commitment_date"><p>Liefertermin: <span t-field="doc.commitment_date" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/></p></t>
+                            <t t-if="doc.commitment_date"><p>Liefertermin: <span t-field="doc.commitment_date" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/></p></t>
                             <t t-if="doc.payment_term_id"><p>Zahlungsbedingungen: <span t-field="doc.payment_term_id.name"/>.</p></t>
                             <t t-if="doc.partner_shipping_id"><p>Versand: <span t-field="doc.partner_shipping_id.name"/>.</p></t>
                             <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
