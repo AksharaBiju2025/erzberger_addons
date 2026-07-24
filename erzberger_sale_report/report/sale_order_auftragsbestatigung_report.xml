@@ -21,7 +21,9 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">erzberger_sale_report.report_auftragsbestatigung_documents</field>
         <field name="report_file">erzberger_sale_report.report_auftragsbestatigung_documents</field>
-        <field name="print_report_name">'Auftragsbestaetigung - %s' % (object.name)</field>
+        <field name="print_report_name">
+            (object.state in ('draft', 'sent') and 'Angebot - %s' % (object.name) or 'Auftragsbestaetigung - %s' % (object.name))
+            </field>
         <field name="binding_model_id" ref="sale.model_sale_order"/>
         <field name="binding_type">report</field>
         <field name="paperformat_id"

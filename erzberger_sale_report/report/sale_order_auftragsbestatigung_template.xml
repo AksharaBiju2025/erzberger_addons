@@ -38,7 +38,8 @@
         </tr>
     </table> -->
 
-   <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+
+<table style="width:100%; border-collapse:collapse; border:1px solid white;">
             <tr>
                 <td width="40%" style="text-align:left;">
                     <img src="/erzberger_sale_report/static/src/img/img_3.png" style="width:160px; vertical-align:bottom;"/>
@@ -49,8 +50,7 @@
                 </td>
                 <td width="55%" colspan="2" style="text-align:left; vertical-align:bottom;">
                     <t t-if="company.logo">
-                       <img t-att-src="image_data_uri(company.logo)"
-                        style="width:440px; height:auto; display:block;"/>
+                       <img t-att-src="image_data_uri(company.logo)" style="width:440px; height:auto; display:block;"/>
 <!--                        <img t-att-src="image_data_uri(company.logo)"-->
 <!--     style="width:500px; max-height:220px;"/>-->
                     </t>
@@ -63,7 +63,8 @@
                 <td width="40%" style="vertical-align:bottom; border:1px solid white;text-align:left ">
                     <div style="color:#003399; font-size:9.5pt; text-decoration:underline; white-space:nowrap;">
                         <t t-esc="company.name"/> •
-                        <t t-esc="company.street"/> •
+                        <t t-esc="company.street"/>
+                        <t t-esc="company.street2"/> •
                         D-<t t-esc="company.zip"/> <t t-esc="company.city"/>
                     </div>
                 </td>
@@ -88,9 +89,7 @@
 
 
 </div>
-    <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
-         t-att-data-oe-model="o and o._name"
-         t-att-data-oe-id="o and o.id">
+    <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id">
         <t t-out="0"/>
     </div>
 
@@ -134,13 +133,14 @@
             </tr>
         </table> -->
 
-        <table style="width:100%; border-collapse:collapse; border:1px solid white;">
+    <table style="width:100%; border-collapse:collapse; border:1px solid white;">
             <tr>
                 <td style="width:26%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
                     <strong style="color:#003399;"><t t-esc="company.name"/></strong><br/>
-                    <span style="color:#12b6e3;"><t t-esc="company.street"/><br/>
-                    D-<t t-esc="company.zip"/> <t t-esc="company.city"/><br/>
-                    <t t-esc="company.country_id.name"/></span>
+                    <strong style="color:#003399;">Erzberger packaging systems</strong><br/>
+                    <span style="color:#12b6e3;"><t t-esc="company.street"/> <t t-esc="company.street2"/>/<br/>
+                    D-<t t-esc="company.zip"/> <t t-esc="company.city"/>/Erzgebirge<br/>
+                    Deutschland/<t t-esc="company.country_id.name"/></span>
                 </td>
                 <!--<td style="width:28%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">-->
                 <!--    <strong>Firmensitz / Headquarters</strong><br/>-->
@@ -278,8 +278,7 @@
                     </t>
                     <t t-elif="doc.state in ('draft', 'sent')">
                         <div style="font-size:11pt; margin:2.5mm 0; padding-top:6mm;">
-                            Sehr <t t-if="doc.partner_id.parent_id"><t t-esc="doc.partner_id.parent_id.name"/>,</t><t t-else=""></t>
-                            <span>Gerne bieten wir Ihnen wie folgt an!</span>
+                            <span>Gerne bieten wir Ihnen freibleibend wie folgt an:</span>
                         </div>
                     </t>
 
@@ -338,7 +337,7 @@
 
                     <table style="width:100%; border-collapse:collapse; border:1px solid white; margin-top: 4mm;">
                         <tr>
-                            <td style="width:55%; border:1px solid white;"></td>
+                            <td style="width:55%; border:1px solid white;"/>
                             <td style="width:45%; border:1px solid white;">
                                 <table style="width:100%; border-collapse:collapse; border:1px solid white;" class="tot-inner">
                                     <t t-set="tax_totals" t-value="doc.tax_totals"/>

@@ -327,7 +327,7 @@ class ProductTemplate(models.Model):
     def _cron_product_category_mapping_holzkunst(self):
 
         attachment = self.env['ir.attachment'].search([
-            ('name', '=', 'product_p_categ_maping _holzkunst.xlsx')
+            ('name', '=', 'product_p_categ_maping_holzkunst.xlsx')
         ], limit=1)
 
         if not attachment:
