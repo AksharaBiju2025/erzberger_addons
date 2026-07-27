@@ -14,9 +14,9 @@
         <t t-call="erzberger_sale_report.report_erz_external_layouts">
 
             <div style="font-family: Arial, sans-serif; font-size: 9pt; color: #222; padding: 0 0 4mm 0;">
-                <div style="position:fixed; top: 0mm; right: 0mm; z-index: -1;">
+                <!-- <div style="position:fixed; top: 0mm; right: 0mm; z-index: -1;">
                     <img t-att-src="'/erzberger_sale_report/static/src/img/img_5.png'" style="height:250mm; width:30.6mm; opacity:0.45;"/>
-                </div>
+                </div> -->
 
                 <!-- ── Space for header / address window ── -->
                 <!-- The external layout renders the address block above the page body.

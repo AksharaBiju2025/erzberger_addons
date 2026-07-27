@@ -29,6 +29,7 @@
         'views/product_template.xml',
     ],
     'installable': True,
+    "external_dependencies": {"python": ["pypdf", "reportlab"]},
     'auto_install': False,
     'license': 'LGPL-3',
 }

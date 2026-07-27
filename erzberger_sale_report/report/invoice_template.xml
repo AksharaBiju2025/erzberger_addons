@@ -84,9 +84,9 @@
                     }
                 </style>
 
-                <div style="position: fixed; top: 0mm; right: 0mm; z-index: -1;">
+                <!-- <div style="position: fixed; top: 0mm; right: 0mm; z-index: -1;">
                         <img t-att-src="'/erzberger_sale_report/static/src/img/img_5.png'" style="height:250mm; width:30.6mm; opacity:0.45;"/>
-                </div>
+                </div> -->
 
                  <div style="font-size:11pt; line-height:1.65; margin:3mm 0;">
                     <t t-if="doc.partner_id.parent_id">
