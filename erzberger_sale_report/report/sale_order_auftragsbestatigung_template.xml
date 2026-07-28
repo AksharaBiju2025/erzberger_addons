@@ -185,21 +185,21 @@
                             </td>
                             <td style="width:42%; vertical-align:top; border:1px solid white; font-size: 11pt;">
                                 <table style="border:1px solid white; width:100%;">
-                                    <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Nr.:</td><td style="font-size: 11pt; text-align:left;" class="meta-val b"><span style="padding-right:65px;" t-field="doc.name"/></td></tr>
+                                    <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Nr.:</td><td style="font-size: 11pt; text-align:left;" class="meta-val b"><span t-field="doc.name"/></td></tr>
                                     <tr style="border:1px solid white;">
                                         <td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Datum:</td>
                                         <td class="meta-val" style="border:1px solid white; font-size: 11pt; text-align:left;">
-                                            <span style="padding-right:65px;" t-field="doc.date_order" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/>
+                                            <span t-field="doc.date_order" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/>
                                         </td>
                                     </tr>
                                     <t t-if="doc.company_id.l10n_de_stnr">
-                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">St.-Nr.:</td><td class="meta-val" style="font-size: 11pt;padding-right:65px; text-align:left;"><t t-esc="doc.company_id.l10n_de_stnr"/></td></tr>
+                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">St.-Nr.:</td><td class="meta-val" style="font-size: 11pt;text-align:left;"><t t-esc="doc.company_id.l10n_de_stnr"/></td></tr>
                                     </t>
                                     <t t-if="doc.company_id.vat">
-                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Ust.-IdNr.:</td><td class="meta-val" style="font-size: 11pt;padding-right:65px; text-align:left;"><span t-field="doc.company_id.vat"/></td></tr>
+                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Ust.-IdNr.:</td><td class="meta-val" style="font-size: 11pt;text-align:left;"><span t-field="doc.company_id.vat"/></td></tr>
                                     </t>
                                     <t t-if="doc.user_id">
-                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Bearbeiter:</td><td style="font-size: 11pt;padding-right:65px; text-align:left;" class="meta-val"><span t-field="doc.user_id.name"/></td></tr>
+                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Bearbeiter:</td><td style="font-size: 11pt;text-align:left;" class="meta-val"><span t-field="doc.user_id.name"/></td></tr>
                                     </t>
                                 </table>
                             </td>
@@ -217,7 +217,7 @@
                         </div>
                     </t>
 
-                    <table class="otbl" style="width:92%;">
+                    <table class="otbl" style="width:100%;">
                         <thead>
                             <tr>
                                 <th class="tl" style="width:13%;">Menge<br/><span class="sub">kg/Stück</span></th>
@@ -264,7 +264,7 @@
                         </tbody>
                     </table>
 
-                    <table style="width:92%; border-collapse:collapse; border:1px solid white; margin-top: 4mm;">
+                    <table style="width:100%; border-collapse:collapse; border:1px solid white; margin-top: 4mm;">
                         <tr>
                             <td style="width:55%; border:1px solid white;"/>
                             <td style="width:45%; border:1px solid white;">
@@ -297,7 +297,7 @@
                         </tr>
                     </table>
 
-                    <div class="erz-terms" style="padding-right:65px;">
+                    <div class="erz-terms">
                         <t t-if="doc.state in ('draft', 'sent')">
                             <p>Preise verstehen sich zzgl. MWSt.</p>
                             <p>Lieferung frei Haus Fulda</p>

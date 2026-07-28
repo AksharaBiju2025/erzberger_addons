@@ -132,7 +132,7 @@
                 </table>
 
 
-                <table class="otbl" style="width:92%; margin-top: 6mm;">
+                <table class="otbl" style="width:100%; margin-top: 6mm;">
 
                     <tr class="info-head">
                         <th style="width:22%; text-align:left;padding:4px;"><b>Auftragsnr.</b></th>
@@ -247,7 +247,7 @@
 
                 
 
-                <div class="erz-terms" style="padding-top:20px; padding-right:65px;">
+                <div class="erz-terms" style="padding-top:20px;">
                     <t t-if="doc.narration">
                         <span t-field="doc.narration"/>
                     </t>

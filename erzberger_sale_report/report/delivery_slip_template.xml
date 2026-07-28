@@ -54,7 +54,7 @@
                 </div>
 
                 <!-- ── Title row: "Lieferschein" left | Date right ── -->
-                <table style="width:92%; border-collapse:collapse; margin-bottom:6mm; border:1px solid white;">
+                <table style="width:100%; border-collapse:collapse; margin-bottom:6mm; border:1px solid white;">
                     <tr>
                         <td style="vertical-align:bottom; border:1px solid white;">
                             <span style="font-size:13pt; font-weight:bold; text-decoration:underline;">
@@ -72,7 +72,7 @@
                 </table>
 
                 <!-- ── Column-header row (thin top + bottom border) ── -->
-                <table style="width:92%; border-collapse:collapse; margin-bottom:2mm;">
+                <table style="width:100%; border-collapse:collapse; margin-bottom:2mm;">
                     <thead>
                         <tr style="border-top:1px solid #222; border-bottom:1px solid #222;">
                             <th style="width:18%; text-align:left;  padding:1.5mm 2mm; font-weight:bold; font-size:9pt;">Menge</th>
