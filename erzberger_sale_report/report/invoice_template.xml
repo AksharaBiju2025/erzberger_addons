@@ -132,51 +132,51 @@
                 </table>
 
 
-                <table class="otbl" style="width:100%; margin-top: 6mm;">
+                <table class="otbl" style="width:100%; margin-top: 6mm;border:1px solid black;">
 
                     <tr class="info-head">
-                        <th style="width:22%; text-align:left;padding:4px;"><b>Auftragsnr.</b></th>
-                        <th style="width:33%; text-align:left;padding:4px;"><b>Lieferdatum</b></th>
-                        <th style="width:22%; text-align:left;padding:4px;"><b>Versandart</b></th>
-                        <th style="width:23%; text-align:left;padding:4px;"><b>Lieferbed.</b></th>
+                        <th style="width:22%; text-align:left;padding:4px;border:1px solid black;"><b>Auftragsnr.</b></th>
+                        <th style="width:33%; text-align:left;padding:4px;border:1px solid black;"><b>Lieferdatum</b></th>
+                        <th style="width:22%; text-align:left;padding:4px;border:1px solid black;"><b>Versandart</b></th>
+                        <th style="width:23%; text-align:left;padding:4px;border:1px solid black;"><b>Lieferbed.</b></th>
                     </tr>
 
                     <tr class="info-data">
-                        <td style="text-align:left;padding:4px;"><span t-field="doc.invoice_origin"/></td>
-                        <td style="text-align:left;padding:4px;">Rechnungsdatum = Lieferdatum</td>
-                        <td style="text-align:left;padding:4px;">per Spedition</td>
-                        <td style="text-align:left;padding:4px;">frei Haus</td>
+                        <td style="text-align:left;padding:4px;border:1px solid black;"><span t-field="doc.invoice_origin"/></td>
+                        <td style="text-align:left;padding:4px;border:1px solid black;">Rechnungsdatum = Lieferdatum</td>
+                        <td style="text-align:left;padding:4px;border:1px solid black;">per Spedition</td>
+                        <td style="text-align:left;padding:4px;border:1px solid black;">frei Haus</td>
                     </tr>
 
                     <tr class="line-head">
-                        <th style="text-align:left;padding:4px;"><b>Menge</b><br/><span class="sub">kg/Stück</span></th>
-                        <th style="text-align:left;padding:4px;"><b>Bezeichnung</b></th>
-                        <th style="text-align:center;" class="tr">
+                        <th style="text-align:left;padding:4px;border:1px solid black;"><b>Menge</b><br/><span class="sub">kg/Stück</span></th>
+                        <th style="text-align:left;padding:4px;border:1px solid black;"><b>Bezeichnung</b></th>
+                        <th style="text-align:center;border:1px solid black;" class="tr">
                             <b>Preis/Einheit</b><br/>
                             <span class="sub">per kg/1.000 Stück</span>
                         </th>
-                        <th style="text-align:center;" class="tr"><b>Betrag</b></th>
+                        <th style="text-align:center;border:1px solid black;" class="tr"><b>Betrag</b></th>
                     </tr>
 
                     <t t-foreach="doc.invoice_line_ids" t-as="line">
                         <t t-if="line.display_type == 'line_section'">
-                            <tr><td colspan="4" class="b" style="font-size:11pt; padding-top:3mm;"><span t-field="line.name"/></td></tr>
+                            <tr><td colspan="4" class="b" style="font-size:11pt; padding-top:3mm;border:1px solid black;"><span t-field="line.name"/></td></tr>
                         </t>
                         <t t-elif="line.display_type == 'line_note'">
-                            <tr><td colspan="4" style="font-style:italic; font-size:8pt;"><span t-field="line.name"/></td></tr>
+                            <tr><td colspan="4" style="font-style:italic; font-size:8pt;border:1px solid black;"><span t-field="line.name"/></td></tr>
                         </t>
                         <t t-else="">
                             <tr>
-                                <td class="tl" style="text-align:left;">
+                                <td class="tl" style="text-align:left;border:1px solid black;">
                                     <span t-field="line.quantity" t-options="{&quot;widget&quot;:&quot;float&quot;,&quot;decimal_precision&quot;:&quot;Product Unit of Measure&quot;}"/>
                                 </td>
                                 <td><span t-field="line.name"/></td>
-                                <td class="tr" style="text-align:center;">
+                                <td class="tr" style="text-align:center;border:1px solid black;">
                                     <t t-if="line.price_unit != 0">
                                         <span t-field="line.price_unit" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                     </t><t t-else="">–</t>
                                 </td>
-                                <td class="tr" style="text-align:center;">
+                                <td class="tr" style="text-align:center;border:1px solid black;;">
                                     <t t-if="line.price_subtotal != 0">
                                         <span t-field="line.price_subtotal" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                     </t><t t-else="">–</t>
@@ -192,7 +192,7 @@
                         <td/>
 
                         <!-- ONE CELL -->
-                        <td style="vertical-align:top;">
+                        <td style="vertical-align:top;border:1px solid black;">
 
                             <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
 
