@@ -260,7 +260,7 @@
 
                 </table>
 
-                
+
 
                 <div class="erz-terms" style="padding-top:20px;">
                     <t t-if="doc.narration">
