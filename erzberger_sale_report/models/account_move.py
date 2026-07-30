@@ -17,3 +17,18 @@ class AccountMove(models.Model):
             ).report_action(self)
 
         return super().action_print_pdf()
+
+    def preview_invoice(self):
+        self.ensure_one()
+
+        if (
+            self.company_id.use_custom_sale_report
+            and self.move_type in ("out_invoice", "out_refund")
+        ):
+            return {
+                'type': 'ir.actions.act_url',
+                'target': 'self',
+                'url': self.get_portal_url(),
+            }
+
+        return super().preview_invoice()
