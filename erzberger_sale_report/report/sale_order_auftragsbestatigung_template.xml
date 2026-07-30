@@ -93,12 +93,14 @@
 
                 <td style="width:24%; vertical-align:top; padding-right:3mm; line-height:1.6; border:1px solid white;">
                     <span style="color:#003399;"><strong style="color:#003399;">Website:</strong><br/></span>
-                    <span style="color:#12b6e3;"><t t-esc="company.website"/><br/></span>
+                    <span style="color:#12b6e3;white-space:nowrap;"><t t-esc="company.website"/></span><br/>
+<!--                    <span style="color:#12b6e3;"><t t-esc="company.website"/><br/></span>-->
                     <strong style="color:#003399;">E-Mail:</strong><br/>
                     <span style="color:#12b6e3;"><t t-esc="company.email"/></span>
                 </td>
                 <td style="width:22%; vertical-align:top; line-height:1.6; border:1px solid white;">
                     <strong style="color:#003399;">Bankverbindung</strong><br/>
+                    <strong style="color:#003399;">Bank Account Number</strong><br/>
                     <span style="color:#12b6e3;"><t t-set="bf" t-value="company.partner_id.bank_ids[:1]"/>
                     <t t-if="bf">
                         <t t-esc="bf.bank_id.name"/><br/>

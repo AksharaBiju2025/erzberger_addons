@@ -21,7 +21,7 @@
                 <!-- ── Space for header / address window ── -->
                 <!-- The external layout renders the address block above the page body.
                      These spacers push the content below it. Adjust mm values to taste. -->
-                <div style="height: 30mm;"></div>
+<!--                <div style="height: 30mm;"></div>-->
 
                 <!-- ── Recipient address (printed in letter-window area) ── -->
                 <div style="margin-bottom: 8mm; font-size: 9pt; line-height: 1.5;">
