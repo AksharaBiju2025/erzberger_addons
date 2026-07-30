@@ -310,7 +310,7 @@
                         <t t-if="doc.state in ('draft', 'sent')">
                             <p>Preise verstehen sich zzgl. MWSt.</p>
                             <p>Lieferung frei Haus Fulda</p>
-                            <p>Es gelten die „Geschäfts-, Zahlungs- und Lieferbedingungen für die Papier- und Kunststoffindustrie“ in Ihrer jeweils neuesten Fassung.</p>
+                            <p>Es gelten die "Geschäfts-, Zahlungs- und Lieferbedingungen für die Papier- und Kunststoffindustrie" in Ihrer jeweils neuesten Fassung.</p>
                             <p>Lieferzeit: ca. 10 - 12 Wochen oder auch nach Vereinbarung</p>
                             <p>Zahlung: DAGEMA-Zentralregulierung - Hiermit weisen wir auf unsere Bonusvereinbarungen hin.</p>
                         </t>
@@ -322,7 +322,7 @@
                             <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
                             <p>Beanstandungen werden nur innerhalb acht Tagen berücksichtigt. Kleine Abweichungen in Farbe, Gewicht und Stoff berechtigen nicht zu Mängelrügen.</p>
                             <p>Toleranzen bei Gewichtsschwankungen (Papier 8%, Kunststoff 25%), Maßabweichungen von 5% und Mengenabweichungen von 20% allg. können nicht beanstandet werden.</p>
-                            <p>Es gelten die „Geschäfts-, Liefer- und Zahlungsbedingungen für die Papier- und Kunststoffindustrie“ in Ihrer jeweils neuesten Fassung.</p>
+                            <p>Es gelten die "Geschäfts-, Liefer- und Zahlungsbedingungen für die Papier- und Kunststoffindustrie" in Ihrer jeweils neuesten Fassung.</p>
                         </t>
 
 
