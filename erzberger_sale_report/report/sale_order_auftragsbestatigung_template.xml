@@ -134,11 +134,18 @@
                         .erz-ref   { font-size:11pt; line-height:1.55; }
                         .meta-lbl  { color:#333; white-space:nowrap; padding-right:3mm; font-size:8.5pt; }
                         .meta-val  { font-weight:bold; text-align:right; font-size:8.5pt; }
+                        .otbl, .otbl table, .otbl thead, .otbl tbody, .otbl tr, .otbl th, .otbl td {
+                            border: none !important;
+                            border-top: none !important;
+                            border-bottom: none !important;
+                            border-left: none !important;
+                            border-right: none !important;
+                            outline: none !important;
+                            box-shadow: none !important;
+                        }
                         .otbl { width:100%; border-collapse:collapse; margin-top:1mm; }
-                        .otbl thead tr { border-top:1.5px solid #000; border-bottom:1.5px solid #000; }
                         .otbl thead th { font-size:11pt; padding:1.5mm 2mm; font-weight:bold; }
-                        .otbl tbody td { font-size:11pt; padding:2mm; vertical-align:top; border-bottom:0.5px solid #ccc; }
-                        .otbl tbody tr:last-child td { border-bottom:1.5px solid #000; }
+                        .otbl tbody td { font-size:11pt; padding:2mm; vertical-align:top; }
                         .sub { font-weight:normal; font-size:9.5pt; }
                         .delivery { font-size:8pt; margin:1.5mm 0; }
                         .tot-inner td { font-size:11pt; padding:0.8mm 2mm; }
@@ -217,7 +224,7 @@
                         </div>
                     </t>
 
-                    <table class="otbl" style="width:100%;">
+                    <table class="otbl" style="width:94%;">
                         <thead>
                             <tr>
                                 <th class="tl" style="width:13%;">Menge<br/><span class="sub">kg/Stück</span></th>
@@ -255,7 +262,7 @@
                             </t>
                             <t t-if="doc.state == 'sale'">
                                 <tr>
-                                    <td colspan="4" style="width:93%;padding:3mm 2mm; font-size:11pt; line-height:1.5; border-bottom:0.5px solid #ccc;">
+                                    <td colspan="4" style="width:93%;padding:3mm 2mm; font-size:11pt; line-height:1.5; border:none;">
                                         Aufgrund der nicht planbaren, sehr dynamischen Preisentwicklung im Rohstoff-, Energie- und Frachtbereich bestätigen wir unsere Preisangaben freibleibend. Wir behalten uns vor, unsere Preise in Rücksprache mit Ihnen anzupassen, sollten die Kosten bis zur Produktion um mehr als 5% steigen. Die Einhaltung unseres bestätigten Liefertermins setzt eine reibungslose Rohstoffversorgung voraus.
                                     </td>
                                 </tr>
