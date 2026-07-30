@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-
+from odoo.exceptions import UserError
 import logging
 _logger = logging.getLogger(__name__)
 import base64
@@ -18,96 +18,165 @@ class ProductTemplate(models.Model):
     # ------------------------------------------------------------------
     @api.model
     def map_product_categories_from_excel(self):
-        """
-        1. Fetch all product.template records where categ_id is False.
-        2. For each, take its Name and look it up in the Excel's "Name"
-           column (col B).
-        3. If found, read that row's "Kategorie des Kassensystems" value
-           (col G).
-        4. Search for an EXISTING product.category with that exact name
-           (no creation).
-        5. If found, write categ_id on the product.
-        """
+        _logger.info("========== Product Category Mapping Started ==========")
+
         attachment = self.env["ir.attachment"].search(
-            [("name", "=", '500_products_holz.xlsx')], limit=1
+            [("name", "=", "500_products_holz.xlsx")], limit=1
         )
+
         if not attachment:
-            print(f"Attachment '{'500_products_holz.xlsx'}' not found — aborting.")
+            _logger.error("Attachment '500_products_holz.xlsx' not found.")
             return False
 
-        import openpyxl  # local import keeps module load light if unused
+        _logger.info("Attachment found: %s", attachment.name)
+
+        import openpyxl
+        import io
+        import base64
 
         file_bytes = base64.b64decode(attachment.datas)
         wb = openpyxl.load_workbook(io.BytesIO(file_bytes), data_only=True)
         ws = wb.active
 
-        # Map header name -> column index (1-based), read from row 1
         headers = {}
-        for idx, cell in enumerate(ws[1]):
-            if cell.value is not None:
-                headers[str(cell.value).strip()] = idx + 1
+        for idx, cell in enumerate(ws[1], start=1):
+            if cell.value:
+                headers[str(cell.value).strip()] = idx
+
+        _logger.info("Excel Headers: %s", headers)
+
         name_col = headers.get("Name")
-        cat_col = headers.get("Produktkategorie")
+        default_code_col = headers.get("intere Referenz")
+        product_category_col = headers.get("Produktkategorie")
+        pos_category_col = headers.get("Kategorie des Kassensystems")
 
-        if not name_col or not cat_col:
-            print(
-                f"Required columns not found. Name col: {name_col}, "
-                f"Kategorie des Kassensystems col: {cat_col}"
+        if not all([
+            name_col,
+            default_code_col,
+            product_category_col,
+            pos_category_col,
+        ]):
+            _logger.error(
+                "Required columns missing. "
+                "Name=%s, Default Code=%s, Product Category=%s, POS Category=%s",
+                name_col,
+                default_code_col,
+                product_category_col,
+                pos_category_col,
             )
-            return False
+            raise UserError("Required columns are missing in the Excel.")
 
-        # Build: { product name (stripped) : category text from col G }
-        by_name = {}
-        for row in ws.iter_rows(min_row=2, values_only=False):
-            name_val = row[name_col - 1].value
-            cat_val = row[cat_col - 1].value
-            if not name_val or not cat_val:
-                continue
-            by_name[str(name_val).strip()] = str(cat_val).strip()
+        ProductCategory = self.env["product.category"]
+        PosCategory = self.env["pos.category"]
 
-        # Step 1: fetch products with no category set
-        products = self.search([("categ_id", "=", False)])
-        print(f"Found {len(products)} products with categ_id = False")
+        product_category_cache = {}
+        pos_category_cache = {}
 
-        Category = self.env["product.category"]
-        category_cache = {}   # category text -> product.category record / None
-        matched = 0
-        no_excel_row = []      # product name not found in Excel at all
-        no_category_match = [] # Excel had a value, but no matching product.category
+        mapped = 0
+        not_found = []
 
-        for product in products:
-            product_name = (product.name or "").strip()
-            cat_text = by_name.get(product_name)
+        for row_no, row in enumerate(ws.iter_rows(min_row=2, values_only=True), start=2):
+            product_name = str(row[name_col - 1] or "").strip()
+            default_code = str(row[default_code_col - 1] or "").strip()
+            product_category_name = str(row[product_category_col - 1] or "").strip()
+            pos_category_name = str(row[pos_category_col - 1] or "").strip()
 
-            if not cat_text:
-                no_excel_row.append(product.id)
+            if not product_name:
                 continue
 
-            if cat_text not in category_cache:
-                category_cache[cat_text] = Category.search(
-                    [("name", "=", cat_text)], limit=1
-                ) or None
-            category = category_cache[cat_text]
-
-            if not category:
-                no_category_match.append((product.id, cat_text))
-                continue
-
-            product.write({"categ_id": category.id})
-            matched += 1
-
-        print(
-            f"Category mapping done. Matched: {matched} | "
-            f"No Excel row: {len(no_excel_row)} | "
-            f"Category not found in system: {len(no_category_match)}"
-        )
-        if no_excel_row:
-            print(f"Products with no matching Excel row: {no_excel_row}")
-        if no_category_match:
-            print(
-                "Products where category text had no existing "
-                f"product.category: {no_category_match}"
+            _logger.info(
+                "Row %s -> Name='%s', Default Code='%s', Product Category='%s', POS Category='%s'",
+                row_no,
+                product_name,
+                default_code,
+                product_category_name,
+                pos_category_name,
             )
+
+            domain = [("name", "=", product_name)]
+            if default_code:
+                domain.append(("default_code", "=", default_code))
+
+            product = self.search(domain, limit=1)
+
+            if not product:
+                _logger.warning(
+                    "Product not found: Name='%s', Default Code='%s'",
+                    product_name,
+                    default_code,
+                )
+                not_found.append((product_name, default_code))
+                continue
+
+            _logger.info(
+                "Matched Product: %s (ID: %s)",
+                product.display_name,
+                product.id,
+            )
+
+            vals = {}
+
+            # Product Category
+            if product_category_name:
+                if product_category_name not in product_category_cache:
+                    product_category_cache[product_category_name] = ProductCategory.search(
+                        [("name", "=", product_category_name)],
+                        limit=1,
+                    )
+
+                category = product_category_cache[product_category_name]
+
+                if category:
+                    vals["categ_id"] = category.id
+                    _logger.info(
+                        "Mapped Product Category '%s' -> ID %s",
+                        category.name,
+                        category.id,
+                    )
+                else:
+                    _logger.warning(
+                        "Product Category not found: '%s'",
+                        product_category_name,
+                    )
+
+            # POS Category
+            if pos_category_name:
+                if pos_category_name not in pos_category_cache:
+                    pos_category_cache[pos_category_name] = PosCategory.search(
+                        [("name", "=", pos_category_name)],
+                        limit=1,
+                    )
+
+                pos_category = pos_category_cache[pos_category_name]
+
+                if pos_category:
+                    vals["pos_categ_ids"] = [(6, 0, [pos_category.id])]
+                    _logger.info(
+                        "Mapped POS Category '%s' -> ID %s",
+                        pos_category.name,
+                        pos_category.id,
+                    )
+                else:
+                    _logger.warning(
+                        "POS Category not found: '%s'",
+                        pos_category_name,
+                    )
+
+            if vals:
+                product.write(vals)
+                mapped += 1
+                _logger.info(
+                    "Updated Product '%s' (ID: %s)",
+                    product.display_name,
+                    product.id,
+                )
+
+        _logger.info("========== Product Category Mapping Finished ==========")
+        _logger.info("Total Products Updated: %s", mapped)
+        _logger.info("Products Not Found: %s", len(not_found))
+
+        if not_found:
+            _logger.warning("Not Found Products: %s", not_found)
 
         return True
 
