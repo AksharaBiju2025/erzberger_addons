@@ -182,11 +182,11 @@
                                     <div class="erz-title" style="font-size: 18pt;">Angebot</div>
                                 </t>
                                 <t t-if="doc.state == 'sale'">
-                                    <div class="erz-ref" style="padding-top:6mm;">
+                                    <div class="erz-ref" style="padding-top:2mm;">
                                         <t t-if="doc.partner_id.name">
-                                            (Ihr Auftrag v. <span t-field="doc.date_order" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/> p. Email v. <span t-field="doc.partner_id.name"/>)<br/>
-                                            Ihre Bestellnr.: <span> </span><br/>
-                                            Ihre Artikelnr.: <br/>
+                                            (Ihr Auftrag v. <span t-field="doc.date_order" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/> p. Email v. <span t-field="doc.user_id.name"/>)<br/>
+<!--                                            Ihre Bestellnr.: <span> </span><br/>-->
+<!--                                            Ihre Artikelnr.: <br/>-->
                                         </t>
                                     </div>
                                 </t>
@@ -217,13 +217,13 @@
                         </tr>
                     </table>
                     <t t-if="doc.state == 'sale'">
-                        <div style="font-size:11pt; margin:2.5mm 0; padding-top:6mm;">
-                            Sehr <t t-if="doc.partner_id.parent_id"><t t-esc="doc.partner_id.parent_id.name"/>,</t><t t-else=""><span t-field="doc.partner_id.name"/>,</t>
+                        <div style="font-size:11pt; margin:2.5mm 0; padding-top:1mm;">
+<!--                            Sehr <t t-if="doc.partner_id.parent_id"><t t-esc="doc.partner_id.parent_id.name"/>,</t><t t-else=""><span t-field="doc.partner_id.name"/>,</t>-->
                             vielen Dank für Ihren Auftrag, den wir wie folgt bestätigen:
                         </div>
                     </t>
                     <t t-elif="doc.state in ('draft', 'sent')">
-                        <div style="font-size:11pt; margin:2.5mm 0; padding-top:6mm;">
+                        <div style="font-size:11pt; margin:2.5mm 0; padding-top:1mm;">
                             <span>Gerne bieten wir Ihnen freibleibend wie folgt an:</span>
                         </div>
                     </t>
