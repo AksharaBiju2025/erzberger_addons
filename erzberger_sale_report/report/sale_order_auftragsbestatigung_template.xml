@@ -340,8 +340,8 @@
                         </t>
 
 
-                        <t t-if="doc.state == 'sale'">
-                            <div class="erz-bank">
+                         <t t-if="doc.state == 'sale'">
+                            <div class="erz-bank" style="page-break-inside: avoid !important; break-inside: avoid !important;">
                                 <t t-set="bank" t-value="doc.company_id.bank_ids[:1]"/>
                                 <t t-if="bank">
                                     <p class="b">Bankverbindung: <t t-esc="bank.bank_id.name"/></p>
