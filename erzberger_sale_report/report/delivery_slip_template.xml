@@ -155,7 +155,7 @@
                     </tbody>
                 </table>
 
-                <t t-if="o.note">
+                <t t-if="o.note and not is_html_empty(o.note)">
                     <style>
                         .note-tbl, .note-tbl tbody, .note-tbl tr, .note-tbl td {
                             border: none !important;
