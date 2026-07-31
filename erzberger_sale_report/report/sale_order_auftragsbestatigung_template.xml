@@ -277,30 +277,30 @@
 
                     <table style="width:100%; border-collapse:collapse; border:1px solid white; margin-top: 4mm;">
                         <tr>
-                            <td style="width:55%; border:1px solid white;"/>
-                            <td style="width:45%; border:1px solid white;">
-                                <table style="width:100%; border-collapse:collapse; border:1px solid white;" class="tot-inner">
+                            <td style="width:40%; border:1px solid white;"/>
+                            <td style="width:60%; border:1px solid white; padding-right:45px;">
+                                <table style="border:1px solid white; margin-left:auto;" class="tot-inner">
                                     <t t-set="tax_totals" t-value="doc.tax_totals"/>
                                     <t t-foreach="tax_totals.get('subtotals', [])" t-as="subtotal">
                                         <tr style="border:1px solid white;">
-                                            <td style="text-align:right; border:1px solid white;" class="tot-lbl">Warenwert</td>
-                                            <td style="text-align:right; border:1px solid white;" class="tot-val">
-                                                <span t-out="subtotal['base_amount_currency']" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
+                                            <td style="text-align:left; border:1px solid white; padding-right:30px; white-space:nowrap;" class="tot-lbl">Warenwert</td>
+                                            <td style="text-align:right; border:1px solid white; white-space:nowrap;" class="tot-val">
+                                                <span t-out="subtotal['base_amount_currency']" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
                                             </td>
                                         </tr>
                                         <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
                                             <tr style="border:1px solid white;">
-                                                <td style="text-align:right; border:1px solid white;" class="tot-lbl">zzgl.<span t-out="tax_group['group_name']"/></td>
-                                                <td style="text-align:right; border:1px solid white;" class="tot-val">
-                                                    <span t-out="tax_group['tax_amount_currency']" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
+                                                <td style="text-align:left; border:1px solid white; padding-right:30px; white-space:nowrap;" class="tot-lbl">zzgl.<span t-out="tax_group['group_name']"/></td>
+                                                <td style="text-align:right; border:1px solid white; white-space:nowrap;" class="tot-val">
+                                                    <span t-out="tax_group['tax_amount_currency']" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
                                                 </td>
                                             </tr>
                                         </t>
                                     </t>
                                     <tr style="border:1px solid white;" class="tot-grand">
-                                        <td style="text-align:right; border:1px solid white;" class="tot-lbl b">Gesamtbetrag</td>
-                                        <td style="text-align:right; border:1px solid white;" class="tot-val b">
-                                            <span t-field="doc.amount_total" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
+                                        <td style="text-align:left; border:1px solid white; padding-right:30px; white-space:nowrap;" class="tot-lbl b">Gesamtbetrag</td>
+                                        <td style="text-align:right; border:1px solid white; white-space:nowrap;" class="tot-val b">
+                                            <span t-field="doc.amount_total" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
                                         </td>
                                     </tr>
                                 </table>
