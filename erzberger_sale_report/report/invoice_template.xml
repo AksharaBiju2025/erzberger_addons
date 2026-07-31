@@ -264,45 +264,48 @@
 
 
                 <div class="erz-terms" style="padding-top:20px;">
-                    <t t-if="doc.narration">
-                        <span t-field="doc.narration"/>
-                    </t>
-                    <t t-else="">
-                        <t t-if="doc.invoice_payment_term_id and doc.invoice_payment_term_id.early_discount">
-                            <p>
-                                Zahlung innerhalb von <t t-esc="doc.invoice_payment_term_id.discount_days"/> Tagen
-                                mit <t t-esc="doc.invoice_payment_term_id.discount_percentage"/>% Skonto bis
-                                <span t-esc="(doc.invoice_date + relativedelta(days=doc.invoice_payment_term_id.discount_days)).strftime('%d.%m.%Y')"/>
-                                - (Skonto
-                                <span t-esc="'%.2f' % (doc.amount_total * doc.invoice_payment_term_id.discount_percentage / 100)"/>
-                                <t t-esc="doc.currency_id.symbol"/>)
-                                <br/>
-                                oder <t t-esc="doc.invoice_payment_term_id.line_ids[-1].nb_days if doc.invoice_payment_term_id.line_ids else ''"/>
-                                Tage netto bis
-                                <span t-field="doc.invoice_date_due" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
-                            </p>
-                        </t>
-                        <t t-elif="doc.invoice_payment_term_id">
-                            <p>Zahlungsbedingungen: <span t-field="doc.invoice_payment_term_id.name"/>.</p>
-                        </t>
-                        <div class="erz-bank">
-                            <t t-set="bank" t-value="doc.company_id.bank_ids[:1]"/>
-                            <t t-if="bank">
-                                <p class="b">Bankverbindung:&#160;&#160;<t t-esc="bank.bank_id.name"/></p>
-                                <div class="erz-bank-center">IBAN: <t t-esc="bank.acc_number"/></div>
-                                <div class="erz-bank-center">BIC: <t t-esc="bank.bank_id.bic or ''"/></div>
-                            </t>
-                            <t t-else="">
-                                <p class="b">Bankverbindung:&#160;&#160;Erzgebirgssparkasse</p>
-                                <div class="erz-bank-center">IBAN: DE37 8705 4000 3612 0096 47</div>
-                                <div class="erz-bank-center">BIC: WELADED1STB</div>
-                            </t>
+                     <div t-if="doc.narration and not is_html_empty(doc.narration)" class="erz-terms-note"
+                         style="text-align: justify; line-height: 1.5; margin-top: 10px; margin-bottom: 10px;">
+                        <strong>Terms &amp; Conditions : </strong>
+                        <div style="padding-left: 70px; margin-top: 4px;">
+                            <span t-out="doc.narration"/>
                         </div>
-                        <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
-                        <p>Sind keine Entsorgungsgebühren aufgeführt, gehen wir davon aus, dass die Service-Verpackungen
-                           Ihrerseits nach dem neuen Verpackungsgesetz bei einem dualen System lizensiert und die
-                           Mengen beim Verpackungsregister (LUCID) gemeldet werden.</p>
+                    </div>
+                    <t t-if="doc.invoice_payment_term_id and doc.invoice_payment_term_id.early_discount">
+                        <p>
+                            Zahlung innerhalb von <t t-esc="doc.invoice_payment_term_id.discount_days"/> Tagen
+                            mit <t t-esc="doc.invoice_payment_term_id.discount_percentage"/>% Skonto bis
+                            <span t-esc="(doc.invoice_date + relativedelta(days=doc.invoice_payment_term_id.discount_days)).strftime('%d.%m.%Y')"/>
+                            - (Skonto
+                            <span t-esc="'%.2f' % (doc.amount_total * doc.invoice_payment_term_id.discount_percentage / 100)"/>
+                            <t t-esc="doc.currency_id.symbol"/>)
+                            <br/>
+                            oder <t t-esc="doc.invoice_payment_term_id.line_ids[-1].nb_days if doc.invoice_payment_term_id.line_ids else ''"/>
+                            Tage netto bis
+                            <span t-field="doc.invoice_date_due" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
+                        </p>
                     </t>
+                    <t t-elif="doc.invoice_payment_term_id">
+                        <p>Zahlungsbedingungen: <span t-field="doc.invoice_payment_term_id.name"/>.</p>
+                    </t>
+
+                    <div class="erz-bank" style="page-break-inside: avoid !important; break-inside: avoid !important;">
+                        <t t-set="bank" t-value="doc.company_id.bank_ids[:1]"/>
+                        <t t-if="bank">
+                            <p class="b">Bankverbindung:&#160;&#160;<t t-esc="bank.bank_id.name"/></p>
+                            <div class="erz-bank-center">IBAN: <t t-esc="bank.acc_number"/></div>
+                            <div class="erz-bank-center">BIC: <t t-esc="bank.bank_id.bic or ''"/></div>
+                        </t>
+                        <t t-else="">
+                            <p class="b">Bankverbindung:&#160;&#160;Erzgebirgssparkasse</p>
+                            <div class="erz-bank-center">IBAN: DE37 8705 4000 3612 0096 47</div>
+                            <div class="erz-bank-center">BIC: WELADED1STB</div>
+                        </t>
+                    </div>
+                    <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
+                    <p>Sind keine Entsorgungsgebühren aufgeführt, gehen wir davon aus, dass die Service-Verpackungen
+                       Ihrerseits nach dem neuen Verpackungsgesetz bei einem dualen System lizensiert und die
+                       Mengen beim Verpackungsregister (LUCID) gemeldet werden.</p>
                 </div>
 
 
