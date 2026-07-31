@@ -14,7 +14,7 @@ class SaleOrder(models.Model):
         copy=False
     )
     is_note = fields.Boolean(
-        string="Note",
+        string="Customer Note",
         default=False,
         copy=False
     )

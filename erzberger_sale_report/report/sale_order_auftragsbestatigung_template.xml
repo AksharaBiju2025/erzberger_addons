@@ -315,7 +315,7 @@
                             <p>Es gelten die "Geschäfts-, Zahlungs- und Lieferbedingungen für die Papier- und Kunststoffindustrie" in Ihrer jeweils neuesten Fassung.</p>
                             <p>Lieferzeit: ca. 10 - 12 Wochen oder auch nach Vereinbarung</p>
                             <p>Zahlung: DAGEMA-Zentralregulierung - Hiermit weisen wir auf unsere Bonusvereinbarungen hin.</p>
-                            <div t-if="doc.note" class="erz-terms-note"
+                            <div t-if="doc.note and not is_html_empty(doc.note)" class="erz-terms-note"
                                  style="text-align: justify; line-height: 1.5; margin-top: 10px;">
                                 <strong>Terms &amp; Conditions : </strong>
                                 <span t-out="doc.note"/>
@@ -332,7 +332,7 @@
                             <p>Beanstandungen werden nur innerhalb acht Tagen berücksichtigt. Kleine Abweichungen in Farbe, Gewicht und Stoff berechtigen nicht zu Mängelrügen.</p>
                             <p>Toleranzen bei Gewichtsschwankungen (Papier 8%, Kunststoff 25%), Maßabweichungen von 5% und Mengenabweichungen von 20% allg. können nicht beanstandet werden.</p>
                             <p>Es gelten die "Geschäfts-, Liefer- und Zahlungsbedingungen für die Papier- und Kunststoffindustrie" in Ihrer jeweils neuesten Fassung.</p></t>
-                            <div t-if="doc.note" class="erz-terms-note"
+                            <div t-if="doc.note and not is_html_empty(doc.note)" class="erz-terms-note"
                                  style="text-align: justify; line-height: 1.5; margin-top: 10px;">
                                 <strong>Terms &amp; Conditions : </strong>
                                 <span t-out="doc.note"/>
