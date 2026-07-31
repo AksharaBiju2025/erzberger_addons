@@ -325,7 +325,7 @@
                             <p>Wie gewünscht, übernehmen wir Lizenzierung und Vollständigkeitserklärung.</p>
                             <t t-if="doc.commitment_date"><p>Liefertermin: <span t-field="doc.commitment_date" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/></p></t>
                             <t t-if="doc.payment_term_id"><p>Zahlungsbedingungen: <span t-field="doc.payment_term_id.name"/>.</p></t>
-                            <t t-if="doc.partner_shipping_id"><p>Versand: <span t-field="doc.partner_shipping_id.name"/>.</p></t>
+<!--                            <t t-if="doc.partner_shipping_id"><p>Versand: <span t-field="doc.partner_shipping_id.name"/>.</p></t>-->
                             <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
                             <p>Beanstandungen werden nur innerhalb acht Tagen berücksichtigt. Kleine Abweichungen in Farbe, Gewicht und Stoff berechtigen nicht zu Mängelrügen.</p>
                             <p>Toleranzen bei Gewichtsschwankungen (Papier 8%, Kunststoff 25%), Maßabweichungen von 5% und Mengenabweichungen von 20% allg. können nicht beanstandet werden.</p>
