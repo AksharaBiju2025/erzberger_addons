@@ -322,6 +322,8 @@
                             </div>
                         </t>
                         <t t-elif="doc.state == 'sale'">
+                            <t t-if="doc.is_note">
+
                             <p>Wie gewünscht, übernehmen wir Lizenzierung und Vollständigkeitserklärung.</p>
                             <t t-if="doc.commitment_date"><p>Liefertermin: <span t-field="doc.commitment_date" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/></p></t>
                             <t t-if="doc.payment_term_id"><p>Zahlungsbedingungen: <span t-field="doc.payment_term_id.name"/>.</p></t>
@@ -329,7 +331,7 @@
                             <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
                             <p>Beanstandungen werden nur innerhalb acht Tagen berücksichtigt. Kleine Abweichungen in Farbe, Gewicht und Stoff berechtigen nicht zu Mängelrügen.</p>
                             <p>Toleranzen bei Gewichtsschwankungen (Papier 8%, Kunststoff 25%), Maßabweichungen von 5% und Mengenabweichungen von 20% allg. können nicht beanstandet werden.</p>
-                            <p>Es gelten die "Geschäfts-, Liefer- und Zahlungsbedingungen für die Papier- und Kunststoffindustrie" in Ihrer jeweils neuesten Fassung.</p>
+                            <p>Es gelten die "Geschäfts-, Liefer- und Zahlungsbedingungen für die Papier- und Kunststoffindustrie" in Ihrer jeweils neuesten Fassung.</p></t>
                             <div t-if="doc.note" class="erz-terms-note"
                                  style="text-align: justify; line-height: 1.5; margin-top: 10px;">
                                 <strong>Terms &amp; Conditions : </strong>

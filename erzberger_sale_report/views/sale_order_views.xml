@@ -14,6 +14,9 @@
                     type="object"
                     data-hotkey="i"/>
             </xpath>
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="is_note"/>
+            </xpath>
         </field>
     </record>
 
