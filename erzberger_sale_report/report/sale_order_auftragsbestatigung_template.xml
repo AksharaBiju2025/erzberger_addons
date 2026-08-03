@@ -264,17 +264,14 @@
                                     </tr>
                                 </t>
                             </t>
-                            <t t-if="doc.state == 'sale'">
-                                <tr>
-                                    <td colspan="4" style="width:93%;padding:3mm 2mm; font-size:11pt; line-height:1.5; border:none;">
-<!--                                        Aufgrund der nicht planbaren, sehr dynamischen Preisentwicklung im Rohstoff-, Energie- und Frachtbereich bestätigen wir unsere Preisangaben freibleibend. Wir behalten uns vor, unsere Preise in Rücksprache mit Ihnen anzupassen, sollten die Kosten bis zur Produktion um mehr als 5% steigen. Die Einhaltung unseres bestätigten Liefertermins setzt eine reibungslose Rohstoffversorgung voraus.-->
-                                        <t t-if="doc.customer_note"><span t-field="doc.customer_note"/></t>
-                                    </td>
-                                </tr>
-                            </t>
-
                         </tbody>
                     </table>
+                     <t t-if="doc.state == 'sale'">
+                            <div colspan="4" style="width:93%;padding:3mm 2mm; font-size:11pt; line-height:1.5; border:none;">
+<!--                                        Aufgrund der nicht planbaren, sehr dynamischen Preisentwicklung im Rohstoff-, Energie- und Frachtbereich bestätigen wir unsere Preisangaben freibleibend. Wir behalten uns vor, unsere Preise in Rücksprache mit Ihnen anzupassen, sollten die Kosten bis zur Produktion um mehr als 5% steigen. Die Einhaltung unseres bestätigten Liefertermins setzt eine reibungslose Rohstoffversorgung voraus.-->
+                                <t t-if="doc.customer_note"><span t-field="doc.customer_note"/></t>
+                            </div>
+                     </t>
 
                     <table style="width:100%; border-collapse:collapse; border:1px solid white; margin-top: 4mm;">
                         <tr>
