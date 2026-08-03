@@ -18,6 +18,7 @@ class SaleOrder(models.Model):
         default=False,
         copy=False
     )
+    customer_note = fields.Html(string='Customer Note')
 
     def action_print_custom(self):
         self.ensure_one()

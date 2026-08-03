@@ -15,7 +15,10 @@
                     data-hotkey="i"/>
             </xpath>
             <xpath expr="//field[@name='company_id']" position="after">
-                <field name="is_note"/>
+                <field name="is_note" invisible="1"/>
+            </xpath>
+                        <xpath expr="//field[@name='client_order_ref']" position="after">
+                <field name="customer_note"/>
             </xpath>
         </field>
     </record>

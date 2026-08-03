@@ -267,7 +267,8 @@
                             <t t-if="doc.state == 'sale'">
                                 <tr>
                                     <td colspan="4" style="width:93%;padding:3mm 2mm; font-size:11pt; line-height:1.5; border:none;">
-                                        Aufgrund der nicht planbaren, sehr dynamischen Preisentwicklung im Rohstoff-, Energie- und Frachtbereich bestätigen wir unsere Preisangaben freibleibend. Wir behalten uns vor, unsere Preise in Rücksprache mit Ihnen anzupassen, sollten die Kosten bis zur Produktion um mehr als 5% steigen. Die Einhaltung unseres bestätigten Liefertermins setzt eine reibungslose Rohstoffversorgung voraus.
+<!--                                        Aufgrund der nicht planbaren, sehr dynamischen Preisentwicklung im Rohstoff-, Energie- und Frachtbereich bestätigen wir unsere Preisangaben freibleibend. Wir behalten uns vor, unsere Preise in Rücksprache mit Ihnen anzupassen, sollten die Kosten bis zur Produktion um mehr als 5% steigen. Die Einhaltung unseres bestätigten Liefertermins setzt eine reibungslose Rohstoffversorgung voraus.-->
+                                        <t t-if="doc.customer_note"><span t-field="doc.customer_note"/></t>
                                     </td>
                                 </tr>
                             </t>
@@ -310,35 +311,35 @@
 
                     <div class="erz-terms">
                         <t t-if="doc.state in ('draft', 'sent')">
-                            <p>Preise verstehen sich zzgl. MWSt.</p>
-                            <p>Lieferung frei Haus Fulda</p>
-                            <p>Es gelten die "Geschäfts-, Zahlungs- und Lieferbedingungen für die Papier- und Kunststoffindustrie" in Ihrer jeweils neuesten Fassung.</p>
-                            <p>Lieferzeit: ca. 10 - 12 Wochen oder auch nach Vereinbarung</p>
-                            <p>Zahlung: DAGEMA-Zentralregulierung - Hiermit weisen wir auf unsere Bonusvereinbarungen hin.</p>
-                            <div t-if="doc.note and not is_html_empty(doc.note)" class="erz-terms-note"
-                                 style="text-align: justify; line-height: 1.5; margin-top: 10px;">
-                                <strong>Terms &amp; Conditions : </strong>
-                                <span t-out="doc.note"/>
-                            </div>
+<!--                            <p>Preise verstehen sich zzgl. MWSt.</p>-->
+<!--                            <p>Lieferung frei Haus Fulda</p>-->
+<!--                            <p>Es gelten die "Geschäfts-, Zahlungs- und Lieferbedingungen für die Papier- und Kunststoffindustrie" in Ihrer jeweils neuesten Fassung.</p>-->
+<!--                            <p>Lieferzeit: ca. 10 - 12 Wochen oder auch nach Vereinbarung</p>-->
+<!--                            <p>Zahlung: DAGEMA-Zentralregulierung - Hiermit weisen wir auf unsere Bonusvereinbarungen hin.</p>-->
+<!--                            <div t-if="doc.note and not is_html_empty(doc.note)" class="erz-terms-note"-->
+<!--                                 style="text-align: justify; line-height: 1.5; margin-top: 10px;">-->
+<!--                                <strong>Terms &amp; Conditions : </strong>-->
+
+<!--                            </div>-->
+                            <span t-out="doc.note"/>
                         </t>
                         <t t-elif="doc.state == 'sale'">
-                            <t t-if="doc.is_note">
-
-                            <p>Wie gewünscht, übernehmen wir Lizenzierung und Vollständigkeitserklärung.</p>
-                            <t t-if="doc.commitment_date"><p>Liefertermin: <span t-field="doc.commitment_date" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/></p></t>
                             <t t-if="doc.payment_term_id"><p>Zahlungsbedingungen: <span t-field="doc.payment_term_id.name"/>.</p></t>
+                            <span t-out="doc.note"/>
+<!--                            <t t-if="doc.is_note">-->
+<!--                            <p>Wie gewünscht, übernehmen wir Lizenzierung und Vollständigkeitserklärung.</p>-->
+<!--                            <t t-if="doc.commitment_date"><p>Liefertermin: <span t-field="doc.commitment_date" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/></p></t>-->
 <!--                            <t t-if="doc.partner_shipping_id"><p>Versand: <span t-field="doc.partner_shipping_id.name"/>.</p></t>-->
-                            <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>
-                            <p>Beanstandungen werden nur innerhalb acht Tagen berücksichtigt. Kleine Abweichungen in Farbe, Gewicht und Stoff berechtigen nicht zu Mängelrügen.</p>
-                            <p>Toleranzen bei Gewichtsschwankungen (Papier 8%, Kunststoff 25%), Maßabweichungen von 5% und Mengenabweichungen von 20% allg. können nicht beanstandet werden.</p>
-                            <p>Es gelten die "Geschäfts-, Liefer- und Zahlungsbedingungen für die Papier- und Kunststoffindustrie" in Ihrer jeweils neuesten Fassung.</p></t>
-                            <div t-if="doc.note and not is_html_empty(doc.note)" class="erz-terms-note"
-                                 style="text-align: justify; line-height: 1.5; margin-top: 10px;">
-                                <strong>Terms &amp; Conditions : </strong>
-                                <span t-out="doc.note"/>
-                            </div>
-                        </t>
+<!--                            <p>Die Ware bleibt bis zur vollständigen Bezahlung unser Eigentum.</p>-->
+<!--                            <p>Beanstandungen werden nur innerhalb acht Tagen berücksichtigt. Kleine Abweichungen in Farbe, Gewicht und Stoff berechtigen nicht zu Mängelrügen.</p>-->
+<!--                            <p>Toleranzen bei Gewichtsschwankungen (Papier 8%, Kunststoff 25%), Maßabweichungen von 5% und Mengenabweichungen von 20% allg. können nicht beanstandet werden.</p>-->
+<!--                            <p>Es gelten die "Geschäfts-, Liefer- und Zahlungsbedingungen für die Papier- und Kunststoffindustrie" in Ihrer jeweils neuesten Fassung.</p></t>-->
+<!--                            <div t-if="doc.note and not is_html_empty(doc.note)" class="erz-terms-note"-->
+<!--                                 style="text-align: justify; line-height: 1.5; margin-top: 10px;">-->
+<!--                                <strong>Terms &amp; Conditions : </strong>-->
+<!--                            </div>-->
 
+                        </t>
 
                          <t t-if="doc.state == 'sale'">
                             <div class="erz-bank" style="page-break-inside: avoid !important; break-inside: avoid !important;">
