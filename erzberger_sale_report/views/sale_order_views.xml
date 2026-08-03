@@ -18,7 +18,7 @@
                 <field name="is_note" invisible="1"/>
             </xpath>
                         <xpath expr="//field[@name='client_order_ref']" position="after">
-                <field name="customer_note"/>
+                <field name="customer_note" invisible="state != 'sale'"/>
             </xpath>
         </field>
     </record>
