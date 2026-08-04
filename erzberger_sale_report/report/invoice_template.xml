@@ -266,8 +266,8 @@
                 <div class="erz-terms" style="padding-top:20px;">
                      <div t-if="doc.narration and not is_html_empty(doc.narration)" class="erz-terms-note"
                          style="text-align: justify; line-height: 1.5; margin-top: 10px; margin-bottom: 10px;">
-                        <strong>Terms &amp; Conditions : </strong>
-                        <div style="padding-left: 70px; margin-top: 4px;">
+<!--                        <strong>Terms &amp; Conditions : </strong>-->
+                        <div style="margin-top: 4px;">
                             <span t-out="doc.narration"/>
                         </div>
                     </div>
