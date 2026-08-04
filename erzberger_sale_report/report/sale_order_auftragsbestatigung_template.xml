@@ -318,6 +318,7 @@
 <!--                                <strong>Terms &amp; Conditions : </strong>-->
 
 <!--                            </div>-->
+                            <t t-if="doc.payment_term_id"><p>Zahlung: <span t-field="doc.payment_term_id.name"/>.</p></t>
                             <span t-out="doc.note"/>
                         </t>
                         <t t-elif="doc.state == 'sale'">
