@@ -7,6 +7,326 @@
      Model: stock.picking
      ============================================================ -->
 
+
+<template id="external_layout_din5008_custom" inherit_id="l10n_din5008.external_layout_din5008">
+    <xpath expr="//table[@class='din_company_info table-borderless']" position="before">
+            <br/>
+                     <br/>
+                      <br/>
+                       <br/>
+                        <br/>
+                         <br/>
+                         <br/>
+                         <br/>
+                     
+                       
+         </xpath>
+    <!--<xpath expr="//table[@class='company_header table-borderless']" position="replace">-->
+    <!--            <table width="100%" class="company_header table-borderless" t-att-style="'height: %dmm;' % (din_header_spacing or 27)">-->
+    <!--                <tr>-->
+    <!--                    <td width="60%">-->
+    <!--                        <div class="colored_address" style="padding-top:170px;">-->
+                                    
+    <!--                                    <t t-if="company.name">-->
+    <!--                                        <span style="padding-top:170px;" t-field="company.name"/>-->
+    <!--                                    </t>-->
+    <!--                                    <t t-if="company.street">-->
+    <!--                                        <span>|</span> <span t-field="company.street"/>-->
+    <!--                                    </t>-->
+    <!--                                    <t t-if="company.street2">-->
+    <!--                                        <span>|</span> <span t-field="company.street2"/>-->
+    <!--                                    </t>-->
+    <!--                                    <t t-if="company.zip">-->
+    <!--                                        <span>|</span> <span t-field="company.zip"/>-->
+    <!--                                    </t>-->
+    <!--                                    <t t-if="company.city">-->
+    <!--                                        <span t-if="not company.zip">|</span> <span t-field="company.city"/>-->
+    <!--                                    </t>-->
+    <!--                                    <t t-if="company.country_id">-->
+    <!--                                        <span>|</span> <span t-field="company.country_id.name"/>-->
+    <!--                                    </t>-->
+    <!--                                </div>-->
+    <!--                                <hr class="company_invoice_line"/>-->
+    <!--                    </td>-->
+    <!--                    <td width="20%"><img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="height:60mm; width:30.6mm;"/>-->
+    <!--                    <br/>-->
+    <!--                        <span style="font-size: 12px; color: #008000; font-weight: 700;text-align:right;">-->
+    <!--                            Handwerkliche Holzkunst aus dem Erzgebirge-->
+    <!--                        </span>-->
+    <!--                    </td>-->
+    <!--                    <td style="width: 30%; text-align: right;">-->
+                            
+    <!--                        <img src="/erzberger_sale_report/static/src/img/img_7.png" style="height:40mm; width:30.6mm;float:right;"/><br/>-->
+    <!--                         <img src="/erzberger_sale_report/static/src/img/img_6.png" style="height:40mm; width:30.6mm;float:right;"/>-->
+    <!--                    </td>-->
+    <!--                </tr>-->
+                    
+                   
+    <!--            </table>-->
+    <!--        </xpath>-->
+   <xpath expr="//table[@class='company_header table-borderless']" position="replace">
+
+    <table width="100%" class="company_header table-borderless" t-att-style="'height: %dmm;' % (din_header_spacing or 27)">
+
+        <tr>
+
+            <!-- ================================================= -->
+            <!-- LEFT: COMPANY ADDRESS -->
+            <!-- ================================================= -->
+            <td width="60%" style="text-align:left;           padding-left:20px;              vertical-align:top;">
+
+                <div class="colored_address" style="padding-top:255px;                           text-align:left;                             white-space:nowrap;                             display:inline-block;                             font-size:10px;                             color:#315d35;                             font-weight:600;                             border-bottom:1px solid #315d35;                             padding-bottom:2px;">
+
+                    <t t-if="company.name">
+                        <span t-field="company.name"/>
+                    </t>
+
+                    <t t-if="company.street">
+                        <span>|</span>
+                        <span t-field="company.street"/>
+                    </t>
+
+                    <t t-if="company.street2">
+                        <span>|</span>
+                        <span t-field="company.street2"/>
+                    </t>
+
+                    <t t-if="company.zip">
+                        <span>|</span>
+                        <span t-field="company.zip"/>
+                    </t>
+
+                    <t t-if="company.city">
+                        <span t-if="not company.zip">|</span>
+                        <span t-field="company.city"/>
+                    </t>
+
+                    <t t-if="company.country_id">
+                        <span>|</span>
+                        <span t-field="company.country_id.name"/>
+                    </t>
+
+                </div>
+
+            </td>
+
+
+            <!--<td width="20%" style="text-align:center;                        vertical-align:top;">-->
+
+            <!--    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="height:50mm;                             width:40mm;                             display:block;                             margin:0 auto;"/>-->
+
+            <!--    <div style="text-align:right;                             margin-top:2mm;                             line-height:1.15;">-->
+            <!--        <span style="font-size:11px;                                  color:#315d35;">Inhaber: Jens Kriegel</span><br/>-->
+            <!--        <span style="font-size:11px;                                  color:#315d35;                                  font-weight:700;                                  text-align:center;                                  display:block;">-->
+            <!--            Handwerkliche<br/>-->
+            <!--            Holzkunst aus<br/>-->
+            <!--            dem Erzgebirge-->
+            <!--        </span>-->
+
+            <!--    </div>-->
+
+            <!--</td>-->
+            <td width="20%" style="text-align:center;            vertical-align:top;">
+
+    <!-- Main Company Logo -->
+    <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="height:46mm;                 width:42mm;                 display:block;                 margin:0 auto;"/>
+
+    <!-- Inhaber -->
+    <div style="width:100%;                 text-align:center;                 margin-top:1mm;                 line-height:1.2;">
+
+        <span style="font-size:11px;                      color:#315d35;                      font-weight:600;                      text-align:center;                      display:block;">
+            Inhaber: Jens Kriegel
+        </span>
+
+    </div>
+
+    <!-- Handwerkliche Holzkunst -->
+    <div style="width:100%;                 text-align:center;                 margin-top:3mm;                 line-height:1.15;">
+
+        <span style="font-size:11px;                      color:#315d35;                      font-weight:700;                      text-align:center;                      display:block;">
+            Handwerkliche<br/>
+            Holzkunst aus<br/>
+            dem Erzgebirge
+        </span>
+
+    </div>
+
+</td>
+
+            <!-- ================================================= -->
+            <!-- RIGHT: ADDITIONAL LOGOS -->
+            <!-- ================================================= -->
+            <td width="20%" style="text-align:right; padding-top:10px;                       vertical-align:top;">
+
+                <img src="/erzberger_sale_report/static/src/img/img_7.png" style="height:30mm;                             width:25mm;                             display:block;                             margin-left:auto;"/>
+
+                <br/>
+
+                <img src="/erzberger_sale_report/static/src/img/img_6.png" style="height:28mm;                             width:26mm;                             display:block;                             margin-left:auto;"/>
+
+            </td>
+
+        </tr>
+
+    </table>
+
+</xpath>
+
+<xpath expr="//div[contains(@class, 'footer') or contains(@t-attf-class, 'footer')]" position="replace">
+
+    <div class="din_page footer" style="background:transparent;                 background-color:transparent;                 color:#315d35;                 padding:0;                 margin:0;                 font-size:8px;                 width:100%;">
+
+        <table class="footer_table table-borderless" style="width:100%;                       border-collapse:collapse;                       border-spacing:0;                       background:transparent;                       background-color:transparent;                       color:#315d35;                       margin:0;                       padding:0;                       table-layout:fixed;">
+
+            <tr>
+
+                <td style="width:25%;                            padding:0 5px 0 5px;                            border-right:1px solid #9bb39c;                            vertical-align:top;                            background:transparent;                            color:#315d35;">
+
+                    <strong style="font-size:9px;                                    font-weight:700;                                    color:#315d35;                                    display:block;                                    margin:0;                                    padding:0;                                    line-height:1.15;">
+                        Fachgeschäft:
+                    </strong>
+
+                    <div style="font-size:8px;                                 color:#315d35;                                 line-height:1.20;                                 margin:1px 0 0 0;                                 padding:0;">
+
+                        <div t-field="company.name"/>
+
+                        <div t-if="company.street" t-field="company.street"/>
+
+                        <div t-if="company.street2" t-field="company.street2"/>
+
+                        <div>
+                            <span t-if="company.zip" t-field="company.zip"/>
+
+                            <t t-if="company.zip and company.city">
+                                <span> </span>
+                            </t>
+
+                            <span t-if="company.city" t-field="company.city"/>
+                        </div>
+
+                        <div t-if="company.country_id" t-field="company.country_id.name"/>
+
+                    </div>
+
+                </td>
+
+
+                  
+                <td style="width:25%;                            padding:0 5px 0 10px;                            border-right:1px solid #9bb39c;                            vertical-align:top;                            background:transparent;                            color:#315d35;">
+
+                    <strong style="font-size:9px;                                    font-weight:700;                                    color:#315d35;                                    display:block;                                    margin:0;                                    padding:0;                                    line-height:1.15;">
+                        Büro:
+                    </strong>
+
+                    <div style="font-size:8px;                                 color:#315d35;                                 line-height:1.20;                                 margin:1px 0 0 0;                                 padding:0;">
+
+                        <div t-if="company.partner_id" t-field="company.partner_id.name"/>
+
+                        <div t-if="company.partner_id.street" t-field="company.partner_id.street"/>
+
+                        <div t-if="company.partner_id.street2" t-field="company.partner_id.street2"/>
+
+                        <div>
+                            <span t-if="company.partner_id.zip" t-field="company.partner_id.zip"/>
+
+                            <t t-if="company.partner_id.zip and company.partner_id.city">
+                                <span> </span>
+                            </t>
+
+                            <span t-if="company.partner_id.city" t-field="company.partner_id.city"/>
+                        </div>
+
+                        <div t-if="company.partner_id.country_id" t-field="company.partner_id.country_id.name"/>
+
+                    </div>
+
+                </td>
+
+
+                  
+                <td style="width:25%;                            padding:0 5px 0 10px;                            border-right:1px solid #9bb39c;                            vertical-align:top;                            background:transparent;                            color:#315d35;">
+
+                    <strong style="font-size:9px;                                    font-weight:700;                                    color:#315d35;                                    display:block;                                    margin:0;                                    padding:0;                                    line-height:1.15;">
+                        Kontakt:
+                    </strong>
+
+                    <div style="font-size:8px;                                 color:#315d35;                                 line-height:1.20;                                 margin:1px 0 0 0;                                 padding:0;">
+
+                        <div t-if="company.phone">
+                            Telefon: <span t-field="company.phone"/>
+                        </div>
+
+                        <div t-if="company.website">
+                            Website: <span>www.erzbergerholzkunst.de</span>
+                        </div>
+
+                        <div t-if="company.email">
+                            E-Mail: <span t-field="company.email"/>
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                  
+                <td style="width:25%;                            padding:0 0 0 10px;                            vertical-align:top;                            background:transparent;                            color:#315d35;">
+
+                    <strong style="font-size:9px;                                    font-weight:700;                                    color:#315d35;                                    display:block;                                    margin:0;                                    padding:0;                                    line-height:1.15;">
+                        Bankverbindung:
+                    </strong>
+
+                    <div style="font-size:8px;                                 color:#315d35;                                 line-height:1.20;                                 margin:1px 0 0 0;                                 padding:0;                                 width:100%;">
+
+                        <t>
+
+                            <t>
+
+                                <div>
+                                    <span>Erzgebirgssparkasse</span>
+                                </div>
+
+                                <div>
+                                    IBAN: <span>DE87 8705 4000 0725 0807 79</span>
+                                </div>
+
+                                <div>
+                                    BIC: <span>WELADED1STB</span>
+                                </div>
+
+                            </t>
+
+                        </t>
+
+                        <!--<t t-if="company.vat">-->
+                        <!--    <div>-->
+                        <!--        <t t-set="default_vat_label">Tax ID</t>-->
+                        <!--        <t t-out="company.account_fiscal_country_id.vat_label or default_vat_label"/>-->
+                        <!--        :-->
+                        <!--        <span t-field="company.vat"/>-->
+                        <!--    </div>-->
+                        <!--</t>-->
+
+                        <!--<div t-if="company.company_registry">-->
+                        <!--    HRB Nr:-->
+                        <!--    <span t-field="company.company_registry"/>-->
+                        <!--</div>-->
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+</xpath>
+</template>
+
+
+
 <template id="report_delivery_note">
 <t t-call="web.html_container">
     <t t-foreach="docs" t-as="o">
