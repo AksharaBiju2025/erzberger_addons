@@ -13,11 +13,9 @@
                     <td width="5%" style="padding-left:10px;">
 
                     </td>
-                    <td width="55%" colspan="2"
-                        style="text-align:left; vertical-align:top;">
+                    <td width="55%" colspan="2" style="text-align:left; vertical-align:top;">
                         <t t-if="company.logo">
-                            <img t-att-src="image_data_uri(company.logo)"
-                                 style="width:440px; height:auto; display:block;"/>
+                            <img t-att-src="image_data_uri(company.logo)" style="width:440px; height:auto; display:block;"/>
                         </t>
                     </td>
                     <br/>
@@ -212,6 +210,12 @@
                                     <t t-if="doc.user_id">
                                         <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Bearbeiter:</td><td style="font-size: 11pt;text-align:left;" class="meta-val"><span t-field="doc.user_id.name"/></td></tr>
                                     </t>
+                                    <t t-if="doc.client_order_ref">
+                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">Kundenreferenz:</td><td style="font-size: 11pt;text-align:left;" class="meta-val"><span t-field="doc.client_order_ref"/></td></tr>
+                                    </t>
+                                    <t t-if="doc.po_number">
+                                        <tr style="border:1px solid white;"><td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-left:50px;">PO-Nr.:</td><td style="font-size: 11pt;text-align:left;" class="meta-val"><span t-field="doc.po_number"/></td></tr>
+                                    </t>
                                 </table>
                             </td>
                         </tr>
@@ -283,14 +287,14 @@
                                         <tr style="border:1px solid white;">
                                             <td style="text-align:left; border:1px solid white; padding-right:30px; white-space:nowrap;" class="tot-lbl">Warenwert</td>
                                             <td style="text-align:right; border:1px solid white; white-space:nowrap;" class="tot-val">
-                                                <span t-out="subtotal['base_amount_currency']" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                                <span t-out="subtotal['base_amount_currency']" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                             </td>
                                         </tr>
                                         <t t-foreach="subtotal['tax_groups']" t-as="tax_group">
                                             <tr style="border:1px solid white;">
                                                 <td style="text-align:left; border:1px solid white; padding-right:30px; white-space:nowrap;" class="tot-lbl">zzgl.<span t-out="tax_group['group_name']"/></td>
                                                 <td style="text-align:right; border:1px solid white; white-space:nowrap;" class="tot-val">
-                                                    <span t-out="tax_group['tax_amount_currency']" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                                    <span t-out="tax_group['tax_amount_currency']" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                                 </td>
                                             </tr>
                                         </t>
@@ -298,7 +302,7 @@
                                     <tr style="border:1px solid white;" class="tot-grand">
                                         <td style="text-align:left; border:1px solid white; padding-right:30px; white-space:nowrap;" class="tot-lbl b">Gesamtbetrag</td>
                                         <td style="text-align:right; border:1px solid white; white-space:nowrap;" class="tot-val b">
-                                            <span t-field="doc.amount_total" t-options='{"widget":"monetary","display_currency":doc.currency_id}'/>
+                                            <span t-field="doc.amount_total" t-options="{&quot;widget&quot;:&quot;monetary&quot;,&quot;display_currency&quot;:doc.currency_id}"/>
                                         </td>
                                     </tr>
                                 </table>

@@ -19,6 +19,22 @@ class SaleOrder(models.Model):
         copy=False
     )
     customer_note = fields.Html(string='Customer Note')
+    po_number = fields.Char(
+        string="PO Number",
+        compute="_compute_po_number",
+        help="Linked Purchase Order Numbers"
+    )
+
+    @api.depends('order_line', 'name')
+    def _compute_po_number(self):
+        for order in self:
+            po_lines = order.order_line.mapped(lambda l: getattr(l, 'purchase_line_ids', self.env['purchase.order.line']))
+            pos = po_lines.mapped('order_id')
+            if not pos and order.name:
+                pos = self.env['purchase.order'].search([('origin', '=', order.name)])
+            if not pos and getattr(order, 'procurement_group_id', False):
+                pos = self.env['purchase.order'].search([('group_id', '=', order.procurement_group_id.id)])
+            order.po_number = ", ".join(pos.mapped('name')) if pos else False
 
     def action_print_custom(self):
         self.ensure_one()

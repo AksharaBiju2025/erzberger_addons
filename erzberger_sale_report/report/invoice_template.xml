@@ -108,8 +108,7 @@
                     <t t-if="doc.partner_id.parent_id">
                         <div><t t-esc="doc.partner_id.parent_id.name"/></div>
                     </t>
-                    <div t-field="doc.partner_id"
-                         t-options='{"widget":"contact","fields":["name","address"],"no_marker":True}'/>
+                    <div t-field="doc.partner_id" t-options="{&quot;widget&quot;:&quot;contact&quot;,&quot;fields&quot;:[&quot;name&quot;,&quot;address&quot;],&quot;no_marker&quot;:True}"/>
                 </div>
 
 
@@ -127,7 +126,7 @@
                                 <tr style="border:1px solid white;">
                                     <td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-right:15px; white-space:nowrap;">Datum:</td>
                                     <td class="meta-val" style="border:1px solid white; font-size: 11pt; text-align:left; white-space:nowrap;">
-                                        <span t-field="doc.invoice_date" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
+                                        <span t-field="doc.invoice_date" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/>
                                     </td>
                                 </tr>
                                 <t t-if="doc.company_id.l10n_de_stnr">
@@ -140,6 +139,12 @@
                                     <tr style="border:1px solid white;">
                                         <td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-right:15px; white-space:nowrap;">Ust.-IdNr.:</td>
                                         <td class="meta-val" style="border:1px solid white; font-size: 11pt; text-align:left; white-space:nowrap;"><span t-field="doc.company_id.vat"/></td>
+                                    </tr>
+                                </t>
+                                <t t-if="doc.po_number">
+                                    <tr style="border:1px solid white;">
+                                        <td class="meta-lbl" style="border:1px solid white; font-size: 11pt; padding-right:15px; white-space:nowrap;">PO-Nr.:</td>
+                                        <td class="meta-val" style="border:1px solid white; font-size: 11pt; text-align:left; white-space:nowrap;"><span t-field="doc.po_number"/></td>
                                     </tr>
                                 </t>
                             </table>
@@ -264,8 +269,7 @@
 
 
                 <div class="erz-terms" style="padding-top:20px;">
-                     <div t-if="doc.narration and not is_html_empty(doc.narration)" class="erz-terms-note"
-                         style="text-align: justify; line-height: 1.5; margin-top: 10px; margin-bottom: 10px;">
+                     <div t-if="doc.narration and not is_html_empty(doc.narration)" class="erz-terms-note" style="text-align: justify; line-height: 1.5; margin-top: 10px; margin-bottom: 10px;">
 <!--                        <strong>Terms &amp; Conditions : </strong>-->
                         <div style="margin-top: 4px;">
                             <span t-out="doc.narration"/>
@@ -282,7 +286,7 @@
                             <br/>
                             oder <t t-esc="doc.invoice_payment_term_id.line_ids[-1].nb_days if doc.invoice_payment_term_id.line_ids else ''"/>
                             Tage netto bis
-                            <span t-field="doc.invoice_date_due" t-options='{"widget":"date","format":"dd.MM.yyyy"}'/>
+                            <span t-field="doc.invoice_date_due" t-options="{&quot;widget&quot;:&quot;date&quot;,&quot;format&quot;:&quot;dd.MM.yyyy&quot;}"/>
                         </p>
                     </t>
                     <t t-elif="doc.invoice_payment_term_id">
@@ -292,12 +296,12 @@
                     <div class="erz-bank" style="page-break-inside: avoid !important; break-inside: avoid !important;">
                         <t t-set="bank" t-value="doc.company_id.bank_ids[:1]"/>
                         <t t-if="bank">
-                            <p class="b">Bankverbindung:&#160;&#160;<t t-esc="bank.bank_id.name"/></p>
+                            <p class="b">Bankverbindung:  <t t-esc="bank.bank_id.name"/></p>
                             <div class="erz-bank-center">IBAN: <t t-esc="bank.acc_number"/></div>
                             <div class="erz-bank-center">BIC: <t t-esc="bank.bank_id.bic or ''"/></div>
                         </t>
                         <t t-else="">
-                            <p class="b">Bankverbindung:&#160;&#160;Erzgebirgssparkasse</p>
+                            <p class="b">Bankverbindung:  Erzgebirgssparkasse</p>
                             <div class="erz-bank-center">IBAN: DE37 8705 4000 3612 0096 47</div>
                             <div class="erz-bank-center">BIC: WELADED1STB</div>
                         </t>
