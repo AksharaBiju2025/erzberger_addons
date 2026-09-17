@@ -45,8 +45,8 @@ class SaleOrder(models.Model):
             ).report_action(self)
 
         return self.env.ref(
-            "sale.action_report_saleorder"
-        ).report_action(self)
+        "erzberger_sale_report.action_report_sale_order_new"
+    ).report_action(self)
 
     def _cron_quotation_followup(self):
         limit_date = fields.Datetime.now() - timedelta(minutes=1)

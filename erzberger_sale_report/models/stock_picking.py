@@ -67,5 +67,5 @@ class StockPicking(models.Model):
             ).report_action(self)
 
         return self.env.ref(
-            "stock.action_report_delivery"
+            "erzberger_sale_report.action_report_delivery_note_holzenberg"
         ).report_action(self)

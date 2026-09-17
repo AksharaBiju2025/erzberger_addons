@@ -1,0 +1,3871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<odoo>
+
+<template id="report_erz_external_layouts_holzkenber">
+    
+    <!-- ========================================================= -->
+<!-- ERZBERGER HEADER                                          -->
+<!-- ========================================================= -->
+
+<div class="header"
+     style="
+        width:100%;
+        margin:0 !important;
+        padding:0 !important;
+        background:#ffffff !important;
+        font-family:Arial, sans-serif !important;
+        color:#315d35;
+        border:0 !important;
+    ">
+
+    <table class="company_header table-borderless"
+           style="
+                width:100% !important;
+                margin:0 !important;
+                padding:0 !important;
+                border:0 !important;
+                border-collapse:collapse !important;
+                border-spacing:0 !important;
+                table-layout:fixed;
+                background:#ffffff !important;
+            ">
+
+        <tbody>
+            <tr>
+
+                <!-- ================================================= -->
+                <!-- LEFT - COMPANY ADDRESS                            -->
+                <!-- ================================================= -->
+
+               <td style="
+    width:50%;
+    padding:0 0 0 10px !important;
+    margin:0 !important;
+    vertical-align:top;
+    text-align:left;
+    border:0 !important;
+    background:#ffffff !important;
+">
+
+    <div style="
+        position:relative;
+        width:100%;
+        height:58mm;
+        margin:0 !important;
+        padding:0 !important;
+        border:0 !important;
+        background:transparent !important;
+    ">
+
+        <div class="colored_address"
+             style="
+                position:absolute;
+                left:0;
+                top:49mm;
+                display:block;
+                width:105mm;
+                margin:0 !important;
+                padding:0 0 4px 0 !important;
+
+                text-align:left;
+                white-space:nowrap;
+
+                font-family:Arial, Helvetica, sans-serif !important;
+                font-size:10pt !important;
+                line-height:1.2 !important;
+                font-weight:600 !important;
+
+                color:#315d35 !important;
+
+                border:0 !important;
+                border-bottom:1px solid #315d35 !important;
+                background:transparent !important;
+            ">
+
+            <t t-if="company.name">
+                <span style="
+                    font-family:Arial, Helvetica, sans-serif !important;
+                    font-size:10pt !important;
+                    font-weight:600 !important;
+                    color:#315d35 !important;
+                " t-field="company.name"/>
+            </t>
+
+            <t t-if="company.street">
+                <span style="
+                    font-family:Arial, Helvetica, sans-serif !important;
+                    font-size:10pt !important;
+                    font-weight:600 !important;
+                    color:#315d35 !important;
+                ">
+                    |
+                </span>
+
+                <span style="
+                    font-family:Arial, Helvetica, sans-serif !important;
+                    font-size:10pt !important;
+                    font-weight:600 !important;
+                    color:#315d35 !important;
+                " t-field="company.street"/>
+            </t>
+
+            <t t-if="company.street2">
+                <span style="
+                    font-family:Arial, Helvetica, sans-serif !important;
+                    font-size:10pt !important;
+                    font-weight:600 !important;
+                    color:#315d35 !important;
+                ">
+                    |
+                </span>
+
+                <span style="
+                    font-family:Arial, Helvetica, sans-serif !important;
+                    font-size:10pt !important;
+                    font-weight:600 !important;
+                    color:#315d35 !important;
+                " t-field="company.street2"/>
+            </t>
+
+            <t t-if="company.zip">
+                <span style="
+                    font-family:Arial, Helvetica, sans-serif !important;
+                    font-size:10pt !important;
+                    font-weight:600 !important;
+                    color:#315d35 !important;
+                ">
+                    |
+                </span>
+
+                <span style="
+                    font-family:Arial, Helvetica, sans-serif !important;
+                    font-size:10pt !important;
+                    font-weight:600 !important;
+                    color:#315d35 !important;
+                " t-field="company.zip"/>
+            </t>
+
+            <t t-if="company.city">
+
+                <span style="
+                    font-family:Arial, Helvetica, sans-serif !important;
+                    font-size:10pt !important;
+                    font-weight:600 !important;
+                    color:#315d35 !important;
+                "
+                t-if="not company.zip">
+                    |
+                </span>
+
+                <span style="
+                    font-family:Arial, Helvetica, sans-serif !important;
+                    font-size:10pt !important;
+                    font-weight:600 !important;
+                    color:#315d35 !important;
+                " t-field="company.city"/>
+
+            </t>
+
+            <t t-if="company.country_id">
+
+                <span style="
+                    font-family:Arial, Helvetica, sans-serif !important;
+                    font-size:10pt !important;
+                    font-weight:600 !important;
+                    color:#315d35 !important;
+                ">
+                    |
+                </span>
+
+                <span style="
+                    font-family:Arial, Helvetica, sans-serif !important;
+                    font-size:10pt !important;
+                    font-weight:600 !important;
+                    color:#315d35 !important;
+                "
+                t-field="company.country_id.name"/>
+
+            </t>
+
+        </div>
+
+    </div>
+
+</td>
+
+
+                <!-- ================================================= -->
+                <!-- MAIN ERZBERGER LOGO                               -->
+                <!-- ================================================= -->
+
+                <td style="
+                    width:34%;
+                    padding:0 !important;
+                    margin:0 !important;
+                    vertical-align:top;
+                    text-align:right;
+                    border:0 !important;
+                    background:#ffffff !important;
+                ">
+
+                    <div style="
+                        width:42mm;
+                        margin:0 0 0 auto !important;
+                        padding:0 !important;
+                        text-align:center;
+                        border:0 !important;
+                    ">
+
+                        <!-- MAIN LOGO -->
+
+                        <img t-if="company.logo"
+                             t-att-src="image_data_uri(company.logo)"
+                             style="
+                                width:42mm;
+                                height:48mm;
+                                display:block;
+                                margin:0 auto !important;
+                                padding:0 !important;
+                                border:0 !important;
+                            "/>
+
+
+                        <!-- INHABER - SMALL GAP -->
+
+                        <!-- INHABER - NO GAP -->
+
+<div style="
+    width:100%;
+    margin:0 !important;
+    padding:0 !important;
+    height:auto;
+    text-align:center;
+    line-height:1 !important;
+    border:0 !important;
+">
+
+    <span style="
+        display:block;
+        margin:0 !important;
+        padding:0 !important;
+        font-family:Arial, sans-serif;
+        font-size:11px;
+        line-height:1 !important;
+        color:#315d35;
+        font-weight:600;
+        white-space:nowrap;
+    ">
+        Inhaber: Jens Kriegel
+    </span>
+
+</div>
+
+
+                        <!-- DESCRIPTION - SMALL GAP -->
+
+                        <div style="
+                            width:100%;
+                            margin:1.5mm 0 0 0 !important;
+                            padding:0 !important;
+                            text-align:center;
+                            line-height:1.05;
+                            border:0 !important;
+                        ">
+
+                            <span style="
+                                font-family:Arial, sans-serif;
+                                font-size:11px;
+                                line-height:1.05;
+                                color:#315d35;
+                                font-weight:700;
+                            ">
+                                Handwerkliche<br/>
+                                Holzkunst aus<br/>
+                                dem Erzgebirge
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <!-- ================================================= -->
+                <!-- RIGHT LOGOS                                       -->
+                <!-- ================================================= -->
+
+                <td style="
+                    width:16%;
+                    padding:0 !important;
+                    margin:0 !important;
+                    vertical-align:top;
+                    text-align:right;
+                    border:0 !important;
+                    background:#ffffff !important;
+                ">
+
+                    <div style="
+                        width:100%;
+                        margin:0 !important;
+                        padding:2px 0 0 0 !important;
+                        text-align:right;
+                        border:0 !important;
+                    ">
+
+                        <!-- TOP RIGHT LOGO -->
+
+                        <img src="/erzberger_sale_report/static/src/img/img_7.png"
+                             style="
+                                width:25mm;
+                                height:38mm;
+                                display:block;
+                                margin:0 0 0 auto !important;
+                                padding:0 !important;
+                                border:0 !important;
+                            "/>
+
+
+                        <!-- NO EXTRA GAP -->
+
+                        <div style="
+                            height:0.5mm;
+                            margin:0 !important;
+                            padding:0 !important;
+                            line-height:0;
+                            font-size:0;
+                        ">
+                            &#160;
+                        </div>
+
+
+                        <!-- BOTTOM RIGHT LOGO -->
+
+                        <img src="/erzberger_sale_report/static/src/img/img_6.png"
+                             style="
+                                width:26mm;
+                                height:25mm;
+                                display:block;
+                                margin:0 0 0 auto !important;
+                                padding:0 !important;
+                                border:0 !important;
+                            "/>
+
+                    </div>
+
+                </td>
+
+            </tr>
+        </tbody>
+
+    </table>
+
+</div>
+
+    <!-- ========================================================= -->
+    <!-- ARTICLE                                                   -->
+    <!-- ========================================================= -->
+
+    <div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout"
+         t-att-data-oe-model="o and o._name"
+         t-att-data-oe-id="o and o.id"
+         style="
+            width:100%;
+            margin:0;
+            padding:0;
+            background:#ffffff !important;
+            border:0 !important;
+        ">
+
+        <t t-out="0"/>
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- FOOTER                                                    -->
+    <!-- ========================================================= -->
+
+    <!-- ========================================================= -->
+<!-- FOOTER                                                    -->
+<!-- ========================================================= -->
+
+<div class="footer"
+     style="
+        width:100%;
+        margin:0 !important;
+        padding:0 !important;
+        background:#ffffff !important;
+        background-color:#ffffff !important;
+        font-family:Arial, sans-serif !important;
+        font-size:11px !important;
+        line-height:1.25 !important;
+        color:#315d35 !important;
+        border:0 !important;
+    ">
+
+    <table class="footer_table table-borderless"
+           style="
+                width:100% !important;
+                border-collapse:collapse !important;
+                border-spacing:0 !important;
+                table-layout:fixed;
+                margin:0 !important;
+                padding:0 !important;
+                background:#ffffff !important;
+                border:0 !important;
+            ">
+
+        <tbody>
+
+            <tr>
+
+                <!-- ================================================= -->
+                <!-- FACHGESCHÄFT                                      -->
+                <!-- ================================================= -->
+
+                <td style="
+                    width:23%;
+                    padding:0 4px 0 0 !important;
+                    margin:0 !important;
+                    vertical-align:top;
+                    background:#ffffff !important;
+                    color:#315d35 !important;
+                    border:0 !important;
+                    border-right:1px solid #9bb39c !important;
+                ">
+
+                    <strong style="
+                        display:block;
+                        margin:0 !important;
+                        padding:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:11px !important;
+                        line-height:1.15 !important;
+                        font-weight:700 !important;
+                        color:#315d35 !important;
+                    ">
+                        Fachgeschäft:
+                    </strong>
+
+                    <div style="
+                        margin:1mm 0 0 0 !important;
+                        padding:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:10.5px !important;
+                        line-height:1.25 !important;
+                        color:#315d35 !important;
+                    ">
+
+                        Erzberger Holzkunst<br/>
+                        Lange Gasse 1<br/>
+                        D-08297 Zwönitz/Erzgebirge
+
+                    </div>
+
+                </td>
+
+
+                <!-- ================================================= -->
+                <!-- BÜRO                                               -->
+                <!-- ================================================= -->
+
+                <td style="
+                    width:25%;
+                    padding:0 4px 0 4px !important;
+                    margin:0 !important;
+                    vertical-align:top;
+                    background:#ffffff !important;
+                    color:#315d35 !important;
+                    border:0 !important;
+                    border-right:1px solid #9bb39c !important;
+                ">
+
+                    <strong style="
+                        display:block;
+                        margin:0 !important;
+                        padding:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:11px !important;
+                        line-height:1.15 !important;
+                        font-weight:700 !important;
+                        color:#315d35 !important;
+                    ">
+                        Büro:
+                    </strong>
+
+                    <div style="
+                        margin:1mm 0 0 0 !important;
+                        padding:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:10.5px !important;
+                        line-height:1.25 !important;
+                        color:#315d35 !important;
+                    ">
+
+                        Erzberger Holzkunst<br/>
+                        Poststraße 19a<br/>
+                        D-08297 Zwönitz OT Brünlos
+
+                    </div>
+
+                </td>
+
+
+                <!-- ================================================= -->
+                <!-- KONTAKT                                            -->
+                <!-- ================================================= -->
+
+                <td style="
+                    width:27%;
+                    padding:0 4px 0 4px !important;
+                    margin:0 !important;
+                    vertical-align:top;
+                    background:#ffffff !important;
+                    color:#315d35 !important;
+                    border:0 !important;
+                    border-right:1px solid #9bb39c !important;
+                ">
+
+                    <strong style="
+                        display:block;
+                        margin:0 !important;
+                        padding:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:11px !important;
+                        line-height:1.15 !important;
+                        font-weight:700 !important;
+                        color:#315d35 !important;
+                    ">
+                        Kontakt:
+                    </strong>
+
+                    <div style="
+                        margin:1mm 0 0 0 !important;
+                        padding:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:10.5px !important;
+                        line-height:1.25 !important;
+                        color:#315d35 !important;
+                        white-space:nowrap;
+                    ">
+
+                        <div t-if="company.phone">
+                            Telefon:
+                            <span>+49 (0) 3 72 96 - 93 28 93</span>
+                        </div>
+
+                        <div t-if="company.website">
+                            Website:
+                            <span>www.erzberger-holzkunst.de</span>
+                        </div>
+
+                        <div t-if="company.email">
+                            E-Mail:
+                            <span t-field="company.email"/>
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <!-- ================================================= -->
+                <!-- BANKVERBINDUNG                                     -->
+                <!-- ================================================= -->
+
+                <td style="
+                    width:25%;
+                    padding:0 0 0 4px !important;
+                    margin:0 !important;
+                    vertical-align:top;
+                    background:#ffffff !important;
+                    color:#315d35 !important;
+                    border:0 !important;
+                ">
+
+                    <strong style="
+                        display:block;
+                        margin:0 !important;
+                        padding:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:11px !important;
+                        line-height:1.15 !important;
+                        font-weight:700 !important;
+                        color:#315d35 !important;
+                    ">
+                        Bankverbindung:
+                    </strong>
+
+                    <div style="
+                        margin:1mm 0 0 0 !important;
+                        padding:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:10.5px !important;
+                        line-height:1.25 !important;
+                        color:#315d35 !important;
+                        white-space:nowrap;
+                    ">
+
+                        Erzgebirgssparkasse<br/>
+
+                        IBAN:
+                        DE87 8705 4000 0725 0807 79<br/>
+
+                        BIC:
+                        WELADED1STB
+
+                    </div>
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+
+</div>
+
+</template>
+
+
+<template id="report_sale_order_new">
+
+    <t t-call="web.html_container">
+
+        <t t-foreach="docs" t-as="doc">
+
+            <t t-set="o" t-value="doc"/>
+            <t t-set="company" t-value="doc.company_id.sudo()"/>
+
+            <t t-call="erzberger_sale_report.report_erz_external_layouts_holzkenber">
+
+                <div class="page erzberger_sale_body"
+                         style="
+                            width:100% !important;
+                            margin:0 !important;
+                            padding:0 !important;
+
+                            background:#ffffff !important;
+                            color:#222222 !important;
+
+                            font-family:'Lato', Arial, sans-serif !important;
+                            font-size:12.5pt !important;
+                            line-height:1.25 !important;
+
+                            border:0 !important;
+                            outline:0 !important;
+                            box-shadow:none !important;
+                         ">
+
+
+                        <!-- ================================================= -->
+                        <!-- FORCE ALL TABLE BORDERS OFF                      -->
+                        <!-- ================================================= -->
+
+                        <style type="text/css">
+
+                            .erzberger_sale_body table,
+                            .erzberger_sale_body thead,
+                            .erzberger_sale_body tbody,
+                            .erzberger_sale_body tfoot,
+                            .erzberger_sale_body tr,
+                            .erzberger_sale_body th,
+                            .erzberger_sale_body td {
+
+                                border:0 !important;
+                                border-top:0 !important;
+                                border-right:0 !important;
+                                border-bottom:0 !important;
+                                border-left:0 !important;
+
+                                outline:0 !important;
+                                box-shadow:none !important;
+
+                                background-image:none !important;
+                            }
+
+
+                            .erzberger_sale_body .table,
+                            .erzberger_sale_body .table-bordered,
+                            .erzberger_sale_body .table-borderless {
+
+                                border:0 !important;
+                                border-collapse:collapse !important;
+                                border-spacing:0 !important;
+                            }
+
+
+                            .erzberger_sale_body .table > :not(caption) > * > * {
+
+                                border:0 !important;
+                                border-top:0 !important;
+                                border-right:0 !important;
+                                border-bottom:0 !important;
+                                border-left:0 !important;
+
+                                box-shadow:none !important;
+                            }
+
+
+                            /*
+                             * ONLY the two requested horizontal
+                             * total lines are allowed.
+                             */
+
+                            .erzberger_sale_body .erz_total_line td {
+
+                                border-top:1px solid #222222 !important;
+                                border-bottom:0 !important;
+                                border-left:0 !important;
+                                border-right:0 !important;
+                            }
+
+                        </style>
+
+
+                        <!-- ================================================= -->
+                        <!-- CUSTOMER + ORDER INFORMATION                      -->
+                        <!-- ================================================= -->
+
+                        <table style="
+                            width:100% !important;
+
+                            margin:0 0 7mm 0 !important;
+                            padding:0 !important;
+
+                            border:0 !important;
+                            border-collapse:collapse !important;
+                            border-spacing:0 !important;
+
+                            table-layout:fixed;
+
+                            background:#ffffff !important;
+
+                            font-family:'Lato', Arial, sans-serif !important;
+                            font-size:12.5pt !important;
+                            line-height:1.25 !important;
+                        ">
+
+                            <tbody>
+
+                                <tr>
+
+                                    <!-- ===================================== -->
+                                    <!-- CUSTOMER ADDRESS                      -->
+                                    <!-- ===================================== -->
+
+                                    <td style="
+                                        width:56%;
+
+                                        padding:0 10mm 0 0 !important;
+                                        margin:0 !important;
+
+                                        vertical-align:top;
+                                        text-align:left;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:11.5pt !important;
+                                        line-height:1.3 !important;
+
+                                        color:#222222 !important;
+                                    ">
+
+                                        <div style="
+                                            margin:0 !important;
+                                            padding:0 !important;
+
+                                            border:0 !important;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:11.5pt !important;
+                                            line-height:1.3 !important;
+
+                                            color:#222222 !important;
+                                        ">
+
+                                            <t t-if="doc.partner_id">
+
+                                                <!-- Customer name -->
+
+                                                <span t-field="doc.partner_id.name"/>
+
+                                                <br/>
+
+
+                                                <!-- Street -->
+
+                                                <span t-if="doc.partner_id.street"
+                                                      t-field="doc.partner_id.street"/>
+
+                                                <br/>
+
+
+                                                <!-- Street 2 -->
+
+                                                <t t-if="doc.partner_id.street2">
+
+                                                    <span t-field="doc.partner_id.street2"/>
+
+                                                    <br/>
+
+                                                </t>
+
+
+                                                <!-- ZIP + CITY -->
+
+                                                <span t-if="doc.partner_id.zip"
+                                                      t-field="doc.partner_id.zip"/>
+
+                                                <t t-if="
+                                                    doc.partner_id.zip
+                                                    and doc.partner_id.city
+                                                ">
+                                                    <span> </span>
+                                                </t>
+
+                                                <span t-if="doc.partner_id.city"
+                                                      t-field="doc.partner_id.city"/>
+
+                                                <br/>
+
+
+                                                <!-- COUNTRY -->
+
+                                                <t t-if="doc.partner_id.country_id">
+
+                                                    <span t-if="
+                                                        doc.partner_id.country_id.code == 'DE'
+                                                    ">
+                                                        Deutschland
+                                                    </span>
+
+                                                    <span t-else=""
+                                                          t-field="doc.partner_id.country_id.name"/>
+
+                                                    <br/>
+
+                                                </t>
+
+
+                                                <!-- PHONE -->
+
+                                                <t t-if="doc.partner_id.phone">
+
+                                                    <span t-field="doc.partner_id.phone"/>
+
+                                                    <br/>
+
+                                                </t>
+
+
+                                                <!-- VAT -->
+
+                                                <t t-if="doc.partner_id.vat">
+
+                                                    USt-IdNr.:
+                                                    <span t-field="doc.partner_id.vat"/>
+
+                                                </t>
+
+                                            </t>
+
+                                        </div>
+
+                                    </td>
+
+
+                                    <!-- ===================================== -->
+                                    <!-- ORDER INFORMATION                      -->
+                                    <!-- ===================================== -->
+
+                                    <td style="
+                                        width:44%;
+
+                                        padding:0 !important;
+                                        margin:0 !important;
+
+                                        vertical-align:top;
+                                        text-align:left;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+
+                                        color:#222222 !important;
+                                    ">
+
+                                        <table style="
+                                            width:100% !important;
+
+                                            margin:0 !important;
+                                            padding:0 !important;
+
+                                            border:0 !important;
+                                            border-collapse:collapse !important;
+                                            border-spacing:0 !important;
+
+                                            table-layout:fixed;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:12.5pt !important;
+                                        ">
+
+                                            <tbody>
+
+                                                <!-- ORDER NUMBER -->
+
+                                                <tr t-if="doc.name">
+
+                                                    <td style="
+                                                        width:52%;
+
+                                                        padding:0 4mm 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+
+                                                        white-space:nowrap;
+                                                    ">
+                                                        Auftragsnr.:
+                                                    </td>
+
+                                                    <td style="
+                                                        width:48%;
+
+                                                        padding:0 0 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+
+                                                        white-space:nowrap;
+                                                    ">
+                                                        <span t-field="doc.name"/>
+                                                    </td>
+
+                                                </tr>
+
+
+                                                <!-- ORDER DATE -->
+
+                                                <tr t-if="doc.date_order">
+
+                                                    <td style="
+                                                        padding:0 4mm 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+
+                                                        white-space:nowrap;
+                                                    ">
+                                                        Auftragsdatum:
+                                                    </td>
+
+                                                    <td style="
+                                                        padding:0 0 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+
+                                                        white-space:nowrap;
+                                                    ">
+
+                                                        <span t-field="doc.date_order"
+                                                              t-options="{'widget':'date'}"/>
+
+                                                    </td>
+
+                                                </tr>
+
+
+                                                <!-- SALESPERSON -->
+
+                                                <tr t-if="doc.user_id">
+
+                                                    <td style="
+                                                        padding:0 4mm 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+
+                                                        white-space:nowrap;
+                                                    ">
+                                                        Vertriebsmitarbeiter:
+                                                    </td>
+
+                                                    <td style="
+                                                        padding:0 0 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+
+                                                        white-space:nowrap;
+                                                    ">
+
+                                                        <span t-field="doc.user_id.name"/>
+
+                                                    </td>
+
+                                                </tr>
+
+
+                                                <!-- DELIVERY DATE -->
+
+                                                <tr t-if="doc.commitment_date">
+
+                                                    <td style="
+                                                        padding:0 4mm 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+
+                                                        white-space:nowrap;
+                                                    ">
+                                                        Lieferdatum:
+                                                    </td>
+
+                                                    <td style="
+                                                        padding:0 0 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+
+                                                        white-space:nowrap;
+                                                    ">
+
+                                                        <span t-field="doc.commitment_date"
+                                                              t-options="{'widget':'date'}"/>
+
+                                                    </td>
+
+                                                </tr>
+
+
+                                                <!-- CUSTOMER REFERENCE -->
+
+                                                <tr t-if="doc.client_order_ref">
+
+                                                    <td style="
+                                                        padding:0 4mm 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+
+                                                        white-space:nowrap;
+                                                    ">
+                                                        Kundenreferenz:
+                                                    </td>
+
+                                                    <td style="
+                                                        padding:0 0 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+                                                    ">
+
+                                                        <span t-field="doc.client_order_ref"/>
+
+                                                    </td>
+
+                                                </tr>
+
+
+                                                <!-- INCOTERM -->
+
+                                                <tr t-if="
+                                                    'incoterm' in doc._fields
+                                                    and doc.incoterm
+                                                ">
+
+                                                    <td style="
+                                                        padding:0 4mm 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+
+                                                        white-space:nowrap;
+                                                    ">
+                                                        Incoterm:
+                                                    </td>
+
+                                                    <td style="
+                                                        padding:0 0 1.5mm 0 !important;
+
+                                                        border:0 !important;
+
+                                                        font-family:'Lato', Arial, sans-serif !important;
+                                                        font-size:12.5pt !important;
+                                                        line-height:1.25 !important;
+                                                    ">
+
+                                                        <span t-field="doc.incoterm.code"/>
+
+                                                    </td>
+
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <!-- ================================================= -->
+                        <!-- DOCUMENT TITLE                                    -->
+                        <!-- ================================================= -->
+
+                        <div style="
+                            width:100% !important;
+
+                            margin:0 0 7mm 0 !important;
+                            padding:0 !important;
+
+                            border:0 !important;
+
+                            background:#ffffff !important;
+
+                            font-family:'Lato', Arial, sans-serif !important;
+                        ">
+
+                            <h1 style="
+                                margin:0 !important;
+                                padding:0 !important;
+
+                                border:0 !important;
+
+                                font-family:'Lato', Arial, sans-serif !important;
+
+                                font-size:26pt !important;
+                                font-weight:400 !important;
+                                line-height:1.15 !important;
+
+                                color:#315d35 !important;
+
+                                background:none !important;
+                            ">
+
+                                <t t-if="doc.env.context.get('proforma')">
+                                    Pro Forma Rechnung
+                                </t>
+
+                                <t t-elif="doc.state in ['draft','sent']">
+                                    Angebot
+                                </t>
+
+                                <t t-else="">
+                                    Auftragsbestätigung
+                                </t>
+
+                            </h1>
+
+                        </div>
+
+
+                        <!-- ================================================= -->
+                        <!-- ORDER LINES                                       -->
+                        <!-- ================================================= -->
+
+                        <t t-set="lines_to_report"
+                           t-value="doc._get_order_lines_to_report()"/>
+
+                        <t t-set="display_taxes"
+                           t-value="any(line.tax_ids for line in lines_to_report)"/>
+
+
+                        <table style="
+                            width:100% !important;
+
+                            margin:0 !important;
+                            padding:0 !important;
+
+                            border:0 !important;
+                            border-collapse:collapse !important;
+                            border-spacing:0 !important;
+
+                            table-layout:fixed;
+
+                            background:#ffffff !important;
+
+                            font-family:'Lato', Arial, sans-serif !important;
+                            font-size:12.5pt !important;
+                            line-height:1.25 !important;
+                        ">
+
+                            <thead>
+
+                                <tr>
+
+                                    <!-- DESCRIPTION -->
+
+                                    <th style="
+                                        width:47%;
+
+                                        padding:0 5px 2.5mm 0 !important;
+
+                                        text-align:left;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        font-weight:700 !important;
+                                        line-height:1.2 !important;
+
+                                        white-space:nowrap;
+                                    ">
+                                        Beschreibung
+                                    </th>
+
+
+                                    <!-- QUANTITY -->
+
+                                    <th style="
+                                        width:14%;
+
+                                        padding:0 5px 2.5mm 5px !important;
+
+                                        text-align:right;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        font-weight:700 !important;
+                                        line-height:1.2 !important;
+
+                                        white-space:nowrap;
+                                    ">
+                                        Menge
+                                    </th>
+
+
+                                    <!-- UNIT PRICE -->
+
+                                    <th style="
+                                        width:16%;
+
+                                        padding:0 5px 2.5mm 5px !important;
+
+                                        text-align:right;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        font-weight:700 !important;
+                                        line-height:1.2 !important;
+
+                                        white-space:nowrap;
+                                    ">
+                                        Einzelpreis
+                                    </th>
+
+
+                                    <!-- TAX -->
+
+                                    <th t-if="display_taxes"
+                                        style="
+                                            width:11%;
+
+                                            padding:0 5px 2.5mm 5px !important;
+
+                                            text-align:right;
+
+                                            border:0 !important;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:12.5pt !important;
+                                            font-weight:700 !important;
+                                            line-height:1.2 !important;
+
+                                            white-space:nowrap;
+                                        ">
+                                        Steuern
+                                    </th>
+
+
+                                    <!-- AMOUNT -->
+
+                                    <th style="
+                                        width:12%;
+
+                                        padding:0 0 2.5mm 5px !important;
+
+                                        text-align:right;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        font-weight:700 !important;
+                                        line-height:1.2 !important;
+
+                                        white-space:nowrap;
+                                    ">
+                                        Betrag
+                                    </th>
+
+                                </tr>
+
+                            </thead>
+
+
+                            <tbody>
+
+                                <t t-foreach="lines_to_report" t-as="line">
+
+                                    <t t-set="is_section"
+                                       t-value="line.display_type == 'line_section'"/>
+
+                                    <t t-set="is_note"
+                                       t-value="line.display_type == 'line_note'"/>
+
+                                    <t t-set="is_subsection"
+                                       t-value="line.display_type == 'line_subsection'"/>
+
+
+                                    <!-- ===================================== -->
+                                    <!-- SECTION                                -->
+                                    <!-- ===================================== -->
+
+                                    <tr t-if="is_section">
+
+                                        <td colspan="5"
+                                            style="
+                                                padding:3mm 0 1.5mm 0 !important;
+
+                                                border:0 !important;
+
+                                                font-family:'Lato', Arial, sans-serif !important;
+                                                font-size:12.5pt !important;
+                                                font-weight:700 !important;
+                                                line-height:1.25 !important;
+
+                                                color:#315d35 !important;
+                                            ">
+
+                                            <span t-field="line.name"/>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <!-- ===================================== -->
+                                    <!-- SUBSECTION                             -->
+                                    <!-- ===================================== -->
+
+                                    <tr t-elif="is_subsection">
+
+                                        <td colspan="5"
+                                            style="
+                                                padding:2mm 0 1.5mm 0 !important;
+
+                                                border:0 !important;
+
+                                                font-family:'Lato', Arial, sans-serif !important;
+                                                font-size:12.5pt !important;
+                                                font-weight:700 !important;
+                                                line-height:1.25 !important;
+
+                                                color:#315d35 !important;
+                                            ">
+
+                                            <span t-field="line.name"/>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <!-- ===================================== -->
+                                    <!-- NOTE                                   -->
+                                    <!-- ===================================== -->
+
+                                    <tr t-elif="is_note">
+
+                                        <td colspan="5"
+                                            style="
+                                                padding:1.5mm 0 !important;
+
+                                                border:0 !important;
+
+                                                font-family:'Lato', Arial, sans-serif !important;
+                                                font-size:12.5pt !important;
+                                                font-style:italic !important;
+                                                line-height:1.25 !important;
+                                            ">
+
+                                            <span t-field="line.name"/>
+
+                                        </td>
+
+                                    </tr>
+
+
+                                    <!-- ===================================== -->
+                                    <!-- PRODUCT                                -->
+                                    <!-- ===================================== -->
+
+                                    <tr t-else=""
+                                        style="
+                                            page-break-inside:avoid !important;
+                                            border:0 !important;
+                                        ">
+
+
+                                        <!-- DESCRIPTION -->
+
+                                        <td style="
+                                            padding:1.5mm 5px 1.5mm 0 !important;
+
+                                            vertical-align:top;
+                                            text-align:left;
+
+                                            border:0 !important;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:12.5pt !important;
+                                            line-height:1.25 !important;
+                                        ">
+
+                                            <span t-field="line.name"/>
+
+                                        </td>
+
+
+                                        <!-- QUANTITY -->
+
+                                        <td style="
+                                            padding:1.5mm 5px !important;
+
+                                            vertical-align:top;
+                                            text-align:right;
+
+                                            border:0 !important;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:12.5pt !important;
+                                            line-height:1.25 !important;
+
+                                            white-space:nowrap;
+                                        ">
+
+                                            <span t-field="line.product_uom_qty"/>
+
+                                            <span> </span>
+
+                                            <span t-field="line.product_uom_id"/>
+
+                                        </td>
+
+
+                                        <!-- UNIT PRICE -->
+
+                                        <td style="
+                                            padding:1.5mm 5px !important;
+
+                                            vertical-align:top;
+                                            text-align:right;
+
+                                            border:0 !important;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:12.5pt !important;
+                                            line-height:1.25 !important;
+
+                                            white-space:nowrap;
+                                        ">
+
+                                            <span t-field="line.price_unit"
+                                                  t-options="{
+                                                      'widget':'monetary',
+                                                      'display_currency':doc.currency_id
+                                                  }"/>
+
+                                        </td>
+
+
+                                        <!-- TAX -->
+
+                                        <td t-if="display_taxes"
+                                            style="
+                                                padding:1.5mm 5px !important;
+
+                                                vertical-align:top;
+                                                text-align:right;
+
+                                                border:0 !important;
+
+                                                font-family:'Lato', Arial, sans-serif !important;
+                                                font-size:12.5pt !important;
+                                                line-height:1.25 !important;
+
+                                                white-space:nowrap;
+                                            ">
+
+                                            <t t-set="tax_labels"
+                                               t-value="', '.join(line.tax_ids.mapped('tax_label'))"/>
+
+                                            <span t-out="tax_labels"/>
+
+                                        </td>
+
+
+                                        <!-- AMOUNT -->
+
+                                        <td style="
+                                            padding:1.5mm 0 1.5mm 5px !important;
+
+                                            vertical-align:top;
+                                            text-align:right;
+
+                                            border:0 !important;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:12.5pt !important;
+                                            line-height:1.25 !important;
+
+                                            white-space:nowrap;
+                                        ">
+
+                                            <span t-field="line.price_total"
+                                                  t-options="{
+                                                      'widget':'monetary',
+                                                      'display_currency':doc.currency_id
+                                                  }"/>
+
+                                        </td>
+
+                                    </tr>
+
+                                </t>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <!-- ================================================= -->
+                        <!-- TOTALS                                            -->
+                        <!-- ================================================= -->
+
+                        <table style="
+                            width:42% !important;
+
+                            margin:5mm 0 0 auto !important;
+                            padding:0 !important;
+
+                            border:0 !important;
+                            border-collapse:collapse !important;
+                            border-spacing:0 !important;
+
+                            table-layout:fixed;
+
+                            background:#ffffff !important;
+
+                            font-family:'Lato', Arial, sans-serif !important;
+                            font-size:12.5pt !important;
+                            line-height:1.25 !important;
+                        ">
+
+                            <tbody>
+
+                                <!-- ========================================= -->
+                                <!-- NET TOTAL - FIRST LINE                  -->
+                                <!-- ========================================= -->
+
+                                <tr class="erz_total_line">
+
+                                    <td style="
+                                        width:65%;
+
+                                        padding:2.5mm 5px 1.5mm 5px !important;
+
+                                        text-align:left;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+
+                                        border-top:1px solid #222222 !important;
+                                        border-bottom:0 !important;
+                                        border-left:0 !important;
+                                        border-right:0 !important;
+                                    ">
+                                        Nettobetrag
+                                    </td>
+
+                                    <td style="
+                                        width:35%;
+
+                                        padding:2.5mm 0 1.5mm 0 !important;
+
+                                        text-align:right;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+
+                                        white-space:nowrap;
+
+                                        border-top:1px solid #222222 !important;
+                                        border-bottom:0 !important;
+                                        border-left:0 !important;
+                                        border-right:0 !important;
+                                    ">
+
+                                        <span t-field="doc.amount_untaxed"
+                                              t-options="{
+                                                  'widget':'monetary',
+                                                  'display_currency':doc.currency_id
+                                              }"/>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ========================================= -->
+                                <!-- TAX - NO LINE                           -->
+                                <!-- ========================================= -->
+
+                                <tr t-if="doc.amount_tax">
+
+                                    <td style="
+                                        padding:1.5mm 5px !important;
+
+                                        text-align:left;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+
+                                        border:0 !important;
+                                    ">
+                                        USt
+                                    </td>
+
+                                    <td style="
+                                        padding:1.5mm 0 !important;
+
+                                        text-align:right;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+
+                                        white-space:nowrap;
+
+                                        border:0 !important;
+                                    ">
+
+                                        <span t-field="doc.amount_tax"
+                                              t-options="{
+                                                  'widget':'monetary',
+                                                  'display_currency':doc.currency_id
+                                              }"/>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ========================================= -->
+                                <!-- TOTAL - SECOND LINE                    -->
+                                <!-- ========================================= -->
+
+                                <tr class="erz_total_line">
+
+                                    <td style="
+                                        padding:2.5mm 5px 1.5mm 5px !important;
+
+                                        text-align:left;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+
+                                        font-weight:700 !important;
+
+                                        border-top:1px solid #222222 !important;
+                                        border-bottom:0 !important;
+                                        border-left:0 !important;
+                                        border-right:0 !important;
+                                    ">
+                                        Gesamt
+                                    </td>
+
+                                    <td style="
+                                        padding:2.5mm 0 1.5mm 0 !important;
+
+                                        text-align:right;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+
+                                        font-weight:700 !important;
+
+                                        white-space:nowrap;
+
+                                        border-top:1px solid #222222 !important;
+                                        border-bottom:0 !important;
+                                        border-left:0 !important;
+                                        border-right:0 !important;
+                                    ">
+
+                                        <span t-field="doc.amount_total"
+                                              t-options="{
+                                                  'widget':'monetary',
+                                                  'display_currency':doc.currency_id
+                                              }"/>
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+
+                        <!-- ================================================= -->
+                        <!-- PAYMENT TERMS                                     -->
+                        <!-- ================================================= -->
+
+                        <div t-if="doc.payment_term_id"
+                             style="
+                                margin:6mm 0 0 0 !important;
+                                padding:0 !important;
+
+                                border:0 !important;
+
+                                font-family:'Lato', Arial, sans-serif !important;
+                                font-size:12.5pt !important;
+                                line-height:1.3 !important;
+                             ">
+
+                            <strong>
+                                Zahlungsbedingungen:
+                            </strong>
+
+                            <span t-field="doc.payment_term_id.name"/>
+
+                        </div>
+
+
+                        <!-- ================================================= -->
+                        <!-- CUSTOMER NOTE                                     -->
+                        <!-- ================================================= -->
+
+                        <div t-if="doc.note"
+                             style="
+                                margin:4mm 0 0 0 !important;
+                                padding:0 !important;
+
+                                border:0 !important;
+
+                                font-family:'Lato', Arial, sans-serif !important;
+                                font-size:12.5pt !important;
+                                line-height:1.3 !important;
+                             ">
+
+                            <span t-field="doc.note"/>
+
+                        </div>
+
+                    </div>
+
+            </t>
+
+        </t>
+
+    </t>
+
+
+</template>
+
+
+
+
+
+    <!-- ========================================================= -->
+    <!-- 3. NEW REPORT ACTION                                      -->
+    <!-- ========================================================= -->
+
+
+    <record id="paperformat_sale_order_new" model="report.paperformat">
+        <field name="name">Erzberger Sale Order New</field>
+        <field name="default" eval="False"/>
+        <field name="format">A4</field>
+        <field name="orientation">Portrait</field>
+
+        <field name="margin_top">65</field>
+        <field name="margin_bottom">25</field>
+        <field name="margin_left">8</field>
+        <field name="margin_right">8</field>
+        <field name="header_spacing">65</field>
+        <field name="header_line" eval="False"/>
+        <field name="dpi">96</field>
+    </record>
+
+    <record id="action_report_sale_order_new" model="ir.actions.report">
+        <field name="name">Erzberger Sale Order</field>
+        <field name="model">sale.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">erzberger_sale_report.report_sale_order_new</field>
+        <field name="report_file">erzberger_sale_report.report_sale_order_new</field>
+        <field name="print_report_name">
+            (object.state in ('draft', 'sent') and 'Angebot - %s' % (object.name) or 'Auftragsbestaetigung - %s' % (object.name))
+            </field>
+        <field name="binding_model_id" ref="sale.model_sale_order"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id"
+           ref="erzberger_sale_report.paperformat_sale_order_new"/>
+    </record>
+
+
+
+
+
+    <template id="report_invoice_document_custom_holzenberg">
+
+    <t t-call="web.html_container">
+
+        <t t-foreach="docs" t-as="doc">
+
+            <t t-set="o" t-value="doc"/>
+            <t t-set="company" t-value="doc.company_id.sudo()"/>
+
+            <!-- ===================================================== -->
+            <!-- SAME HEADER + FOOTER TEMPLATE                        -->
+            <!-- ===================================================== -->
+
+            <t t-call="erzberger_sale_report.report_erz_external_layouts_holzkenber">
+
+                <div class="page erzberger_invoice_body"
+                     style="
+                        width:100% !important;
+                        margin:0 !important;
+                        padding:0 !important;
+
+                        background:#ffffff !important;
+                        color:#222222 !important;
+
+                        font-family:'Lato', Arial, sans-serif !important;
+                        font-size:12.5pt !important;
+                        line-height:1.25 !important;
+
+                        border:0 !important;
+                        outline:0 !important;
+                        box-shadow:none !important;
+                     ">
+
+                    <!-- ================================================= -->
+                    <!-- REMOVE ALL TABLE BORDERS                         -->
+                    <!-- ================================================= -->
+
+                    <style type="text/css">
+
+                        .erzberger_invoice_body table,
+                        .erzberger_invoice_body thead,
+                        .erzberger_invoice_body tbody,
+                        .erzberger_invoice_body tfoot,
+                        .erzberger_invoice_body tr,
+                        .erzberger_invoice_body th,
+                        .erzberger_invoice_body td {
+
+                            border:0 !important;
+                            border-top:0 !important;
+                            border-right:0 !important;
+                            border-bottom:0 !important;
+                            border-left:0 !important;
+
+                            outline:0 !important;
+                            box-shadow:none !important;
+
+                            background-image:none !important;
+                        }
+
+
+                        .erzberger_invoice_body .table,
+                        .erzberger_invoice_body .table-bordered,
+                        .erzberger_invoice_body .table-borderless {
+
+                            border:0 !important;
+                            border-collapse:collapse !important;
+                            border-spacing:0 !important;
+                        }
+
+
+                        /*
+                         * ONLY TWO HORIZONTAL LINES
+                         * ARE ALLOWED IN THE TOTAL AREA.
+                         */
+
+                        .erzberger_invoice_body
+                        .erz_invoice_total_line td {
+
+                            border-top:1px solid #222222 !important;
+
+                            border-right:0 !important;
+                            border-bottom:0 !important;
+                            border-left:0 !important;
+                        }
+
+                    </style>
+
+
+                    <!-- ================================================= -->
+                    <!-- CUSTOMER + INVOICE INFORMATION                    -->
+                    <!-- ================================================= -->
+
+                    <table style="
+                        width:100% !important;
+
+                        margin:0 0 7mm 0 !important;
+                        padding:0 !important;
+
+                        border:0 !important;
+                        border-collapse:collapse !important;
+                        border-spacing:0 !important;
+
+                        table-layout:fixed;
+
+                        background:#ffffff !important;
+
+                        font-family:'Lato', Arial, sans-serif !important;
+                        font-size:12.5pt !important;
+                        line-height:1.25 !important;
+                    ">
+
+                        <tbody>
+
+                            <tr>
+
+                                <!-- ===================================== -->
+                                <!-- CUSTOMER ADDRESS                     -->
+                                <!-- ===================================== -->
+
+                                <td style="
+                                    width:56%;
+
+                                    padding:0 10mm 0 0 !important;
+                                    margin:0 !important;
+
+                                    vertical-align:top;
+                                    text-align:left;
+
+                                    border:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:11.5pt !important;
+                                    line-height:1.3 !important;
+
+                                    color:#222222 !important;
+                                ">
+
+                                    <div style="
+                                        margin:0 !important;
+                                        padding:0 !important;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:11.5pt !important;
+                                        line-height:1.3 !important;
+
+                                        color:#222222 !important;
+                                    ">
+
+                                        <t t-if="doc.partner_id">
+
+                                            <!-- CUSTOMER NAME -->
+
+                                            <span t-field="doc.partner_id.name"/>
+
+                                            <br/>
+
+
+                                            <!-- STREET -->
+
+                                            <span t-if="doc.partner_id.street"
+                                                  t-field="doc.partner_id.street"/>
+
+                                            <br/>
+
+
+                                            <!-- STREET 2 -->
+
+                                            <t t-if="doc.partner_id.street2">
+
+                                                <span t-field="doc.partner_id.street2"/>
+
+                                                <br/>
+
+                                            </t>
+
+
+                                            <!-- ZIP + CITY -->
+
+                                            <span t-if="doc.partner_id.zip"
+                                                  t-field="doc.partner_id.zip"/>
+
+                                            <t t-if="
+                                                doc.partner_id.zip
+                                                and doc.partner_id.city
+                                            ">
+                                                <span> </span>
+                                            </t>
+
+                                            <span t-if="doc.partner_id.city"
+                                                  t-field="doc.partner_id.city"/>
+
+                                            <br/>
+
+
+                                            <!-- COUNTRY -->
+
+                                            <t t-if="doc.partner_id.country_id">
+
+                                                <span t-if="
+                                                    doc.partner_id.country_id.code == 'DE'
+                                                ">
+                                                    Deutschland
+                                                </span>
+
+                                                <span t-else=""
+                                                      t-field="doc.partner_id.country_id.name"/>
+
+                                                <br/>
+
+                                            </t>
+
+
+                                            <!-- PHONE -->
+
+                                            <t t-if="doc.partner_id.phone">
+
+                                                <span t-field="doc.partner_id.phone"/>
+
+                                                <br/>
+
+                                            </t>
+
+
+                                            <!-- VAT -->
+
+                                            <t t-if="doc.partner_id.vat">
+
+                                                USt-IdNr.:
+                                                <span t-field="doc.partner_id.vat"/>
+
+                                            </t>
+
+                                        </t>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- ===================================== -->
+                                <!-- INVOICE INFORMATION                   -->
+                                <!-- ===================================== -->
+
+                                <td style="
+                                    width:44%;
+
+                                    padding:0 !important;
+                                    margin:0 !important;
+
+                                    vertical-align:top;
+                                    text-align:left;
+
+                                    border:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:12.5pt !important;
+                                    line-height:1.25 !important;
+
+                                    color:#222222 !important;
+                                ">
+
+                                    <table style="
+                                        width:100% !important;
+
+                                        margin:0 !important;
+                                        padding:0 !important;
+
+                                        border:0 !important;
+                                        border-collapse:collapse !important;
+                                        border-spacing:0 !important;
+
+                                        table-layout:fixed;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+                                    ">
+
+                                        <tbody>
+
+                                            <!-- INVOICE NUMBER -->
+
+                                            <tr t-if="doc.name">
+
+                                                <td style="
+                                                    width:55%;
+
+                                                    padding:0 4mm 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+                                                    Rechnungsnr.
+                                                </td>
+
+                                                <td style="
+                                                    width:45%;
+
+                                                    padding:0 0 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+
+                                                    <span t-field="doc.name"/>
+
+                                                </td>
+
+                                            </tr>
+
+
+                                            <!-- INVOICE DATE -->
+
+                                            <tr t-if="doc.invoice_date">
+
+                                                <td style="
+                                                    padding:0 4mm 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+                                                    Rechnungsdatum:
+                                                </td>
+
+                                                <td style="
+                                                    padding:0 0 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+
+                                                    <span t-field="doc.invoice_date"
+                                                          t-options="{'widget':'date'}"/>
+
+                                                </td>
+
+                                            </tr>
+
+
+                                            <!-- DUE DATE -->
+
+                                            <tr t-if="doc.invoice_date_due">
+
+                                                <td style="
+                                                    padding:0 4mm 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+                                                    Fälligkeit der Rechnung:
+                                                </td>
+
+                                                <td style="
+                                                    padding:0 0 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+
+                                                    <span t-field="doc.invoice_date_due"
+                                                          t-options="{'widget':'date'}"/>
+
+                                                </td>
+
+                                            </tr>
+
+
+                                            <!-- DELIVERY DATE -->
+
+                                            <tr t-if="doc.delivery_date">
+
+                                                <td style="
+                                                    padding:0 4mm 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+                                                    Lieferdatum:
+                                                </td>
+
+                                                <td style="
+                                                    padding:0 0 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+
+                                                    <span t-field="doc.delivery_date"
+                                                          t-options="{'widget':'date'}"/>
+
+                                                </td>
+
+                                            </tr>
+
+
+                                            <!-- INCOTERM -->
+
+                                            <tr t-if="doc.invoice_incoterm_id">
+
+                                                <td style="
+                                                    padding:0 4mm 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+                                                    Incoterm:
+                                                </td>
+
+                                                <td style="
+                                                    padding:0 0 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+                                                ">
+
+                                                    <span t-field="doc.invoice_incoterm_id.code"/>
+
+                                                    <t t-if="doc.incoterm_location">
+
+                                                        <span> - </span>
+
+                                                        <span t-field="doc.incoterm_location"/>
+
+                                                    </t>
+
+                                                </td>
+
+                                            </tr>
+
+
+                                            <!-- SOURCE -->
+
+                                            <tr t-if="doc.invoice_origin">
+
+                                                <td style="
+                                                    padding:0 4mm 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+                                                    Verweis
+                                                </td>
+
+                                                <td style="
+                                                    padding:0 0 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+                                                ">
+
+                                                    <span t-field="doc.invoice_origin"/>
+
+                                                </td>
+
+                                            </tr>
+
+
+                                            <!-- REFERENCE -->
+
+                                            <tr t-if="doc.ref">
+
+                                                <td style="
+                                                    padding:0 4mm 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+                                                    Referenz
+                                                </td>
+
+                                                <td style="
+                                                    padding:0 0 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+                                                ">
+
+                                                    <span t-field="doc.ref"/>
+
+                                                </td>
+
+                                            </tr>
+
+
+                                            <!-- VAT -->
+
+                                            <tr t-if="
+                                                doc.partner_id
+                                                and doc.partner_id.commercial_partner_id == doc.partner_id
+                                                and doc.partner_id.commercial_partner_id.vat
+                                            ">
+
+                                                <td style="
+                                                    padding:0 4mm 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+
+                                                    white-space:nowrap;
+                                                ">
+                                                    USt-IdNr.
+                                                </td>
+
+                                                <td style="
+                                                    padding:0 0 1.5mm 0 !important;
+
+                                                    border:0 !important;
+
+                                                    font-family:'Lato', Arial, sans-serif !important;
+                                                    font-size:12.5pt !important;
+                                                    line-height:1.25 !important;
+                                                ">
+
+                                                    <span t-field="doc.partner_id.commercial_partner_id.vat"/>
+
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+
+                    <!-- ================================================= -->
+                    <!-- INVOICE TITLE                                     -->
+                    <!-- ================================================= -->
+
+                    <div style="
+                        width:100% !important;
+
+                        margin:0 0 7mm 0 !important;
+                        padding:0 !important;
+
+                        border:0 !important;
+
+                        background:#ffffff !important;
+
+                        font-family:'Lato', Arial, sans-serif !important;
+                    ">
+
+                        <h1 style="
+                            margin:0 !important;
+                            padding:0 !important;
+
+                            border:0 !important;
+
+                            font-family:'Lato', Arial, sans-serif !important;
+
+                            font-size:26pt !important;
+                            font-weight:400 !important;
+                            line-height:1.15 !important;
+
+                            color:#315d35 !important;
+
+                            background:none !important;
+                        ">
+
+                            <t t-if="doc.move_type == 'out_invoice'">
+
+                                <t t-if="doc.state == 'posted'">
+                                    Rechnung
+                                </t>
+
+                                <t t-elif="doc.state == 'draft'">
+                                    Entwurfsrechnung
+                                </t>
+
+                                <t t-elif="doc.state == 'cancel'">
+                                    Stornierte Rechnung
+                                </t>
+
+                            </t>
+
+                            <t t-elif="doc.move_type == 'out_refund'">
+
+                                Gutschrift
+
+                            </t>
+
+                            <t t-elif="doc.move_type == 'in_invoice'">
+
+                                Lieferantenrechnung
+
+                            </t>
+
+                            <t t-elif="doc.move_type == 'in_refund'">
+
+                                Lieferantengutschrift
+
+                            </t>
+
+                        </h1>
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- INVOICE LINES                                     -->
+                    <!-- ================================================= -->
+
+                    <t t-set="display_discount"
+                       t-value="any(line.discount for line in doc.invoice_line_ids)"/>
+
+                    <t t-set="display_taxes"
+                       t-value="any(line.tax_ids for line in doc.invoice_line_ids)"/>
+
+                    <t t-set="lines_to_report"
+                       t-value="doc._get_move_lines_to_report()"/>
+
+
+                    <table style="
+                        width:100% !important;
+
+                        margin:0 !important;
+                        padding:0 !important;
+
+                        border:0 !important;
+                        border-collapse:collapse !important;
+                        border-spacing:0 !important;
+
+                        table-layout:fixed;
+
+                        background:#ffffff !important;
+
+                        font-family:'Lato', Arial, sans-serif !important;
+                        font-size:12.5pt !important;
+                        line-height:1.25 !important;
+                    ">
+
+                        <thead>
+
+                            <tr>
+
+                                <!-- POSITION -->
+
+                                <th t-if="doc.company_id.has_position_column"
+                                    style="
+                                        width:6%;
+
+                                        padding:0 5px 2.5mm 0 !important;
+
+                                        text-align:left;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        font-weight:700 !important;
+                                        line-height:1.2 !important;
+                                    ">
+                                    Pos.
+                                </th>
+
+
+                                <!-- DESCRIPTION -->
+
+                                <th style="
+                                    width:41%;
+
+                                    padding:0 5px 2.5mm 0 !important;
+
+                                    text-align:left;
+
+                                    border:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:12.5pt !important;
+                                    font-weight:700 !important;
+                                    line-height:1.2 !important;
+                                ">
+                                    Beschreibung
+                                </th>
+
+
+                                <!-- QUANTITY -->
+
+                                <th style="
+                                    width:14%;
+
+                                    padding:0 5px 2.5mm 5px !important;
+
+                                    text-align:right;
+
+                                    border:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:12.5pt !important;
+                                    font-weight:700 !important;
+                                    line-height:1.2 !important;
+
+                                    white-space:nowrap;
+                                ">
+                                    Menge
+                                </th>
+
+
+                                <!-- UNIT PRICE -->
+
+                                <th style="
+                                    width:16%;
+
+                                    padding:0 5px 2.5mm 5px !important;
+
+                                    text-align:right;
+
+                                    border:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:12.5pt !important;
+                                    font-weight:700 !important;
+                                    line-height:1.2 !important;
+
+                                    white-space:nowrap;
+                                ">
+                                    Einzelpreis
+                                </th>
+
+
+                                <!-- DISCOUNT -->
+
+                                <th t-if="display_discount"
+                                    style="
+                                        width:8%;
+
+                                        padding:0 5px 2.5mm 5px !important;
+
+                                        text-align:right;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        font-weight:700 !important;
+                                        line-height:1.2 !important;
+
+                                        white-space:nowrap;
+                                    ">
+                                    Disc.%
+                                </th>
+
+
+                                <!-- TAX -->
+
+                                <th t-if="display_taxes"
+                                    style="
+                                        width:11%;
+
+                                        padding:0 5px 2.5mm 5px !important;
+
+                                        text-align:right;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        font-weight:700 !important;
+                                        line-height:1.2 !important;
+
+                                        white-space:nowrap;
+                                    ">
+                                    Steuern
+                                </th>
+
+
+                                <!-- AMOUNT -->
+
+                                <th style="
+                                    width:12%;
+
+                                    padding:0 0 2.5mm 5px !important;
+
+                                    text-align:right;
+
+                                    border:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:12.5pt !important;
+                                    font-weight:700 !important;
+                                    line-height:1.2 !important;
+
+                                    white-space:nowrap;
+                                ">
+                                    Betrag
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody>
+
+                            <t t-set="line_number" t-value="1"/>
+
+
+                            <t t-foreach="lines_to_report" t-as="line">
+
+                                <t t-set="is_section"
+                                   t-value="line.display_type == 'line_section'"/>
+
+                                <t t-set="is_note"
+                                   t-value="line.display_type == 'line_note'"/>
+
+                                <t t-set="is_subsection"
+                                   t-value="line.display_type == 'line_subsection'"/>
+
+                                <t t-set="is_product"
+                                   t-value="line.display_type == 'product'"/>
+
+
+                                <!-- ===================================== -->
+                                <!-- SECTION                               -->
+                                <!-- ===================================== -->
+
+                                <tr t-if="is_section">
+
+                                    <td t-if="doc.company_id.has_position_column"/>
+
+                                    <td t-att-colspan="
+                                        6
+                                        + (1 if display_discount else 0)
+                                        + (1 if display_taxes else 0)
+                                        "
+                                        style="
+                                            padding:3mm 0 1.5mm 0 !important;
+
+                                            border:0 !important;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:12.5pt !important;
+                                            font-weight:700 !important;
+                                            line-height:1.25 !important;
+
+                                            color:#315d35 !important;
+                                        ">
+
+                                        <span t-field="line.name"/>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ===================================== -->
+                                <!-- NOTE                                  -->
+                                <!-- ===================================== -->
+
+                                <tr t-elif="is_note">
+
+                                    <td t-att-colspan="
+                                        6
+                                        + (1 if display_discount else 0)
+                                        + (1 if display_taxes else 0)
+                                        "
+                                        style="
+                                            padding:1.5mm 0 !important;
+
+                                            border:0 !important;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:12.5pt !important;
+                                            font-style:italic !important;
+                                            line-height:1.25 !important;
+                                        ">
+
+                                        <span t-field="line.name"
+                                              t-options="{'widget':'text'}"/>
+
+                                    </td>
+
+                                </tr>
+
+
+                                <!-- ===================================== -->
+                                <!-- PRODUCT LINE                          -->
+                                <!-- ===================================== -->
+
+                                <tr t-else=""
+                                    style="
+                                        page-break-inside:avoid !important;
+                                        border:0 !important;
+                                    ">
+
+
+                                    <!-- POSITION -->
+
+                                    <td t-if="doc.company_id.has_position_column"
+                                        style="
+                                            padding:1.5mm 5px 1.5mm 0 !important;
+
+                                            vertical-align:top;
+                                            text-align:left;
+
+                                            border:0 !important;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:12.5pt !important;
+                                            line-height:1.25 !important;
+                                        ">
+
+                                        <span t-esc="line_number"/>
+
+                                        <t t-set="line_number"
+                                           t-value="line_number + 1"/>
+
+                                    </td>
+
+
+                                    <!-- DESCRIPTION -->
+
+                                    <td style="
+                                        padding:1.5mm 5px 1.5mm 0 !important;
+
+                                        vertical-align:top;
+                                        text-align:left;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+                                    ">
+
+                                        <span t-if="line.name"
+                                              t-field="line.name"
+                                              t-options="{'widget':'text'}"/>
+
+                                    </td>
+
+
+                                    <!-- QUANTITY -->
+
+                                    <td style="
+                                        padding:1.5mm 5px !important;
+
+                                        vertical-align:top;
+                                        text-align:right;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+
+                                        white-space:nowrap;
+                                    ">
+
+                                        <span t-field="line.quantity"/>
+
+                                        <span t-if="line.product_uom_id"
+                                              t-field="line.product_uom_id"/>
+
+                                    </td>
+
+
+                                    <!-- UNIT PRICE -->
+
+                                    <td style="
+                                        padding:1.5mm 5px !important;
+
+                                        vertical-align:top;
+                                        text-align:right;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+
+                                        white-space:nowrap;
+                                    ">
+
+                                        <span t-field="line.price_unit"
+                                              t-options="{
+                                                  'widget':'monetary',
+                                                  'display_currency':doc.currency_id
+                                              }"/>
+
+                                    </td>
+
+
+                                    <!-- DISCOUNT -->
+
+                                    <td t-if="display_discount"
+                                        style="
+                                            padding:1.5mm 5px !important;
+
+                                            vertical-align:top;
+                                            text-align:right;
+
+                                            border:0 !important;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:12.5pt !important;
+                                            line-height:1.25 !important;
+
+                                            white-space:nowrap;
+                                        ">
+
+                                        <span t-field="line.discount"/>
+
+                                    </td>
+
+
+                                    <!-- TAX -->
+
+                                    <td t-if="display_taxes"
+                                        style="
+                                            padding:1.5mm 5px !important;
+
+                                            vertical-align:top;
+                                            text-align:right;
+
+                                            border:0 !important;
+
+                                            font-family:'Lato', Arial, sans-serif !important;
+                                            font-size:12.5pt !important;
+                                            line-height:1.25 !important;
+                                        ">
+
+                                        <t t-set="taxes"
+                                           t-value="', '.join(tax.tax_label for tax in line.tax_ids if tax.tax_label)"/>
+
+                                        <span t-out="taxes"/>
+
+                                    </td>
+
+
+                                    <!-- AMOUNT -->
+
+                                    <td style="
+                                        padding:1.5mm 0 1.5mm 5px !important;
+
+                                        vertical-align:top;
+                                        text-align:right;
+
+                                        border:0 !important;
+
+                                        font-family:'Lato', Arial, sans-serif !important;
+                                        font-size:12.5pt !important;
+                                        line-height:1.25 !important;
+
+                                        white-space:nowrap;
+                                    ">
+
+                                        <span t-if="doc.company_price_include == 'tax_excluded'"
+                                              t-field="line.price_subtotal"
+                                              t-options="{
+                                                  'widget':'monetary',
+                                                  'display_currency':doc.currency_id
+                                              }"/>
+
+                                        <span t-else=""
+                                              t-field="line.price_total"
+                                              t-options="{
+                                                  'widget':'monetary',
+                                                  'display_currency':doc.currency_id
+                                              }"/>
+
+                                    </td>
+
+                                </tr>
+
+                            </t>
+
+                        </tbody>
+
+                    </table>
+
+
+                    <!-- ================================================= -->
+                    <!-- TOTALS                                            -->
+                    <!-- ================================================= -->
+
+                    <table style="
+                        width:42% !important;
+
+                        margin:5mm 0 0 auto !important;
+                        padding:0 !important;
+
+                        border:0 !important;
+                        border-collapse:collapse !important;
+                        border-spacing:0 !important;
+
+                        table-layout:fixed;
+
+                        background:#ffffff !important;
+
+                        font-family:'Lato', Arial, sans-serif !important;
+                        font-size:12.5pt !important;
+                        line-height:1.25 !important;
+                    ">
+
+                        <tbody>
+
+                            <!-- NET AMOUNT -->
+
+                            <tr class="erz_invoice_total_line">
+
+                                <td style="
+                                    width:65%;
+
+                                    padding:2.5mm 5px 1.5mm 5px !important;
+
+                                    text-align:left;
+
+                                    border-top:1px solid #222222 !important;
+
+                                    border-right:0 !important;
+                                    border-bottom:0 !important;
+                                    border-left:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:12.5pt !important;
+                                    line-height:1.25 !important;
+                                ">
+
+                                    Nettobetrag
+
+                                </td>
+
+                                <td style="
+                                    width:35%;
+
+                                    padding:2.5mm 0 1.5mm 0 !important;
+
+                                    text-align:right;
+
+                                    border-top:1px solid #222222 !important;
+
+                                    border-right:0 !important;
+                                    border-bottom:0 !important;
+                                    border-left:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:12.5pt !important;
+                                    line-height:1.25 !important;
+
+                                    white-space:nowrap;
+                                ">
+
+                                    <span t-field="doc.amount_untaxed"
+                                          t-options="{
+                                              'widget':'monetary',
+                                              'display_currency':doc.currency_id
+                                          }"/>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- TAX -->
+
+                            <tr t-if="doc.amount_tax">
+
+                                <td style="
+                                    padding:1.5mm 5px !important;
+
+                                    text-align:left;
+
+                                    border:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:12.5pt !important;
+                                    line-height:1.25 !important;
+                                ">
+
+                                    <t t-if="doc.tax_totals">
+
+                                        <t t-set="tax_groups"
+                                           t-value="doc.tax_totals.get('groups_by_subtotal', {}).get('Untaxed Amount', [])"/>
+
+                                        <t t-if="tax_groups">
+
+                                            <t t-foreach="tax_groups" t-as="tax_group">
+
+                                                <div>
+                                                    <span t-out="tax_group.get('tax_group_name')"/>
+                                                </div>
+
+                                            </t>
+
+                                        </t>
+
+                                        <t t-else="">
+                                            USt
+                                        </t>
+
+                                    </t>
+
+                                    <t t-else="">
+                                        USt
+                                    </t>
+
+                                </td>
+
+
+                                <td style="
+                                    padding:1.5mm 0 !important;
+
+                                    text-align:right;
+
+                                    border:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:12.5pt !important;
+                                    line-height:1.25 !important;
+
+                                    white-space:nowrap;
+                                ">
+
+                                    <span t-field="doc.amount_tax"
+                                          t-options="{
+                                              'widget':'monetary',
+                                              'display_currency':doc.currency_id
+                                          }"/>
+
+                                </td>
+
+                            </tr>
+
+
+                            <!-- GRAND TOTAL -->
+
+                            <tr class="erz_invoice_total_line">
+
+                                <td style="
+                                    padding:2.5mm 5px 1.5mm 5px !important;
+
+                                    text-align:left;
+
+                                    border-top:1px solid #222222 !important;
+
+                                    border-right:0 !important;
+                                    border-bottom:0 !important;
+                                    border-left:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:12.5pt !important;
+                                    line-height:1.25 !important;
+
+                                    font-weight:700 !important;
+                                ">
+
+                                    Gesamt
+
+                                </td>
+
+                                <td style="
+                                    padding:2.5mm 0 1.5mm 0 !important;
+
+                                    text-align:right;
+
+                                    border-top:1px solid #222222 !important;
+
+                                    border-right:0 !important;
+                                    border-bottom:0 !important;
+                                    border-left:0 !important;
+
+                                    font-family:'Lato', Arial, sans-serif !important;
+                                    font-size:12.5pt !important;
+                                    line-height:1.25 !important;
+
+                                    font-weight:700 !important;
+
+                                    white-space:nowrap;
+                                ">
+
+                                    <span t-field="doc.amount_total"
+                                          t-options="{
+                                              'widget':'monetary',
+                                              'display_currency':doc.currency_id
+                                          }"/>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+
+                    <!-- ================================================= -->
+                    <!-- PAYMENT TERMS                                     -->
+                    <!-- ================================================= -->
+
+                    <div t-if="doc.invoice_payment_term_id"
+                         style="
+                            margin:6mm 0 0 0 !important;
+                            padding:0 !important;
+
+                            border:0 !important;
+
+                            font-family:'Lato', Arial, sans-serif !important;
+                            font-size:12.5pt !important;
+                            line-height:1.3 !important;
+                         ">
+
+                        <span t-if="doc.invoice_payment_term_id.note"
+                              t-field="doc.invoice_payment_term_id.note"/>
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- PAYMENT REFERENCE                                 -->
+                    <!-- ================================================= -->
+
+                    <div t-if="doc.payment_reference"
+                         style="
+                            margin:4mm 0 0 0 !important;
+                            padding:0 !important;
+
+                            border:0 !important;
+
+                            font-family:'Lato', Arial, sans-serif !important;
+                            font-size:12.5pt !important;
+                            line-height:1.3 !important;
+                         ">
+
+                        Zahlungsreferenz:
+                        <strong>
+                            <span t-field="doc.payment_reference"/>
+                        </strong>
+
+                    </div>
+
+
+                    <!-- ================================================= -->
+                    <!-- NARRATION / CUSTOMER NOTE                         -->
+                    <!-- ================================================= -->
+
+                    <div t-if="doc.narration"
+                         style="
+                            margin:4mm 0 0 0 !important;
+                            padding:0 !important;
+
+                            border:0 !important;
+
+                            font-family:'Lato', Arial, sans-serif !important;
+                            font-size:12.5pt !important;
+                            line-height:1.3 !important;
+                         ">
+
+                        <span t-field="doc.narration"/>
+
+                    </div>
+
+
+                </div>
+
+            </t>
+
+        </t>
+
+    </t>
+
+</template>
+
+
+
+
+
+
+    <record id="action_report_invoice_holzenberg" model="ir.actions.report">
+        <field name="name">Invoice Report</field>
+        <field name="model">account.move</field>
+        <field name="report_type">qweb-pdf</field>
+
+        <field name="report_name">erzberger_sale_report.report_invoice_document_custom_holzenberg</field>
+        <field name="report_file">erzberger_sale_report.report_invoice_document_custom_holzenberg</field>
+        <field name="is_invoice_report" eval="True"/>
+
+        <field name="print_report_name">'Invoice - %s' % (object.name)</field>
+
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id"
+           ref="erzberger_sale_report.paperformat_sale_order_new"/>
+    </record>
+
+
+
+
+
+
+
+
+
+    <template id="report_delivery_note_holzenberg">
+
+    <t t-call="web.html_container">
+
+        <t t-foreach="docs" t-as="o">
+
+            <t t-set="company" t-value="o.company_id.sudo()"/>
+
+            <!-- ============================================== -->
+            <!-- ADDRESS SELECTION -->
+            <!-- ============================================== -->
+
+            <t t-set="warehouse_partner"
+               t-value="o.picking_type_id.warehouse_id.partner_id or company.partner_id"/>
+
+            <t t-set="delivery_partner"
+               t-value="o.partner_id or warehouse_partner"/>
+
+
+            <!-- ============================================== -->
+            <!-- ERZBERGER HEADER + FOOTER -->
+            <!-- ============================================== -->
+
+            <t t-call="erzberger_sale_report.report_erz_external_layouts_holzkenber">
+
+                <div class="page"
+                     style="
+                        font-family:Arial, sans-serif !important;
+                        font-size:11pt !important;
+                        line-height:1.35 !important;
+                        color:#30343b !important;
+                        width:100% !important;
+                        margin:0 !important;
+                        padding:0 !important;
+                     ">
+
+
+                    <!-- ========================================== -->
+                    <!-- CUSTOMER / WAREHOUSE ADDRESS -->
+                    <!-- ========================================== -->
+
+                    <div style="
+                        width:100% !important;
+                        margin:0 !important;
+                        padding:0 !important;
+                        border:0 !important;
+                        outline:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:11pt !important;
+                        line-height:1.35 !important;
+                        color:#30343b !important;
+                    ">
+
+                        <t t-if="delivery_partner">
+
+                            <!-- ADDRESS LABEL -->
+                            <div style="
+                                margin:0 0 2mm 0 !important;
+                                padding:0 !important;
+                                border:0 !important;
+                                font-size:11pt !important;
+                                font-weight:bold !important;
+                                color:#30343b !important;
+                            ">
+
+                                <t t-if="not o.partner_id">
+                                    Warehouse Address
+                                </t>
+
+                            </div>
+
+
+                            <!-- NAME -->
+                            <div style="
+                                margin:0 !important;
+                                padding:0 !important;
+                                border:0 !important;
+                                font-size:11pt !important;
+                                font-weight:normal !important;
+                                color:#30343b !important;
+                            ">
+
+                                <span t-field="delivery_partner.name"/>
+
+                            </div>
+
+
+                            <!-- STREET -->
+                            <div t-if="delivery_partner.street"
+                                 style="
+                                    margin:0 !important;
+                                    padding:0 !important;
+                                    border:0 !important;
+                                    font-size:11pt !important;
+                                    color:#30343b !important;
+                                 ">
+
+                                <span t-field="delivery_partner.street"/>
+
+                            </div>
+
+
+                            <!-- STREET 2 -->
+                            <div t-if="delivery_partner.street2"
+                                 style="
+                                    margin:0 !important;
+                                    padding:0 !important;
+                                    border:0 !important;
+                                    font-size:11pt !important;
+                                    color:#30343b !important;
+                                 ">
+
+                                <span t-field="delivery_partner.street2"/>
+
+                            </div>
+
+
+                            <!-- ZIP + CITY -->
+                            <div style="
+                                margin:0 !important;
+                                padding:0 !important;
+                                border:0 !important;
+                                font-size:11pt !important;
+                                color:#30343b !important;
+                            ">
+
+                                <span t-if="delivery_partner.zip"
+                                      t-field="delivery_partner.zip"/>
+
+                                <span t-if="delivery_partner.zip and delivery_partner.city">
+                                    &#160;
+                                </span>
+
+                                <span t-if="delivery_partner.city"
+                                      t-field="delivery_partner.city"/>
+
+                            </div>
+
+
+                            <!-- COUNTRY -->
+                            <div t-if="delivery_partner.country_id"
+                                 style="
+                                    margin:0 !important;
+                                    padding:0 !important;
+                                    border:0 !important;
+                                    font-size:11pt !important;
+                                    color:#30343b !important;
+                                 ">
+
+                                <span t-field="delivery_partner.country_id.name"/>
+
+                            </div>
+
+
+                            <!-- PHONE -->
+                            <div t-if="delivery_partner.phone"
+                                 style="
+                                    margin:0 !important;
+                                    padding:0 !important;
+                                    border:0 !important;
+                                    font-size:11pt !important;
+                                    color:#30343b !important;
+                                 ">
+
+                                <span t-field="delivery_partner.phone"/>
+
+                            </div>
+
+                        </t>
+
+                    </div>
+
+
+                    <!-- ========================================== -->
+                    <!-- SPACE -->
+                    <!-- ========================================== -->
+
+                    <div style="height:22mm !important;"></div>
+
+
+                    <!-- ========================================== -->
+                    <!-- DELIVERY NUMBER -->
+                    <!-- ========================================== -->
+
+                    <div style="
+                        width:100% !important;
+                        margin:0 0 10mm 0 !important;
+                        padding:0 !important;
+                        border:0 !important;
+                        outline:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:28pt !important;
+                        font-weight:400 !important;
+                        line-height:1.15 !important;
+                        color:#30343b !important;
+                    ">
+
+                        <span t-field="o.name"/>
+
+                    </div>
+
+
+                    <!-- ========================================== -->
+                    <!-- AUFTRAG + VERSANDDATUM -->
+                    <!-- ========================================== -->
+
+                    <div style="
+                        width:100% !important;
+                        margin:0 0 11mm 0 !important;
+                        padding:0 !important;
+                        border:0 !important;
+                        outline:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:11pt !important;
+                        line-height:1.35 !important;
+                        color:#30343b !important;
+                    ">
+
+
+                        <!-- AUFTRAG -->
+                        <div style="
+                            display:inline-block !important;
+                            vertical-align:top !important;
+                            width:45% !important;
+                            margin:0 !important;
+                            padding:0 !important;
+                            border:0 !important;
+                            outline:0 !important;
+                            font-size:11pt !important;
+                            color:#30343b !important;
+                        ">
+
+                            <div style="
+                                margin:0 0 2mm 0 !important;
+                                padding:0 !important;
+                                border:0 !important;
+                                font-size:11pt !important;
+                                font-weight:bold !important;
+                            ">
+                                Auftrag
+                            </div>
+
+                            <div style="
+                                margin:0 !important;
+                                padding:0 !important;
+                                border:0 !important;
+                                font-size:11pt !important;
+                                font-weight:normal !important;
+                            ">
+
+                                <span t-if="o.origin"
+                                      t-field="o.origin"/>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- VERSANDDATUM -->
+                        <div style="
+                            display:inline-block !important;
+                            vertical-align:top !important;
+                            width:50% !important;
+                            margin:0 !important;
+                            padding:0 !important;
+                            border:0 !important;
+                            outline:0 !important;
+                            font-size:11pt !important;
+                            color:#30343b !important;
+                        ">
+
+                            <div style="
+                                margin:0 0 2mm 0 !important;
+                                padding:0 !important;
+                                border:0 !important;
+                                font-size:11pt !important;
+                                font-weight:bold !important;
+                            ">
+                                Versanddatum
+                            </div>
+
+                            <div style="
+                                margin:0 !important;
+                                padding:0 !important;
+                                border:0 !important;
+                                font-size:11pt !important;
+                                font-weight:normal !important;
+                                white-space:nowrap !important;
+                            ">
+
+                                <span t-if="o.state == 'done'"
+                                      t-field="o.date_done"/>
+
+                                <span t-else=""
+                                      t-field="o.scheduled_date"/>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ========================================== -->
+                    <!-- PRODUCT HEADER -->
+                    <!-- ========================================== -->
+
+                    <div style="
+                        width:100% !important;
+                        margin:0 0 4mm 0 !important;
+                        padding:0 !important;
+                        border:0 !important;
+                        outline:0 !important;
+                        font-family:Arial, sans-serif !important;
+                        font-size:11pt !important;
+                        line-height:1.35 !important;
+                        color:#30343b !important;
+                    ">
+
+                        <div style="
+                            display:inline-block !important;
+                            vertical-align:top !important;
+                            width:64% !important;
+                            margin:0 !important;
+                            padding:0 !important;
+                            border:0 !important;
+                            outline:0 !important;
+                            text-align:left !important;
+                            font-size:11pt !important;
+                            font-weight:bold !important;
+                        ">
+                            Produkt
+                        </div>
+
+
+                        <div style="
+                            display:inline-block !important;
+                            vertical-align:top !important;
+                            width:18% !important;
+                            margin:0 !important;
+                            padding:0 !important;
+                            border:0 !important;
+                            outline:0 !important;
+                            text-align:right !important;
+                            font-size:11pt !important;
+                            font-weight:bold !important;
+                        ">
+                            Bestellt
+                        </div>
+
+
+                        <div style="
+                            display:inline-block !important;
+                            vertical-align:top !important;
+                            width:17% !important;
+                            margin:0 !important;
+                            padding:0 !important;
+                            border:0 !important;
+                            outline:0 !important;
+                            text-align:right !important;
+                            font-size:11pt !important;
+                            font-weight:bold !important;
+                        ">
+                            Geliefert
+                        </div>
+
+                    </div>
+
+
+                    <!-- ========================================== -->
+                    <!-- UNIQUE PRODUCTS -->
+                    <!-- ========================================== -->
+
+                    <t t-set="products"
+                       t-value="
+                           o.move_ids
+                           .filtered(lambda m: m.product_id and m.product_uom_qty)
+                           .mapped('product_id')
+                       "/>
+
+
+                    <t t-foreach="products" t-as="product">
+
+                        <t t-set="moves"
+                           t-value="
+                               o.move_ids.filtered(
+                                   lambda m: m.product_id == product
+                               )
+                           "/>
+
+                        <t t-set="ordered_qty"
+                           t-value="sum(moves.mapped('product_uom_qty'))"/>
+
+                        <t t-set="delivered_qty"
+                           t-value="sum(moves.mapped('quantity'))"/>
+
+                        <t t-set="uom"
+                           t-value="moves[0].product_uom if moves else False"/>
+
+
+                        <!-- PRODUCT ROW -->
+                        <div style="
+                            width:100% !important;
+                            margin:0 0 2.5mm 0 !important;
+                            padding:0 !important;
+                            border:0 !important;
+                            outline:0 !important;
+                            font-family:Arial, sans-serif !important;
+                            font-size:11pt !important;
+                            line-height:1.35 !important;
+                            color:#30343b !important;
+                        ">
+
+                            <!-- PRODUCT -->
+                            <div style="
+                                display:inline-block !important;
+                                vertical-align:top !important;
+                                width:64% !important;
+                                margin:0 !important;
+                                padding:0 !important;
+                                border:0 !important;
+                                outline:0 !important;
+                                text-align:left !important;
+                                font-size:11pt !important;
+                                font-weight:normal !important;
+                                color:#30343b !important;
+                            ">
+
+                                <span t-out="product.display_name"/>
+
+                            </div>
+
+
+                            <!-- ORDERED -->
+                            <div style="
+                                display:inline-block !important;
+                                vertical-align:top !important;
+                                width:18% !important;
+                                margin:0 !important;
+                                padding:0 !important;
+                                border:0 !important;
+                                outline:0 !important;
+                                text-align:right !important;
+                                font-size:11pt !important;
+                                font-weight:normal !important;
+                                color:#30343b !important;
+                                white-space:nowrap !important;
+                            ">
+
+                                <span t-out="
+                                    int(ordered_qty)
+                                    if ordered_qty == int(ordered_qty)
+                                    else ordered_qty
+                                "/>
+
+                                <span t-if="uom">
+                                    &#160;<span t-out="uom.name"/>
+                                </span>
+
+                            </div>
+
+
+                            <!-- DELIVERED -->
+                            <div style="
+                                display:inline-block !important;
+                                vertical-align:top !important;
+                                width:17% !important;
+                                margin:0 !important;
+                                padding:0 !important;
+                                border:0 !important;
+                                outline:0 !important;
+                                text-align:right !important;
+                                font-size:11pt !important;
+                                font-weight:normal !important;
+                                color:#30343b !important;
+                                white-space:nowrap !important;
+                            ">
+
+                                <span t-out="
+                                    int(delivered_qty)
+                                    if delivered_qty == int(delivered_qty)
+                                    else delivered_qty
+                                "/>
+
+                                <span t-if="uom">
+                                    &#160;<span t-out="uom.name"/>
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </t>
+
+                </div>
+
+            </t>
+
+        </t>
+
+    </t>
+
+</template>
+
+
+
+
+    <record id="action_report_delivery_note_holzenberg" model="ir.actions.report">
+        <field name="name">Delivery Report</field>
+        <field name="model">stock.picking</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">erzberger_sale_report.report_delivery_note_holzenberg</field>
+        <field name="report_file">erzberger_sale_report.report_delivery_note_holzenberg</field>
+        <field name="print_report_name">'Delivery Note'</field>
+        <field name="binding_model_id" ref="stock.model_stock_picking"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id"
+        ref="erzberger_sale_report.paperformat_sale_order_new"/>
+    </record>
+
+
+
+    
+
+</odoo>

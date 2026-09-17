@@ -27,6 +27,7 @@
         'views/stock_picking_views.xml',
         'views/res_company.xml',
         'views/product_template.xml',
+        'custom_report.xml'
     ],
     'installable': True,
     "external_dependencies": {"python": ["pypdf", "reportlab"]},
