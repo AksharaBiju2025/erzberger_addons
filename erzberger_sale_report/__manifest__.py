@@ -22,12 +22,13 @@
         'report/delivery_slip_template.xml',
         'report/invoice_report.xml',
         'report/invoice_template.xml',
+        'report/custom_report.xml',
         # 'views/account_move_views.xml',
         'views/sale_order_views.xml',
         'views/stock_picking_views.xml',
         'views/res_company.xml',
         'views/product_template.xml',
-        'custom_report.xml'
+        
     ],
     'installable': True,
     "external_dependencies": {"python": ["pypdf", "reportlab"]},
