@@ -17,7 +17,7 @@ class CustomerPortalInherit(CustomerPortal):
             report_ref = (
                 'erzberger_sale_report.action_report_auftragsbestatigungs'
                 if order_sudo.company_id.use_custom_sale_report
-                else 'sale.action_report_saleorder'
+                else 'erzberger_sale_report.action_report_sale_order_new'
             )
             return self._show_report(
                 model=order_sudo,
@@ -49,6 +49,14 @@ class CustomerPortalInherit(CustomerPortal):
                     report_ref='erzberger_sale_report.action_report_invoice_custom',
                     download=download,
                 )
+            else:
+                return self._show_report(
+                    model=invoice_sudo,
+                    report_type=report_type,
+                    report_ref='erzberger_sale_report.action_report_invoice_holzenberg',
+                    download=download,
+                )
+        
 
         return super().portal_my_invoice_detail(
             invoice_id, access_token=access_token, report_type=report_type, download=download, **kw
