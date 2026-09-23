@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="erzberger_pos_epson_tse.OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('before-footer')]" position="inside">
+            <t t-set="tse" t-value="order.epsonTse"/>
+            <t t-if="tse and tse.is_signed">
+                <div class="epson-tse-receipt-box">
+                    <div class="epson-tse-title">TSE-Signatur (KassenSichV)</div>
+                    <div class="epson-tse-row">
+                        <span class="epson-tse-label">TSE-Transaktion:</span>
+                        <span class="epson-tse-value" t-esc="tse.transaction_number"/>
+                    </div>
+                    <div class="epson-tse-row">
+                        <span class="epson-tse-label">TSE-Signaturzähler:</span>
+                        <span class="epson-tse-value" t-esc="tse.signature_counter"/>
+                    </div>
+                    <div class="epson-tse-row">
+                        <span class="epson-tse-label">TSE-Start:</span>
+                        <span class="epson-tse-value" t-esc="tse.time_start"/>
+                    </div>
+                    <div class="epson-tse-row">
+                        <span class="epson-tse-label">TSE-Stop:</span>
+                        <span class="epson-tse-value" t-esc="tse.time_end"/>
+                    </div>
+                    <div class="epson-tse-row">
+                        <span class="epson-tse-label">TSE-Seriennummer:</span>
+                        <span class="epson-tse-value" t-esc="tse.serial_number"/>
+                    </div>
+                    <div class="epson-tse-row">
+                        <span class="epson-tse-label">Algorithmus:</span>
+                        <span class="epson-tse-value" t-esc="tse.signature_algorithm"/>
+                    </div>
+                    <div class="epson-tse-signature-block">
+                        <div><b>Signatur:</b></div>
+                        <div t-esc="tse.signature_value"/>
+                    </div>
+                    <t t-if="tse.qr_svg">
+                        <div class="epson-tse-qr-container">
+                            <img t-att-src="tse.qr_svg" alt="TSE KassenSichV QR Code"/>
+                        </div>
+                    </t>
+                    <t t-if="tse.is_test_mode">
+                        <div class="epson-tse-test-badge">
+                            TEST-BELEG (TSE-SIMULATION)
+                        </div>
+                    </t>
+                </div>
+            </t>
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_order_form_epson_tse" model="ir.ui.view">
+        <field name="name">pos.order.form.view.inherit.epson_tse</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='extra']" position="inside">
+                <group string="Epson USB TSE (Germany KassenSichV)" invisible="not epson_tse_status">
+                    <group>
+                        <field name="epson_tse_status" widget="badge" 
+                               decoration-success="epson_tse_status == 'signed'"
+                               decoration-danger="epson_tse_status == 'error'"
+                               decoration-warning="epson_tse_status == 'emergency'"/>
+                        <field name="epson_tse_transaction_number"/>
+                        <field name="epson_tse_signature_counter"/>
+                        <field name="epson_tse_serial_number"/>
+                    </group>
+                    <group>
+                        <field name="epson_tse_time_start"/>
+                        <field name="epson_tse_time_end"/>
+                        <field name="epson_tse_signature_algorithm"/>
+                    </group>
+                    <group colspan="2" string="Cryptographic Signature &amp; QR Payload">
+                        <field name="epson_tse_signature_value" style="word-break: break-all; font-family: monospace;"/>
+                        <field name="epson_tse_public_key" style="word-break: break-all; font-family: monospace;" invisible="not epson_tse_public_key"/>
+                        <field name="epson_tse_qr_code" style="word-break: break-all; font-family: monospace;"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

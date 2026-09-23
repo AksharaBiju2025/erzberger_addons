@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_epson_tse" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.epson_tse</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="point_of_sale.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='pos_interface_section']" position="before">
+                <block title="Epson TM-m30III Hardware TSE (Germany)" id="epson_tse_section">
+                    <setting string="Epson Hardware TSE" help="Enable offline German KassenSichV compliance via Epson TM-m30III USB TSE stick.">
+                        <field name="pos_l10n_de_epson_tse_enabled"/>
+                    </setting>
+                    <div class="row mt16" invisible="not pos_l10n_de_epson_tse_enabled">
+                        <setting string="Printer / TSE IP" help="Local network IP of the Epson TM-m30III printer.">
+                            <field name="pos_l10n_de_epson_tse_ip"/>
+                        </setting>
+                        <setting string="TSE Port" help="Default: 80 for HTTP, 8043 for HTTPS, 8009 for direct TSE service.">
+                            <field name="pos_l10n_de_epson_tse_port"/>
+                        </setting>
+                        <setting string="Device ID" help="Default: local_printer.">
+                            <field name="pos_l10n_de_epson_tse_devid"/>
+                        </setting>
+                        <setting string="Kassen-ID (Client ID)">
+                            <field name="pos_l10n_de_epson_tse_client_id"/>
+                        </setting>
+                        <setting string="TSE CDCID / Serial">
+                            <field name="pos_l10n_de_epson_tse_serial"/>
+                        </setting>
+                        <setting string="Simulation / Test Mode" help="Allows testing without the physical hardware.">
+                            <field name="pos_l10n_de_epson_tse_test_mode"/>
+                        </setting>
+                    </div>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

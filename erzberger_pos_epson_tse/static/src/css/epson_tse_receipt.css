@@ -1,0 +1,74 @@
+/* Epson USB TSE Receipt Styling */
+.epson-tse-receipt-box {
+    margin-top: 15px;
+    margin-bottom: 10px;
+    padding: 8px;
+    border-top: 1px dashed #000;
+    border-bottom: 1px dashed #000;
+    font-size: 11px;
+    line-height: 1.35;
+    font-family: monospace;
+}
+
+.epson-tse-title {
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    font-size: 11px;
+    letter-spacing: 0.5px;
+}
+
+.epson-tse-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2px;
+}
+
+.epson-tse-label {
+    font-weight: normal;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.epson-tse-value {
+    text-align: right;
+    word-break: break-all;
+    font-weight: 600;
+}
+
+.epson-tse-signature-block {
+    margin-top: 5px;
+    word-break: break-all;
+    font-size: 9px;
+    line-height: 1.2;
+    background-color: #f9f9f9;
+    padding: 4px;
+    border-radius: 2px;
+}
+
+.epson-tse-qr-container {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.epson-tse-qr-container svg,
+.epson-tse-qr-container img {
+    display: inline-block;
+    width: 140px;
+    height: 140px;
+}
+
+.epson-tse-test-badge {
+    display: block;
+    background-color: #fce8e6;
+    color: #c5221f;
+    border: 1px solid #c5221f;
+    padding: 3px;
+    margin-top: 6px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 3px;
+    font-size: 10px;
+}

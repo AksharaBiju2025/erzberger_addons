@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_config_form_epson_tse" model="ir.ui.view">
+        <field name="name">pos.config.form.epson.tse</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <div class="card mt-3">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span class="fw-bold">Epson TM-m30III USB TSE (Germany KassenSichV)</span>
+                        <button name="action_test_epson_tse_connection" 
+                                type="object" 
+                                string="Test TSE Connection" 
+                                class="btn btn-sm btn-outline-primary"
+                                invisible="not l10n_de_epson_tse_enabled"/>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12 col-lg-6">
+                                <setting string="Enable Epson USB TSE" 
+                                         help="Use the physical Epson USB TSE stick inserted into the Epson TM-m30III printer for BSI TR-03153 compliance.">
+                                    <field name="l10n_de_epson_tse_enabled"/>
+                                </setting>
+                            </div>
+                            <div class="col-12 col-lg-6" invisible="not l10n_de_epson_tse_enabled">
+                                <setting string="Simulation / Test Mode" 
+                                         help="Simulate TSE signatures directly in POS frontend if the physical printer is offline or during testing.">
+                                    <field name="l10n_de_epson_tse_test_mode"/>
+                                </setting>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3" invisible="not l10n_de_epson_tse_enabled">
+                            <div class="col-12 col-lg-6">
+                                <setting string="Printer / TSE IP Address" 
+                                         help="Local IP address of the Epson TM-m30III printer on the network.">
+                                    <field name="l10n_de_epson_tse_ip" placeholder="e.g. 192.168.1.150"/>
+                                </setting>
+                                <setting string="Port" help="ePOS HTTP (80), HTTPS (8043), or direct TSE service (8009).">
+                                    <field name="l10n_de_epson_tse_port"/>
+                                </setting>
+                                <setting string="Protocol">
+                                    <field name="l10n_de_epson_tse_protocol"/>
+                                </setting>
+                            </div>
+                            <div class="col-12 col-lg-6">
+                                <setting string="Device ID" help="Device ID in ePOS XML (usually 'local_printer').">
+                                    <field name="l10n_de_epson_tse_devid"/>
+                                </setting>
+                                <setting string="Client ID (Kassen-ID)" help="Cash register identifier registered with this TSE.">
+                                    <field name="l10n_de_epson_tse_client_id"/>
+                                </setting>
+                                <setting string="TSE Serial / CDCID" help="CDCID or serial number printed on the TSE stick.">
+                                    <field name="l10n_de_epson_tse_serial"/>
+                                </setting>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
